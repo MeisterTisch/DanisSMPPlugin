@@ -9,6 +9,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.level.types.LevelType;
 
 import java.util.ResourceBundle;
 
@@ -17,7 +18,7 @@ public class MessageLevelUp {
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
 
         TextComponent level = Component.text(levelInt, NamedTextColor.GREEN);
-        TextComponent type = Component.text(bundle.getString("level." + levelType.toString().toLowerCase()), levelType.color)
+        TextComponent type = Component.text(bundle.getString("level." + levelType.toString().toLowerCase()), levelType.getColor())
                 .decoration(TextDecoration.BOLD, true)
                 .hoverEvent(Component.text("Tab coming soon!"))
                 .clickEvent(ClickEvent.callback((event1) -> { player.sendMessage("Tab coming soon!"); }));

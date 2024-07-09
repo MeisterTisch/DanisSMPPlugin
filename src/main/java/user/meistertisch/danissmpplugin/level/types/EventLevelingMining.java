@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level;
+package user.meistertisch.danissmpplugin.level.types;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.level.BossBarLevel;
+import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 
 import java.util.ResourceBundle;
 
@@ -15,6 +17,7 @@ public class EventLevelingMining implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+        //TODO: Add CoreProtect API to check if block was placed by player
         if(LevelType.MINING.getValidBlocks().contains(event.getBlock().getType())){
             Player player = event.getPlayer();
             FileConfiguration config = FilePlayer.getConfig();

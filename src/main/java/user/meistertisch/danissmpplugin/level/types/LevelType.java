@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level;
+package user.meistertisch.danissmpplugin.level.types;
 
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -10,12 +10,20 @@ public enum LevelType {
     MINING(NamedTextColor.GRAY, BossBar.Color.WHITE),
     FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW);
 
-    final NamedTextColor color;
-    final BossBar.Color barColor;
+    private final NamedTextColor color;
+    private final BossBar.Color barColor;
 
     LevelType(NamedTextColor color, BossBar.Color barColor) {
         this.color = color;
         this.barColor = barColor;
+    }
+
+    public NamedTextColor getColor() {
+        return color;
+    }
+
+    public BossBar.Color getBarColor() {
+        return barColor;
     }
 
     public List<Material> getValidBlocks(){
@@ -47,5 +55,7 @@ public enum LevelType {
         } else {
             return null;
         }
+
+
     }
 }
