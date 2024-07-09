@@ -1,0 +1,46 @@
+package user.meistertisch.danissmpplugin.level;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.entity.Player;
+import user.meistertisch.danissmpplugin.files.FilePlayer;
+
+import java.util.ResourceBundle;
+
+public class MessageLevelUp {
+    public MessageLevelUp(Player player, LevelType levelType, int levelInt){
+        ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+
+        TextComponent level = Component.text(levelInt, NamedTextColor.GREEN);
+        TextComponent type = Component.text(bundle.getString("level." + levelType.toString().toLowerCase()), levelType.color)
+                .decoration(TextDecoration.BOLD, true)
+                .hoverEvent(Component.text("Tab coming soon!"))
+                .clickEvent(ClickEvent.callback((event1) -> { player.sendMessage("Tab coming soon!"); }));
+
+        Component text = Component.text(bundle.getString("level.levelUp"))
+                .color(TextColor.color(NamedTextColor.DARK_GREEN))
+                .replaceText(TextReplacementConfig.builder().match("%level%").replacement(level).build())
+                .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
+
+        player.sendMessage(text);
+
+//      OLD CODE
+//        TextComponent level = Component.text((int) levelAfter, NamedTextColor.GREEN);
+//        TextComponent type = Component.text(bundle.getString("level.mining"), NamedTextColor.GRAY)
+//                .decoration(TextDecoration.BOLD, true)
+//                .hoverEvent(Component.text("Tab coming soon!"))
+//                .clickEvent(ClickEvent.callback((event1) -> { player.sendMessage("Tab coming soon!"); }));
+//
+//        Component text = Component.text(bundle.getString("level.levelUp"))
+//                .color(TextColor.color(NamedTextColor.DARK_GREEN))
+//                .replaceText(TextReplacementConfig.builder().match("%level%").replacement(level).build())
+//                .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
+//
+//        player.sendMessage(text);
+    }
+}

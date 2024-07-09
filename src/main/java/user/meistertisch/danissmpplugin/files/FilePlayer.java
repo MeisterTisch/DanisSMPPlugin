@@ -1,7 +1,8 @@
-package user.meistertisch.danissmpplugin;
+package user.meistertisch.danissmpplugin.files;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import user.meistertisch.danissmpplugin.Main;
 
 import java.io.File;
 import java.io.IOException;

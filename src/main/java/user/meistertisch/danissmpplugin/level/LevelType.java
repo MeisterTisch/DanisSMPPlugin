@@ -1,18 +1,21 @@
 package user.meistertisch.danissmpplugin.level;
 
+import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 
-import java.awt.*;
 import java.util.List;
 
 public enum LevelType {
-    MINING(Color.GRAY),
-    FARMING(Color.ORANGE);
+    MINING(NamedTextColor.GRAY, BossBar.Color.WHITE),
+    FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW);
 
-    final Color color;
+    final NamedTextColor color;
+    final BossBar.Color barColor;
 
-    LevelType(Color color) {
+    LevelType(NamedTextColor color, BossBar.Color barColor) {
         this.color = color;
+        this.barColor = barColor;
     }
 
     public List<Material> getValidBlocks(){

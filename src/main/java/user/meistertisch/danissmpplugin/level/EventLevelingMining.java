@@ -7,7 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import user.meistertisch.danissmpplugin.FilePlayer;
+import user.meistertisch.danissmpplugin.files.FilePlayer;
+
+import java.util.ResourceBundle;
 
 public class EventLevelingMining implements Listener {
 
@@ -15,6 +17,8 @@ public class EventLevelingMining implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if(LevelType.MINING.getValidBlocks().contains(event.getBlock().getType())){
             Player player = event.getPlayer();
+            FileConfiguration config = FilePlayer.getConfig();
+            ResourceBundle bundle = ResourceBundle.getBundle("language_" + config.getString(player.getName() + ".lang"));
 
             double xp;
 
@@ -33,7 +37,6 @@ public class EventLevelingMining implements Listener {
             //TODO: Multiplier for enchantments
 
             player.sendActionBar(Component.text(event.getBlock().getType() + " | " + (xp * 100) + " XP"));
-            FileConfiguration config = FilePlayer.getConfig();
 
             int levelBefore = (int) config.getDouble(player.getName() + ".level.mining");
             double levelAfter = config.getDouble(player.getName() + ".level.mining") + xp;
@@ -41,16 +44,15 @@ public class EventLevelingMining implements Listener {
             config.set(player.getName() + ".level.mining", levelAfter);
             FilePlayer.saveConfig();
 
-            //TODO: Make Preference if Sound should be played
             if(levelAfter - levelBefore >= 1){
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             } else {
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
+                if(FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpSound"))
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
             }
 
             if((int) levelAfter % 10 == 0 && levelAfter - levelBefore >= 1){
-                //TODO: MAKE TEXT
-                player.sendMessage("Level up! You are now level " + (int) levelAfter + " in Mining!");
+                new MessageLevelUp(player, LevelType.MINING, (int) levelAfter);
             }
 
             new BossBarLevel(LevelType.MINING, event.getPlayer());

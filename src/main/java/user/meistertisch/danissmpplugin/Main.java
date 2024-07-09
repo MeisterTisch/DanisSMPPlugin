@@ -3,6 +3,7 @@ package user.meistertisch.danissmpplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.EventLevelingMining;
 
 public final class  Main extends JavaPlugin {
@@ -22,6 +23,8 @@ public final class  Main extends JavaPlugin {
 
         //Files
         this.saveDefaultConfig();
+        this.saveResource("language_de.properties", true);
+        this.saveResource("language_en.properties", true);
         FilePlayer.setup();
 
     }
