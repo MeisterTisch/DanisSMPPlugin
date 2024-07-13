@@ -27,35 +27,48 @@ public enum LevelType {
     }
 
     public List<Material> getValidBlocks(){
-        if(this == MINING) {
-            return List.of(
-                    Material.TUFF,
-                    Material.GRANITE,
-                    Material.DEEPSLATE,
-                    Material.STONE,
-                    Material.DIORITE,
-                    Material.ANDESITE,
-                    Material.COAL_ORE,
-                    Material.IRON_ORE,
-                    Material.GOLD_ORE,
-                    Material.DIAMOND_ORE,
-                    Material.EMERALD_ORE,
-                    Material.LAPIS_ORE,
-                    Material.REDSTONE_ORE,
-                    Material.COPPER_ORE,
-                    Material.DEEPSLATE_COAL_ORE,
-                    Material.DEEPSLATE_IRON_ORE,
-                    Material.DEEPSLATE_GOLD_ORE,
-                    Material.DEEPSLATE_DIAMOND_ORE,
-                    Material.DEEPSLATE_EMERALD_ORE,
-                    Material.DEEPSLATE_LAPIS_ORE,
-                    Material.DEEPSLATE_REDSTONE_ORE,
-                    Material.DEEPSLATE_COPPER_ORE
-            );
-        } else {
-            return null;
+        switch (this){
+            case MINING -> {
+                return List.of(
+                        Material.TUFF,
+                        Material.GRANITE,
+                        Material.DEEPSLATE,
+                        Material.STONE,
+                        Material.DIORITE,
+                        Material.ANDESITE,
+                        Material.COAL_ORE,
+                        Material.IRON_ORE,
+                        Material.GOLD_ORE,
+                        Material.DIAMOND_ORE,
+                        Material.EMERALD_ORE,
+                        Material.LAPIS_ORE,
+                        Material.REDSTONE_ORE,
+                        Material.COPPER_ORE,
+                        Material.DEEPSLATE_COAL_ORE,
+                        Material.DEEPSLATE_IRON_ORE,
+                        Material.DEEPSLATE_GOLD_ORE,
+                        Material.DEEPSLATE_DIAMOND_ORE,
+                        Material.DEEPSLATE_EMERALD_ORE,
+                        Material.DEEPSLATE_LAPIS_ORE,
+                        Material.DEEPSLATE_REDSTONE_ORE,
+                        Material.DEEPSLATE_COPPER_ORE
+                );
+            }
+            case FARMING -> {
+                return List.of(
+                        Material.CARROTS,
+                        Material.POTATOES,
+                        Material.WHEAT,
+                        Material.PUMPKIN,
+                        Material.MELON,
+                        Material.BEETROOTS,
+                        Material.TORCHFLOWER,
+                        Material.SWEET_BERRY_BUSH
+                );
+            }
+            default -> {
+                return null;
+            }
         }
-
-
     }
 }

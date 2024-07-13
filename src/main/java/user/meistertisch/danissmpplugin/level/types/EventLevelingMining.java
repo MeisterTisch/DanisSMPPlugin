@@ -21,7 +21,6 @@ public class EventLevelingMining implements Listener {
         if(LevelType.MINING.getValidBlocks().contains(event.getBlock().getType())){
             Player player = event.getPlayer();
             FileConfiguration config = FilePlayer.getConfig();
-            ResourceBundle bundle = ResourceBundle.getBundle("language_" + config.getString(player.getName() + ".lang"));
 
             double xp;
 
@@ -34,7 +33,9 @@ public class EventLevelingMining implements Listener {
                 case REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE, LAPIS_ORE, DEEPSLATE_LAPIS_ORE -> xp = 0.3;
                 case GOLD_ORE, DEEPSLATE_GOLD_ORE -> xp = 0.4;
                 case DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE, EMERALD_ORE, DEEPSLATE_EMERALD_ORE -> xp = 0.5;
-                default -> xp = 0;
+                default -> {
+                    return;
+                }
             }
 
             //TODO: Multiplier for enchantments
@@ -58,7 +59,7 @@ public class EventLevelingMining implements Listener {
                 new MessageLevelUp(player, LevelType.MINING, (int) levelAfter);
             }
 
-            new BossBarLevel(LevelType.MINING, event.getPlayer());
+            new BossBarLevel(LevelType.MINING, player);
         }
     }
 }
