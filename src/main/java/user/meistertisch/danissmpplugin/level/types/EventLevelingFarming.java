@@ -11,11 +11,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
+
+import java.util.ResourceBundle;
 
 
 public class EventLevelingFarming implements Listener {
@@ -93,11 +96,46 @@ public class EventLevelingFarming implements Listener {
         showXP(player, event.getBlock().getType(), xp);
     }
 
+    // FOR MAKING THE ANIMALS GO BAM BAM
+    @EventHandler
+    public void animalBreeding(EntityBreedEvent event){
+        if(event.getBreeder() instanceof Player player){
+            double xp = 0.3;
+
+            ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+            showXP(player, bundle.getString("level.farming.breeding"), xp);
+        }
+    }
+
 
     // Showing the player the XP they got
     private void showXP(Player player, Material block, double xp){
         FileConfiguration config = FilePlayer.getConfig();
         player.sendActionBar(Component.text(block + " | " + (xp * 100) + " XP"));
+
+        int levelBefore = (int) config.getDouble(player.getName() + ".level.farming");
+        double levelAfter = config.getDouble(player.getName() + ".level.farming") + xp;
+
+        config.set(player.getName() + ".level.farming", levelAfter);
+        FilePlayer.saveConfig();
+
+        if (levelAfter - levelBefore >= 1) {
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+        } else {
+            if (FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpSound"))
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
+        }
+
+        if ((int) levelAfter % 10 == 0 && levelAfter - levelBefore >= 1) {
+            new MessageLevelUp(player, LevelType.FARMING, (int) levelAfter);
+        }
+
+        new BossBarLevel(LevelType.FARMING, player);
+    }
+
+    private void showXP(Player player, String text, double xp){
+        FileConfiguration config = FilePlayer.getConfig();
+        player.sendActionBar(Component.text(text + " | " + (xp * 100) + " XP"));
 
         int levelBefore = (int) config.getDouble(player.getName() + ".level.farming");
         double levelAfter = config.getDouble(player.getName() + ".level.farming") + xp;
