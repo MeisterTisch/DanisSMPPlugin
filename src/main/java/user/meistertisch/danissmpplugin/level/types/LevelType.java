@@ -133,7 +133,7 @@ public enum LevelType {
     }
 
     public Inventory getRewardInventory(){
-        Inventory inv = Bukkit.createInventory(null, 9);
+
         switch (this){
             case MINING -> {
 

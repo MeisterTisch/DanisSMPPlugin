@@ -3,6 +3,7 @@ package user.meistertisch.danissmpplugin.level;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
+import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -21,8 +22,8 @@ public class BossBarLevel {
         player.activeBossBars().forEach(bossBar -> bossBar.removeViewer(player));
         service = Executors.newSingleThreadScheduledExecutor();
 
-        int level = (int) FilePlayer.getConfig().getDouble(player.getName() + ".level." + levelType.toString().toLowerCase());
-        float progress = (float) FilePlayer.getConfig().getDouble(player.getName() + ".level." + levelType.toString().toLowerCase()) - level;
+        int level = (int) FileLevels.getConfig().getDouble(player.getName() + ".level." + levelType.toString().toLowerCase());
+        float progress = (float) FileLevels.getConfig().getDouble(player.getName() + ".level." + levelType.toString().toLowerCase()) - level;
 
         String levelName = bundle.getString("level");
         String typeName = bundle.getString("level." + levelType.toString().toLowerCase());

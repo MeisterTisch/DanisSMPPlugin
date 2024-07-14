@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.level.CommandLeveling;
 import user.meistertisch.danissmpplugin.level.types.EventLevelingFarming;
 import user.meistertisch.danissmpplugin.level.types.EventLevelingMining;
 import user.meistertisch.danissmpplugin.level.types.EventLevelingMonsters;
@@ -20,6 +21,7 @@ public final class  Main extends JavaPlugin {
         pluginManager = Bukkit.getPluginManager();
 
         //Commands
+        getCommand("level").setExecutor(new CommandLeveling());
 
         //Listeners
         pluginManager.registerEvents(new EventLevelingMining(), this);

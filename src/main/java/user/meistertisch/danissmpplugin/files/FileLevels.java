@@ -13,7 +13,7 @@ public class FileLevels {
 
     public static void setup() {
         file = new File(
-                Main.getPlugin().getDataFolder(), "players.yml"); //playerManagerFile
+                Main.getPlugin().getDataFolder(), "levels.yml"); //levels
         if (!file.exists()) {
             try {
                 file.createNewFile();
