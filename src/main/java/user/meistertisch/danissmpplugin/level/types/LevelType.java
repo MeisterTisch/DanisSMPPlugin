@@ -2,7 +2,6 @@ package user.meistertisch.danissmpplugin.level.types;
 
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
@@ -10,8 +9,21 @@ import org.bukkit.inventory.Inventory;
 import java.util.List;
 
 public enum LevelType {
+    //TODO: Building, Crafting, ( check every minute for changes in the statistics)
+
+    //Building and Crafting
+    BUILDING(NamedTextColor.LIGHT_PURPLE, BossBar.Color.PINK, Material.BRICKS),
+    //Alchemy and Enchanting
+    MAGIC(NamedTextColor.DARK_PURPLE, BossBar.Color.PURPLE, Material.ENCHANTING_TABLE),
+    //Abenteuer halt
+    ADVENTURE(NamedTextColor.GREEN, BossBar.Color.GREEN, Material.COMPASS),
+    //Trading
+    TRADING(NamedTextColor.BLUE, BossBar.Color.BLUE, Material.EMERALD),
+    //MINING
     MINING(NamedTextColor.GRAY, BossBar.Color.WHITE, Material.DIAMOND_PICKAXE),
-    MONSTERS(NamedTextColor.RED, BossBar.Color.RED, Material.DIAMOND_SWORD),
+    //TODO: RENAME COMBAT
+    COMBAT(NamedTextColor.RED, BossBar.Color.RED, Material.DIAMOND_SWORD),
+    //HERE MAKE TOO: Eating
     FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW, Material.DIAMOND_HOE);
 
     private final NamedTextColor color;
@@ -84,7 +96,7 @@ public enum LevelType {
 
     public List<EntityType> getValidMobs(){
         switch (this){
-            case MONSTERS -> {
+            case COMBAT -> {
                 return List.of(
                         EntityType.ZOMBIE,
                         EntityType.SKELETON,
@@ -132,13 +144,13 @@ public enum LevelType {
         }
     }
 
-    public Inventory getRewardInventory(){
-
-        switch (this){
-            case MINING -> {
-
-            }
-        }
-        return null;
-    }
+//    public Inventory getRewardInventory(){
+//
+//        switch (this){
+//            case MINING -> {
+//
+//            }
+//        }
+//        return null;
+//    }
 }

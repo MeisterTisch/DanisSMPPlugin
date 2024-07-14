@@ -12,10 +12,10 @@ import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 
-public class EventLevelingMonsters implements Listener {
+public class EventLevelingCombat implements Listener {
     @EventHandler
     public void monsterKilled(EntityDeathEvent event){
-        if(LevelType.MONSTERS.getValidMobs().contains(event.getEntityType()) && event.getEntity().getKiller() instanceof Player player){
+        if(LevelType.COMBAT.getValidMobs().contains(event.getEntityType()) && event.getEntity().getKiller() instanceof Player player){
             double xp;
 
             switch (event.getEntityType()){
@@ -56,9 +56,9 @@ public class EventLevelingMonsters implements Listener {
         }
 
         if ((int) levelAfter % 10 == 0 && levelAfter - levelBefore >= 1) {
-            new MessageLevelUp(player, LevelType.MONSTERS, (int) levelAfter);
+            new MessageLevelUp(player, LevelType.COMBAT, (int) levelAfter);
         }
 
-        new BossBarLevel(LevelType.MONSTERS, player);
+        new BossBarLevel(LevelType.COMBAT, player);
     }
 }

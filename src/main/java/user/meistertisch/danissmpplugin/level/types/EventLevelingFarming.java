@@ -9,9 +9,11 @@ import org.bukkit.block.data.Ageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import user.meistertisch.danissmpplugin.files.FileLevels;
@@ -104,6 +106,18 @@ public class EventLevelingFarming implements Listener {
 
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FileLevels.getConfig().getString(player.getName() + ".lang"));
             showXP(player, bundle.getString("level.farming.breeding"), xp);
+        }
+    }
+
+    @EventHandler
+    public void berryBushInteract(PlayerInteractEvent event){
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SWEET_BERRY_BUSH){
+            Player player = event.getPlayer();
+            double xp = 0.1;
+
+            if(event.getClickedBlock().getBlockData() instanceof Ageable ageable && ageable.getAge() == ageable.getMaximumAge()){
+                showXP(player, event.getClickedBlock().getType(), xp);
+            }
         }
     }
 
