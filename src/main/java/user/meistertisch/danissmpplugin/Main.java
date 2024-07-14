@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.EventLevelingFarming;
 import user.meistertisch.danissmpplugin.level.types.EventLevelingMining;
+import user.meistertisch.danissmpplugin.level.types.EventLevelingMonsters;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
@@ -22,6 +23,7 @@ public final class  Main extends JavaPlugin {
         //Listeners
         pluginManager.registerEvents(new EventLevelingMining(), this);
         pluginManager.registerEvents(new EventLevelingFarming(), this);
+        pluginManager.registerEvents(new EventLevelingMonsters(), this);
 
         //Files
         this.saveDefaultConfig();

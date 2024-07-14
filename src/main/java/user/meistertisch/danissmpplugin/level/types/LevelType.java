@@ -3,11 +3,13 @@ package user.meistertisch.danissmpplugin.level.types;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 
 import java.util.List;
 
 public enum LevelType {
     MINING(NamedTextColor.GRAY, BossBar.Color.WHITE),
+    MONSTERS(NamedTextColor.RED, BossBar.Color.RED),
     FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW);
 
     private final NamedTextColor color;
@@ -67,7 +69,57 @@ public enum LevelType {
                 );
             }
             default -> {
-                return null;
+                return List.of();
+            }
+        }
+    }
+
+    public List<EntityType> getValidMobs(){
+        switch (this){
+            case MONSTERS -> {
+                return List.of(
+                        EntityType.ZOMBIE,
+                        EntityType.SKELETON,
+                        EntityType.CREEPER,
+                        EntityType.SPIDER,
+                        EntityType.CAVE_SPIDER,
+                        EntityType.ENDERMAN,
+                        EntityType.PHANTOM,
+                        EntityType.WITCH,
+                        EntityType.ELDER_GUARDIAN,
+                        EntityType.BLAZE,
+                        EntityType.GHAST,
+                        EntityType.HOGLIN,
+                        EntityType.PIGLIN,
+                        EntityType.PIGLIN_BRUTE,
+                        EntityType.WITHER,
+                        EntityType.WITHER_SKELETON,
+                        EntityType.ZOMBIFIED_PIGLIN,
+                        EntityType.ZOMBIE_VILLAGER,
+                        EntityType.ENDER_DRAGON,
+                        EntityType.ENDERMITE,
+                        EntityType.DROWNED,
+                        EntityType.BOGGED,
+                        EntityType.EVOKER,
+                        EntityType.BREEZE,
+                        EntityType.GUARDIAN,
+                        EntityType.HUSK,
+                        EntityType.MAGMA_CUBE,
+                        EntityType.PILLAGER,
+                        EntityType.RAVAGER,
+                        EntityType.SHULKER,
+                        EntityType.SILVERFISH,
+                        EntityType.STRAY,
+                        EntityType.VEX,
+                        EntityType.VINDICATOR,
+                        EntityType.WARDEN,
+                        EntityType.SLIME,
+                        EntityType.ZOGLIN,
+                        EntityType.ILLUSIONER
+                );
+            }
+            default -> {
+                return List.of();
             }
         }
     }
