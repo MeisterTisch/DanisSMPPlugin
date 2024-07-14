@@ -12,10 +12,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 
@@ -103,7 +102,7 @@ public class EventLevelingFarming implements Listener {
         if(event.getBreeder() instanceof Player player){
             double xp = 0.3;
 
-            ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+            ResourceBundle bundle = ResourceBundle.getBundle("language_" + FileLevels.getConfig().getString(player.getName() + ".lang"));
             showXP(player, bundle.getString("level.farming.breeding"), xp);
         }
     }
@@ -111,19 +110,19 @@ public class EventLevelingFarming implements Listener {
 
     // Showing the player the XP they got
     private void showXP(Player player, Material block, double xp){
-        FileConfiguration config = FilePlayer.getConfig();
+        FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(block + " | " + (xp * 100) + " XP"));
 
         int levelBefore = (int) config.getDouble(player.getName() + ".level.farming");
         double levelAfter = config.getDouble(player.getName() + ".level.farming") + xp;
 
         config.set(player.getName() + ".level.farming", levelAfter);
-        FilePlayer.saveConfig();
+        FileLevels.saveConfig();
 
         if (levelAfter - levelBefore >= 1) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         } else {
-            if (FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpSound"))
+            if (FileLevels.getConfig().getBoolean(player.getName() + ".level.xpSound"))
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
         }
 
@@ -135,19 +134,19 @@ public class EventLevelingFarming implements Listener {
     }
 
     private void showXP(Player player, String text, double xp){
-        FileConfiguration config = FilePlayer.getConfig();
+        FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(text + " | " + (xp * 100) + " XP"));
 
         int levelBefore = (int) config.getDouble(player.getName() + ".level.farming");
         double levelAfter = config.getDouble(player.getName() + ".level.farming") + xp;
 
         config.set(player.getName() + ".level.farming", levelAfter);
-        FilePlayer.saveConfig();
+        FileLevels.saveConfig();
 
         if (levelAfter - levelBefore >= 1) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         } else {
-            if (FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpSound"))
+            if (FileLevels.getConfig().getBoolean(player.getName() + ".level.xpSound"))
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
         }
 

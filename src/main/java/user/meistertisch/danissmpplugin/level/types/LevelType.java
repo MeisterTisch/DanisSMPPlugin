@@ -2,22 +2,26 @@ package user.meistertisch.danissmpplugin.level.types;
 
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
 public enum LevelType {
-    MINING(NamedTextColor.GRAY, BossBar.Color.WHITE),
-    MONSTERS(NamedTextColor.RED, BossBar.Color.RED),
-    FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW);
+    MINING(NamedTextColor.GRAY, BossBar.Color.WHITE, Material.DIAMOND_PICKAXE),
+    MONSTERS(NamedTextColor.RED, BossBar.Color.RED, Material.DIAMOND_SWORD),
+    FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW, Material.DIAMOND_HOE);
 
     private final NamedTextColor color;
     private final BossBar.Color barColor;
+    private final Material invStartItem;
 
-    LevelType(NamedTextColor color, BossBar.Color barColor) {
+    LevelType(NamedTextColor color, BossBar.Color barColor, Material invStartItem) {
         this.color = color;
         this.barColor = barColor;
+        this.invStartItem = invStartItem;
     }
 
     public NamedTextColor getColor() {
@@ -26,6 +30,10 @@ public enum LevelType {
 
     public BossBar.Color getBarColor() {
         return barColor;
+    }
+
+    public Material getInvStartItem() {
+        return invStartItem;
     }
 
     public List<Material> getValidBlocks(){
@@ -122,5 +130,15 @@ public enum LevelType {
                 return List.of();
             }
         }
+    }
+
+    public Inventory getRewardInventory(){
+        Inventory inv = Bukkit.createInventory(null, 9);
+        switch (this){
+            case MINING -> {
+
+            }
+        }
+        return null;
     }
 }

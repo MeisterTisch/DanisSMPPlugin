@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 
@@ -39,19 +39,19 @@ public class EventLevelingMonsters implements Listener {
 
     // Showing the player the XP they got
     private void showXP(Player player, EntityType monster, double xp){
-        FileConfiguration config = FilePlayer.getConfig();
+        FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(monster + " | " + (xp * 100) + " XP"));
 
         int levelBefore = (int) config.getDouble(player.getName() + ".level.monsters");
         double levelAfter = config.getDouble(player.getName() + ".level.monsters") + xp;
 
         config.set(player.getName() + ".level.monsters", levelAfter);
-        FilePlayer.saveConfig();
+        FileLevels.saveConfig();
 
         if (levelAfter - levelBefore >= 1) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         } else {
-            if (FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpSound"))
+            if (FileLevels.getConfig().getBoolean(player.getName() + ".level.xpSound"))
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 10);
         }
 
