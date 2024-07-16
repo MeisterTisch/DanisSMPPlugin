@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level.types;
+package user.meistertisch.danissmpplugin.level.types.combat;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
+import user.meistertisch.danissmpplugin.level.types.LevelType;
 
 public class EventLevelingCombat implements Listener {
     @EventHandler

@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level.types;
+package user.meistertisch.danissmpplugin.level.types.adventure;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
+import user.meistertisch.danissmpplugin.level.types.LevelType;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

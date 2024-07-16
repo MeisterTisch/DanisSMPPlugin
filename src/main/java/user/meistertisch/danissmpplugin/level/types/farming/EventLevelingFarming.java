@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level.types;
+package user.meistertisch.danissmpplugin.level.types.farming;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
+import user.meistertisch.danissmpplugin.level.types.LevelType;
 
 import java.util.ResourceBundle;
 

@@ -1,7 +1,6 @@
-package user.meistertisch.danissmpplugin.level.types;
+package user.meistertisch.danissmpplugin.level.types.adventure;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,11 +11,9 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
+import user.meistertisch.danissmpplugin.level.types.LevelType;
 
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 public class EventLevelingAdventureNEW implements Listener {
     private static ScheduledExecutorService service;
