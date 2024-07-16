@@ -42,10 +42,10 @@ public class EventLevelingCombat implements Listener {
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(monster + " | " + (xp * 100) + " XP"));
 
-        int levelBefore = (int) config.getDouble(player.getName() + ".level.monsters");
-        double levelAfter = config.getDouble(player.getName() + ".level.monsters") + xp;
+        int levelBefore = (int) config.getDouble(player.getName() + ".level.combat");
+        double levelAfter = config.getDouble(player.getName() + ".level.combat") + xp;
 
-        config.set(player.getName() + ".level.monsters", levelAfter);
+        config.set(player.getName() + ".level.combat", levelAfter);
         FileLevels.saveConfig();
 
         if (levelAfter - levelBefore >= 1) {

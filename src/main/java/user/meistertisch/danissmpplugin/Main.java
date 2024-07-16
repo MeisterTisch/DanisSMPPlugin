@@ -6,13 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
-import user.meistertisch.danissmpplugin.level.types.EventLevelingFarming;
-import user.meistertisch.danissmpplugin.level.types.EventLevelingMining;
-import user.meistertisch.danissmpplugin.level.types.EventLevelingCombat;
+import user.meistertisch.danissmpplugin.level.types.*;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
     PluginManager pluginManager;
+    EventLevelingAdventure eventLevelingAdventure;
 
     @Override
     public void onEnable() {
@@ -27,6 +26,8 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingMining(), this);
         pluginManager.registerEvents(new EventLevelingFarming(), this);
         pluginManager.registerEvents(new EventLevelingCombat(), this);
+        pluginManager.registerEvents(new EventLevelingAdventureNEW(), this);
+//        eventLevelingAdventure = new EventLevelingAdventure();
 
         //Files
         this.saveDefaultConfig();
@@ -39,6 +40,7 @@ public final class  Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        eventLevelingAdventure.shutdown();
     }
 
     //Some static Getters

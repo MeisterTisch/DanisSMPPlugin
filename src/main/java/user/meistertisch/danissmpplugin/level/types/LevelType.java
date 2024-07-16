@@ -3,13 +3,13 @@ package user.meistertisch.danissmpplugin.level.types;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
 public enum LevelType {
-    //TODO: Building, Crafting, ( check every minute for changes in the statistics)
+    // Crafting ( check every minute for changes in the statistics)
 
     //Building and Crafting
     BUILDING(NamedTextColor.LIGHT_PURPLE, BossBar.Color.PINK, Material.BRICKS),
@@ -142,6 +142,36 @@ public enum LevelType {
                 return List.of();
             }
         }
+    }
+
+    public List<Statistic> getValidStatistics(){
+        switch (this){
+            case ADVENTURE -> {
+                return List.of(
+                        Statistic.ANIMALS_BRED,
+                        Statistic.OPEN_BARREL,
+                        Statistic.CAULDRON_FILLED,
+                        Statistic.CHEST_OPENED,
+                        Statistic.DAMAGE_ABSORBED,
+                        Statistic.DAMAGE_BLOCKED_BY_SHIELD,
+                        Statistic.DAMAGE_DEALT,
+                        Statistic.DAMAGE_DEALT_ABSORBED,
+                        Statistic.DAMAGE_RESISTED,
+                        Statistic.DAMAGE_DEALT_RESISTED,
+                        Statistic.DAMAGE_TAKEN,
+                        Statistic.CLIMB_ONE_CM,
+                        Statistic.CROUCH_ONE_CM,
+                        Statistic.FALL_ONE_CM,
+                        Statistic.SWIM_ONE_CM,
+                        Statistic.SPRINT_ONE_CM
+
+                );
+            }
+            default -> {
+                return List.of();
+            }
+        }
+
     }
 
 //    public Inventory getRewardInventory(){
