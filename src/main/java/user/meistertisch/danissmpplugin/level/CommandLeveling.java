@@ -36,11 +36,8 @@ public class CommandLeveling implements TabExecutor {
 //                    meta.lore(List.of(Component.text(bundle.getString(reward.getDescription()))));
 //                    item.setItemMeta(meta);
 //                    player.getInventory().addItem(item);
-                    try {
-                        new InventoryDrumroll(player, LevelType.ADVENTURE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+
+                    new InventoryDrumroll(player, LevelType.ADVENTURE);
                 }
             }
             return true;
