@@ -1,12 +1,16 @@
 package user.meistertisch.danissmpplugin.level.invs.start;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.level.invs.drumroll.InventoryDrumroll;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 import user.meistertisch.danissmpplugin.level.types.adventure.InventoryLevelsAdventure;
 import user.meistertisch.danissmpplugin.level.types.building.InventoryLevelsBuilding;
@@ -49,14 +53,17 @@ public class ListenerInvClickStartRewarding implements Listener {
             return;
 
         player.closeInventory();
-        switch (type){
-            case COMBAT -> new InventoryLevelsCombat(player);
-            case MINING -> new InventoryLevelsMining(player);
-            case FARMING -> new InventoryLevelsFarming(player);
-            case ADVENTURE -> new InventoryLevelsAdventure(player);
-            case MAGIC -> new InventoryLevelsMagic(player);
-            case TRADING -> new InventoryLevelsTrading(player);
-            case BUILDING -> new InventoryLevelsBuilding(player);
+
+        if(FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase()) <= 0){
+            player.sendMessage(
+                    Component.text(bundle.getString("level.inv.start.noRewardsLeft")).color(NamedTextColor.RED)
+            );
+            return;
         }
+
+        new InventoryDrumroll(player, type);
+        FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + type.name().toLowerCase(),
+                FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase())-1);
+        FileLevels.saveConfig();
     }
 }

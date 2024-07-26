@@ -25,9 +25,14 @@ public class InventoryLevelsStart {
             ItemMeta meta = item.getItemMeta();
             meta.itemName(Component.text(bundle.getString("level." + type.name().toLowerCase())).color(type.getColor()));
 
+            meta.itemName(Component.text(
+                    bundle.getString("level." + type.name().toLowerCase()) + " | " + bundle.getString("level") + ": " + (int) FileLevels.getConfig().getDouble(player.getName() + ".level." + type.name().toLowerCase())
+                    )
+                    .color(type.getColor()));
+
             List<? extends Component> lore = List.of(
-                    Component.text(bundle.getString("level")
-                            + ": " + (int) FileLevels.getConfig().getDouble(player.getName() + ".level." + type.name().toLowerCase())
+                    Component.text(bundle.getString("level.inv.start.rewardsLeft")
+                            + (int) FileLevels.getConfig().getDouble(player.getName() + ".rewardsLeft." + type.name().toLowerCase())
                     )
             );
 
