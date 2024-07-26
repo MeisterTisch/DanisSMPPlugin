@@ -1,33 +1,32 @@
 package user.meistertisch.danissmpplugin.level.drumroll;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 import user.meistertisch.danissmpplugin.level.types.adventure.RewardsLevelingAdventure;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 
 public class InventoryDrumroll {
     Player player;
     Inventory inv;
     ResourceBundle bundle;
-    int count = 0; //TODO: Change back to 0 after testing
+    int count = 0;
     BukkitTask task;
 
     public InventoryDrumroll(Player player, LevelType levelType) {
@@ -65,7 +64,7 @@ public class InventoryDrumroll {
                     }
                     if(count >= 220){
                         task.cancel();
-                        givePlayerReward();
+                        givePlayerReward(rewards[4]);
                         return;
                     }
                     player.openInventory(inv);
@@ -84,7 +83,7 @@ public class InventoryDrumroll {
 
                             ItemStack item = new ItemStack(reward.getMaterial(), reward.getAmount());
                             ItemMeta meta = item.getItemMeta();
-                            meta.displayName(Component.text(bundle.getString(reward.getName())));
+                            meta.displayName(Component.text(bundle.getString(reward.getName())).color(reward.getRarity().getColor()));
                             meta.lore(List.of(Component.text(bundle.getString(reward.getDescription()))));
                             item.setItemMeta(meta);
 
@@ -99,15 +98,32 @@ public class InventoryDrumroll {
 
     }
 
-    private void givePlayerReward(){
+    private void givePlayerReward(Object obj){
         ItemStack item = inv.getItem(13);
         if(item == null) return;
         player.getInventory().addItem(item);
 
+        Component rarity;
+        Component itemName;
+
+        if(obj instanceof RewardsLevelingAdventure reward){
+            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                    .color(reward.getRarity().getColor())
+                    .decoration(TextDecoration.BOLD, true);
+            itemName = item.displayName()
+                    .color(reward.getRarity().getColor())
+                    .decoration(TextDecoration.BOLD, true);
+        } else {
+            return;
+        }
+
         player.closeInventory();
-        Component text = Component.text(bundle.getString("level.drumroll.rewarding.common"))
-                .color(TextColor.color(0, 255, 0))
-                .append(item.displayName().color(TextColor.color(255, 225, 0)));
+
+        Component text = Component.text(bundle.getString("level.rewarding"))
+                .color(TextColor.color(NamedTextColor.DARK_GREEN))
+                .replaceText(TextReplacementConfig.builder().match("%rarity%").replacement(rarity).build())
+                .replaceText(TextReplacementConfig.builder().match("%item%").replacement(itemName).build());
+
         player.sendMessage(text);
     }
 }

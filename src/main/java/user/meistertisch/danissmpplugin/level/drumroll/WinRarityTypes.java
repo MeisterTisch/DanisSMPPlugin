@@ -1,20 +1,34 @@
 package user.meistertisch.danissmpplugin.level.drumroll;
 
+import net.kyori.adventure.text.format.TextColor;
+
 public enum WinRarityTypes {
-    COMMON(50),
-    UNCOMMON(30),
-    RARE(15),
-    EPIC(4),
-    LEGENDARY(1);
+    COMMON(50, "level.rewarding.common", TextColor.color(0xc9caca)),
+    UNCOMMON(30, "level.rewarding.uncommon", TextColor.color(0x7cd702)),
+    RARE(15, "level.rewarding.rare", TextColor.color(0x00bfdf)),
+    EPIC(4, "level.rewarding.epic", TextColor.color(0xc42fe8)),
+    LEGENDARY(1, "level.rewarding.legendary", TextColor.color(0xeea866));
 
-    final int winningChance;
+    private final int winningChance;
+    private final String name;
+    private final TextColor color;
 
-    WinRarityTypes(int winningChance) {
+    WinRarityTypes(int winningChance, String name, TextColor color) {
         this.winningChance = winningChance;
+        this.name = name;
+        this.color = color;
     }
 
     public int getWinningChance() {
         return winningChance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public TextColor getColor() {
+        return color;
     }
 
     public static WinRarityTypes getRandomRarity(){

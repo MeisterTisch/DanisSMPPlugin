@@ -29,19 +29,5 @@ public class MessageLevelUp {
                 .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
 
         player.sendMessage(text);
-
-//      OLD CODE
-//        TextComponent level = Component.text((int) levelAfter, NamedTextColor.GREEN);
-//        TextComponent type = Component.text(bundle.getString("level.mining"), NamedTextColor.GRAY)
-//                .decoration(TextDecoration.BOLD, true)
-//                .hoverEvent(Component.text("Tab coming soon!"))
-//                .clickEvent(ClickEvent.callback((event1) -> { player.sendMessage("Tab coming soon!"); }));
-//
-//        Component text = Component.text(bundle.getString("level.levelUp"))
-//                .color(TextColor.color(NamedTextColor.DARK_GREEN))
-//                .replaceText(TextReplacementConfig.builder().match("%level%").replacement(level).build())
-//                .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
-//
-//        player.sendMessage(text);
     }
 }
