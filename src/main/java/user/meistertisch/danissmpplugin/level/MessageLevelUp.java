@@ -20,8 +20,8 @@ public class MessageLevelUp {
         TextComponent level = Component.text(levelInt, NamedTextColor.GREEN);
         TextComponent type = Component.text(bundle.getString("level." + levelType.toString().toLowerCase()), levelType.getColor())
                 .decoration(TextDecoration.BOLD, true)
-                .hoverEvent(Component.text("Tab coming soon!"))
-                .clickEvent(ClickEvent.callback((event1) -> { player.sendMessage("Tab coming soon!"); }));
+                .hoverEvent(Component.text(bundle.getString("level.levelUp.hover")))
+                .clickEvent(ClickEvent.runCommand("/level"));
 
         Component text = Component.text(bundle.getString("level.levelUp"))
                 .color(TextColor.color(NamedTextColor.DARK_GREEN))
