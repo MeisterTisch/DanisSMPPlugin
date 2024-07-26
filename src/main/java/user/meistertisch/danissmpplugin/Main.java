@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
+import user.meistertisch.danissmpplugin.level.ListenerJoinRewardsReminder;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
 import user.meistertisch.danissmpplugin.level.invs.start.ListenerInvClickStartRewarding;
 import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventure;
@@ -35,6 +36,7 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingAdventureNEW(), this);
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
+        pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
 
         //Files
         this.saveDefaultConfig();
