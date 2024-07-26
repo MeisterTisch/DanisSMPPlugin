@@ -1,22 +1,16 @@
 package user.meistertisch.danissmpplugin.level;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import user.meistertisch.danissmpplugin.files.FilePlayer;
-import user.meistertisch.danissmpplugin.level.drumroll.InventoryDrumroll;
-import user.meistertisch.danissmpplugin.level.invs.InventoryLevelsStart;
+import user.meistertisch.danissmpplugin.level.invs.drumroll.InventoryDrumroll;
+import user.meistertisch.danissmpplugin.level.invs.start.InventoryLevelsStart;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
-import user.meistertisch.danissmpplugin.level.types.adventure.RewardsLevelingAdventure;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class CommandLeveling implements TabExecutor {
     @Override

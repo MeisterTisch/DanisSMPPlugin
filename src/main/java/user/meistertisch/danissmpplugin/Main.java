@@ -6,7 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
-import user.meistertisch.danissmpplugin.level.invs.EventInvClick;
+import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
+import user.meistertisch.danissmpplugin.level.invs.start.ListenerInvClickStartRewarding;
 import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventure;
 import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventureNEW;
 import user.meistertisch.danissmpplugin.level.types.combat.EventLevelingCombat;
@@ -32,8 +33,8 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingFarming(), this);
         pluginManager.registerEvents(new EventLevelingCombat(), this);
         pluginManager.registerEvents(new EventLevelingAdventureNEW(), this);
-        pluginManager.registerEvents(new EventInvClick(), this);
-//        eventLevelingAdventure = new EventLevelingAdventure();
+        pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
+        pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
 
         //Files
         this.saveDefaultConfig();

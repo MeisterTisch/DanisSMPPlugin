@@ -1,6 +1,5 @@
-package user.meistertisch.danissmpplugin.level.invs;
+package user.meistertisch.danissmpplugin.level.invs.start;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +18,7 @@ import user.meistertisch.danissmpplugin.level.types.trading.InventoryLevelsTradi
 
 import java.util.ResourceBundle;
 
-public class EventInvClick implements Listener {
+public class ListenerInvClickStartRewarding implements Listener {
     @EventHandler
     public void invClick(InventoryClickEvent event){
         if(!(event.getWhoClicked() instanceof Player player))

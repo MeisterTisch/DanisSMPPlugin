@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level.invs;
+package user.meistertisch.danissmpplugin.level.invs.start;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

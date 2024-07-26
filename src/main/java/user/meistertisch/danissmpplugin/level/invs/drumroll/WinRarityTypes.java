@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.level.drumroll;
+package user.meistertisch.danissmpplugin.level.invs.drumroll;
 
 import net.kyori.adventure.text.format.TextColor;
 

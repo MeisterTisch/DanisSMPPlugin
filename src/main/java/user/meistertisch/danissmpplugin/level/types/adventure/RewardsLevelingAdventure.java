@@ -1,7 +1,7 @@
 package user.meistertisch.danissmpplugin.level.types.adventure;
 
 import org.bukkit.Material;
-import user.meistertisch.danissmpplugin.level.drumroll.WinRarityTypes;
+import user.meistertisch.danissmpplugin.level.invs.drumroll.WinRarityTypes;
 
 import java.util.ArrayList;
 import java.util.List;
