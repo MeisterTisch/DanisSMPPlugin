@@ -10,7 +10,6 @@ import user.meistertisch.danissmpplugin.level.ListenerJoinRewardsReminder;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
 import user.meistertisch.danissmpplugin.level.invs.start.ListenerInvClickStartRewarding;
 import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventure;
-import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventureNEW;
 import user.meistertisch.danissmpplugin.level.types.combat.EventLevelingCombat;
 import user.meistertisch.danissmpplugin.level.types.farming.EventLevelingFarming;
 import user.meistertisch.danissmpplugin.level.types.mining.EventLevelingMining;
@@ -33,7 +32,7 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingMining(), this);
         pluginManager.registerEvents(new EventLevelingFarming(), this);
         pluginManager.registerEvents(new EventLevelingCombat(), this);
-        pluginManager.registerEvents(new EventLevelingAdventureNEW(), this);
+        pluginManager.registerEvents(new EventLevelingAdventure(), this);
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
         pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
@@ -49,7 +48,6 @@ public final class  Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        eventLevelingAdventure.shutdown();
     }
 
     //Some static Getters
