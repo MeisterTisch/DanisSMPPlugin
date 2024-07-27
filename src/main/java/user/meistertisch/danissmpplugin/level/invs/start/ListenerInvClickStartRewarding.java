@@ -53,7 +53,13 @@ public class ListenerInvClickStartRewarding implements Listener {
             );
             return;
         }
-        //TODO: CHECK FOR FULL INV
+
+        if(player.getInventory().firstEmpty() == -1){
+            player.sendMessage(
+                    Component.text(bundle.getString("level.inv.start.noSpace")).color(NamedTextColor.RED)
+            );
+            return;
+        }
 
         new InventoryDrumroll(player, type);
         FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + type.name().toLowerCase(),
