@@ -1,12 +1,14 @@
 package user.meistertisch.danissmpplugin.level.types.adventure;
 
 import org.bukkit.Material;
+import user.meistertisch.danissmpplugin.level.CommandLeveling;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.WinRarityTypes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum RewardsLevelingAdventure {
+    ROTTEN_FLESH("level.adventure.rewards.rotten_flesh.name", "level.adventure.rewards.rotten_flesh.desc", Material.ROTTEN_FLESH,32, WinRarityTypes.COMMON),
     STEAK("level.adventure.rewards.steak.name", "level.adventure.rewards.steak.desc", Material.COOKED_BEEF, 16, WinRarityTypes.COMMON),
     PORKCHOP("level.adventure.rewards.porkchop.name", "level.adventure.rewards.porkchop.desc", Material.COOKED_PORKCHOP, 16, WinRarityTypes.COMMON),
     MUTTON("level.adventure.rewards.mutton.name", "level.adventure.rewards.mutton.desc", Material.COOKED_MUTTON, 16, WinRarityTypes.COMMON),
@@ -19,14 +21,16 @@ public enum RewardsLevelingAdventure {
     MANY_BREAD("level.adventure.rewards.many_bread.name", "level.adventure.rewards.many_bread.desc", Material.BREAD, 64, WinRarityTypes.UNCOMMON),
     GOLDEN_CARROTS("level.adventure.rewards.golden_carrots.name", "level.adventure.rewards.golden_carrots.desc", Material.GOLDEN_CARROT, 16, WinRarityTypes.RARE),
     MANY_GOLDEN_CARROTS("level.adventure.rewards.many_golden_carrots.name", "level.adventure.rewards.many_golden_carrots.desc", Material.GOLDEN_CARROT, 32, WinRarityTypes.EPIC),
+    GAPPLE("level.adventure.rewards.gapple.name", "level.adventure.rewards.gapple.desc", Material.GOLDEN_APPLE, 4, WinRarityTypes.EPIC),
+    MANY_GAPPLE("level.adventure.rewards.many_gapple.name", "level.adventure.rewards.many_gapple.desc", Material.GOLDEN_APPLE, 8, WinRarityTypes.LEGENDARY),
     TOTEM("level.adventure.rewards.totem.name", "level.adventure.rewards.totem.desc", Material.TOTEM_OF_UNDYING, 1, WinRarityTypes.LEGENDARY),
     ENCH_GAPPLE("level.adventure.rewards.ench_gapple.name", "level.adventure.rewards.ench_gapple.desc", Material.ENCHANTED_GOLDEN_APPLE, 4, WinRarityTypes.LEGENDARY);
 
-    String name;
-    String description;
-    Material material;
-    int amount;
-    WinRarityTypes rarity;
+    private final String name;
+    private final String description;
+    private final Material material;
+    private final int amount;
+    private final WinRarityTypes rarity;
 
     RewardsLevelingAdventure(String name, String description, Material material, int amount, WinRarityTypes rarity) {
         this.name = name;
