@@ -12,13 +12,6 @@ import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.InventoryDrumroll;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
-import user.meistertisch.danissmpplugin.level.types.adventure.InventoryLevelsAdventure;
-import user.meistertisch.danissmpplugin.level.types.building.InventoryLevelsBuilding;
-import user.meistertisch.danissmpplugin.level.types.combat.InventoryLevelsCombat;
-import user.meistertisch.danissmpplugin.level.types.farming.InventoryLevelsFarming;
-import user.meistertisch.danissmpplugin.level.types.magic.InventoryLevelsMagic;
-import user.meistertisch.danissmpplugin.level.types.mining.InventoryLevelsMining;
-import user.meistertisch.danissmpplugin.level.types.trading.InventoryLevelsTrading;
 
 import java.util.ResourceBundle;
 
