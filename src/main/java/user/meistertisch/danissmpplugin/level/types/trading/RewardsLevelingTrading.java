@@ -1,7 +1,6 @@
 package user.meistertisch.danissmpplugin.level.types.trading;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Villager;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.WinRarityTypes;
 import user.meistertisch.danissmpplugin.level.types.adventure.RewardsLevelingAdventure;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum RewardsLevelingTrading {
-    BLAST_FURNANCE("level.trading.rewards.blast_furnance.name", "level.trading.rewards.blast_furnance.desc", Material.BLAST_FURNACE, 2, WinRarityTypes.COMMON),
+    BLAST_FURNACE("level.trading.rewards.blast_furnace.name", "level.trading.rewards.blast_furnace.desc", Material.BLAST_FURNACE, 2, WinRarityTypes.COMMON),
     SMOKER("level.trading.rewards.smoker.name", "level.trading.rewards.smoker.desc", Material.SMOKER, 2, WinRarityTypes.COMMON),
     CARTOGRAPHY_TABLE("level.trading.rewards.cartography_table.name", "level.trading.rewards.cartography_table.desc", Material.CARTOGRAPHY_TABLE, 2, WinRarityTypes.COMMON),
     BREWING_STAND("level.trading.rewards.brewing_stand.name", "level.trading.rewards.brewing_stand.desc", Material.BREWING_STAND, 2, WinRarityTypes.COMMON),
@@ -63,10 +62,10 @@ public enum RewardsLevelingTrading {
         return rarity;
     }
 
-    public static List<RewardsLevelingAdventure> getRewards(WinRarityTypes rarity){
-        List<RewardsLevelingAdventure> list = new ArrayList<>();
+    public static List<RewardsLevelingTrading> getRewards(WinRarityTypes rarity){
+        List<RewardsLevelingTrading> list = new ArrayList<>();
 
-        for(RewardsLevelingAdventure reward : RewardsLevelingAdventure.values()){
+        for(RewardsLevelingTrading reward : RewardsLevelingTrading.values()){
             if(reward.getRarity().equals(rarity)){
                 list.add(reward);
             }
@@ -75,9 +74,9 @@ public enum RewardsLevelingTrading {
         return list;
     }
 
-    public static RewardsLevelingAdventure getNextItem(){
+    public static RewardsLevelingTrading getNextItem(){
         WinRarityTypes rarity = WinRarityTypes.getRandomRarity();
-        List<RewardsLevelingAdventure> rewards = getRewards(rarity);
+        List<RewardsLevelingTrading> rewards = getRewards(rarity);
 
         return rewards.get((int) (Math.random() * rewards.size()));
     }

@@ -60,6 +60,7 @@ public class ListenerInvClickStartRewarding implements Listener {
             );
             return;
         }
+        //TODO: CHECK FOR FULL INV
 
         new InventoryDrumroll(player, type);
         FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + type.name().toLowerCase(),

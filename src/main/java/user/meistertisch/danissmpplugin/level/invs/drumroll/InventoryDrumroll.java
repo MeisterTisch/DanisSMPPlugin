@@ -16,6 +16,7 @@ import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 import user.meistertisch.danissmpplugin.level.types.adventure.RewardsLevelingAdventure;
+import user.meistertisch.danissmpplugin.level.types.trading.RewardsLevelingTrading;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -65,7 +66,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-                    player.openInventory(inv);
+//                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingAdventure lastReward = RewardsLevelingAdventure.getNextItem();
@@ -77,6 +78,60 @@ public class InventoryDrumroll {
 
                         for (int i = 0; i < 9; i++) {
                             RewardsLevelingAdventure reward = rewards[i];
+                            if(reward == null) continue;
+
+                            ItemStack item = new ItemStack(reward.getMaterial(), reward.getAmount());
+                            ItemMeta meta = item.getItemMeta();
+                            meta.displayName(Component.text(bundle.getString(reward.getName())).color(reward.getRarity().getColor()));
+                            meta.lore(List.of(Component.text(bundle.getString(reward.getDescription()))));
+                            item.setItemMeta(meta);
+
+                            inv.setItem(17 - i, item);
+                        }
+                    }
+                }, 0, 1);
+
+            }
+            case TRADING -> {
+                RewardsLevelingTrading[] rewards = new RewardsLevelingTrading[9];
+                player.openInventory(inv);
+
+                task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
+                    count++;
+                    int period = 1;
+
+                    if(count >= 60 && count <= 100){
+                        period = 2;
+                    }
+                    if(count >= 100 && count <= 140){
+                        period = 5;
+                    }
+                    if(count >= 140 && count <= 180){
+                        period = 10;
+                    }
+                    if(count >= 180 && count <= 200){
+                        period = 20;
+                    }
+                    if(count >= 200){
+                        period = 9999;
+                    }
+                    if(count >= 220){
+                        task.cancel();
+                        givePlayerReward(rewards[4]);
+                        return;
+                    }
+//                    player.openInventory(inv);
+
+                    if(count % period == 0) {
+                        RewardsLevelingTrading lastReward = RewardsLevelingTrading.getNextItem();
+                        for (int i = 0; i < 9; i++) {
+                            RewardsLevelingTrading thisReward = rewards[i];
+                            rewards[i] = lastReward;
+                            lastReward = thisReward;
+                        }
+
+                        for (int i = 0; i < 9; i++) {
+                            RewardsLevelingTrading reward = rewards[i];
                             if(reward == null) continue;
 
                             ItemStack item = new ItemStack(reward.getMaterial(), reward.getAmount());
@@ -111,7 +166,15 @@ public class InventoryDrumroll {
             itemName = item.displayName()
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
-        } else {
+        } else if(obj instanceof RewardsLevelingTrading reward){
+            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                    .color(reward.getRarity().getColor())
+                    .decoration(TextDecoration.BOLD, true);
+            itemName = item.displayName()
+                    .color(reward.getRarity().getColor())
+                    .decoration(TextDecoration.BOLD, true);
+        }
+        else {
             return;
         }
 
