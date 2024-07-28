@@ -77,7 +77,7 @@ public class EventLevelingAdventure implements Listener {
 
         if ((int) levelAfter % 10 == 0 && levelAfter - levelBefore >= 1) {
             new MessageLevelUp(player, LevelType.ADVENTURE, (int) levelAfter);
-            FileLevels.getConfig().set(player.getName() + ".rewardsLeft.mining", FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft.mining") + 1);
+            FileLevels.getConfig().set(player.getName() + ".rewardsLeft.adventure", FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft.adventure") + 1);
             FileLevels.saveConfig();
         }
 

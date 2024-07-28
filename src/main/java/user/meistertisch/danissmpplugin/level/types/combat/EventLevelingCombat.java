@@ -58,7 +58,7 @@ public class EventLevelingCombat implements Listener {
 
         if ((int) levelAfter % 10 == 0 && levelAfter - levelBefore >= 1) {
             new MessageLevelUp(player, LevelType.COMBAT, (int) levelAfter);
-            FileLevels.getConfig().set(player.getName() + ".rewardsLeft.mining", FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft.mining") + 1);
+            FileLevels.getConfig().set(player.getName() + ".rewardsLeft.combat", FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft.combat") + 1);
             FileLevels.saveConfig();
         }
 

@@ -8,3 +8,4 @@ description: This is a perfectly made plugin for SMPs
 website: https://github.com/meistertisch
 commands:
   level:
+  admin:

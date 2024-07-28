@@ -3,6 +3,8 @@ package user.meistertisch.danissmpplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import user.meistertisch.danissmpplugin.admin.CommandAdmin;
+import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
@@ -27,6 +29,7 @@ public final class  Main extends JavaPlugin {
 
         //Commands
         getCommand("level").setExecutor(new CommandLeveling());
+        getCommand("admin").setExecutor(new CommandAdmin());
 
         //Listeners
         pluginManager.registerEvents(new EventLevelingMining(), this);
@@ -43,6 +46,7 @@ public final class  Main extends JavaPlugin {
         this.saveResource("language_en.properties", true);
         FilePlayer.setup();
         FileLevels.setup();
+        FileAdmins.setup();
     }
 
     @Override

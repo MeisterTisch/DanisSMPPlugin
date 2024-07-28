@@ -28,6 +28,14 @@ public class MessageLevelUp {
                 .replaceText(TextReplacementConfig.builder().match("%level%").replacement(level).build())
                 .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
 
+
+        Component openText = Component.text(bundle.getString("level.levelUp.openReward"))
+                .color(TextColor.color(NamedTextColor.DARK_GREEN))
+                .decoration(TextDecoration.ITALIC, true)
+                .hoverEvent(Component.text(bundle.getString("level.levelUp.openReward.hover")))
+                .clickEvent(ClickEvent.runCommand("/level reward " + levelType.name().toLowerCase()));
+
         player.sendMessage(text);
+        player.sendMessage(openText);
     }
 }

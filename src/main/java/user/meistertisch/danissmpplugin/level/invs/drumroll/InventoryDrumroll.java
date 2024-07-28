@@ -45,7 +45,6 @@ public class InventoryDrumroll {
         switch (levelType){
             case ADVENTURE -> {
                 RewardsLevelingAdventure[] rewards = new RewardsLevelingAdventure[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -71,7 +70,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingAdventure lastReward = RewardsLevelingAdventure.getNextItem();
@@ -99,7 +98,6 @@ public class InventoryDrumroll {
             }
             case TRADING -> {
                 RewardsLevelingTrading[] rewards = new RewardsLevelingTrading[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -125,7 +123,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingTrading lastReward = RewardsLevelingTrading.getNextItem();
@@ -153,7 +151,6 @@ public class InventoryDrumroll {
             }
             case MINING -> {
                 RewardsLevelingMining[] rewards = new RewardsLevelingMining[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -179,7 +176,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingMining lastReward = RewardsLevelingMining.getNextItem();
@@ -207,7 +204,6 @@ public class InventoryDrumroll {
             }
             case COMBAT -> {
                 RewardsLevelingCombat[] rewards = new RewardsLevelingCombat[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -233,7 +229,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingCombat lastReward = RewardsLevelingCombat.getNextItem();
@@ -261,7 +257,6 @@ public class InventoryDrumroll {
             }
             case BUILDING -> {
                 RewardsLevelingBuilding[] rewards = new RewardsLevelingBuilding[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -287,7 +282,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingBuilding lastReward = RewardsLevelingBuilding.getNextItem();
@@ -315,7 +310,6 @@ public class InventoryDrumroll {
             }
             case FARMING -> {
                 RewardsLevelingFarming[] rewards = new RewardsLevelingFarming[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -341,7 +335,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingFarming lastReward = RewardsLevelingFarming.getNextItem();
@@ -369,7 +363,6 @@ public class InventoryDrumroll {
             }
             case MAGIC -> {
                 RewardsLevelingMagic[] rewards = new RewardsLevelingMagic[9];
-                player.openInventory(inv);
 
                 task = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), () -> {
                     count++;
@@ -395,7 +388,7 @@ public class InventoryDrumroll {
                         givePlayerReward(rewards[4]);
                         return;
                     }
-//                    player.openInventory(inv);
+                    player.openInventory(inv);
 
                     if(count % period == 0) {
                         RewardsLevelingMagic lastReward = RewardsLevelingMagic.getNextItem();
@@ -422,8 +415,6 @@ public class InventoryDrumroll {
 
             }
         }
-
-
     }
 
     private void givePlayerReward(Object obj){
