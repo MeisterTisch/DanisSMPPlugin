@@ -62,8 +62,5 @@ public class ListenerInvClickStartRewarding implements Listener {
         }
 
         new InventoryDrumroll(player, type);
-        FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + type.name().toLowerCase(),
-                FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase())-1);
-        FileLevels.saveConfig();
     }
 }

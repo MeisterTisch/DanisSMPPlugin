@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 import user.meistertisch.danissmpplugin.level.types.adventure.RewardsLevelingAdventure;
@@ -40,6 +41,10 @@ public class InventoryDrumroll {
         ItemStack greenGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         inv.setItem(4, greenGlass);
         inv.setItem(22, greenGlass);
+
+        FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + levelType.name().toLowerCase(),
+                FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + levelType.name().toLowerCase())-1);
+        FileLevels.saveConfig();
 
 
         switch (levelType){
