@@ -141,7 +141,7 @@ public class CommandLeveling implements TabExecutor {
                     }
 
                     new InventoryDrumroll(player, levelType);
-                } //TODO: Implementieren der restlichen Funktion (rewards, levels) Siehe DrawIO
+                }
                 case 3, 4 -> {
                     int caseNumber = strings.length;
                     if(!FileAdmins.isAdmin(player)){
@@ -293,53 +293,33 @@ public class CommandLeveling implements TabExecutor {
                     }
 
                 }
-
-                case 1+99 -> {
-                    switch (strings[0].toLowerCase()){
-                        case "reward" -> {
-                            Component text = Component.text(bundle.getString("commands.level.rewardsLeft")).color(NamedTextColor.DARK_GREEN);
-                            boolean allZero = true;
-
-                            for(LevelType type : LevelType.values()){
-                                if(!(FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase()) == 0)){
-                                    allZero = false;
-                                    Component minus = Component.text("\n - ").color(NamedTextColor.DARK_GRAY);
-                                    Component reminderText = Component.text(bundle.getString("level." + type.toString().toLowerCase()) +
-                                                    ": " + FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase()))
-                                            .color(type.getColor());
-                                    minus = minus.append(reminderText);
-                                    text = text.append(minus);
-                                }
-                            }
-
-                            if(allZero){
-                                text = Component.text(bundle.getString("commands.level.noRewardsLeft"))
-                                        .color(NamedTextColor.RED);
-                            }
-
-                            player.sendMessage(text);
-                        }
-                        default -> player.sendMessage(
-                                Component.text(bundle.getString("commands.invalidArg"))
-                                        .color(NamedTextColor.RED)
-                        );
+                case 5 -> {
+                    if(!FileAdmins.isAdmin(player)){
+                        player.sendMessage(Component.text(bundle.getString("commands.noAdmin")).color(NamedTextColor.RED));
+                        return true;
                     }
-                }
-                case 2+99 -> {
-                    if(List.of("give", "set", "remove", "get").contains(strings[1].toLowerCase())){
-                        if(!FileAdmins.isAdmin(player)){
-                            player.sendMessage(Component.text(bundle.getString("commands.noAdmin")).color(NamedTextColor.RED));
-                            return true;
-                        }
+
+                    String action = strings[0].toLowerCase();
+                    if(!List.of("add", "set", "remove").contains(action)){
                         player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
                         return true;
                     }
 
-                    String input = strings[1].toUpperCase();
-                    LevelType type;
+                    String category = strings[1].toLowerCase();
+                    if(!List.of("rewards", "levels").contains(category)){
+                        player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
+                        return true;
+                    }
 
+                    Player target = Bukkit.getPlayer(strings[2]);
+                    if(!Bukkit.getOnlinePlayers().contains(target) || target == null){
+                        player.sendMessage(Component.text(bundle.getString("commands.invalidTarget")).color(NamedTextColor.RED));
+                        return true;
+                    }
+
+                    LevelType levelType = null;
                     try {
-                        type = LevelType.valueOf(input);
+                        levelType = LevelType.valueOf(strings[3].toUpperCase());
                     } catch (IllegalArgumentException e) {
                         player.sendMessage(
                                 Component.text(bundle.getString("commands.invalidArg"))
@@ -348,122 +328,88 @@ public class CommandLeveling implements TabExecutor {
                         return true;
                     }
 
-                    if(FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + type.name().toLowerCase()) <= 0){
+                    int amount = 0;
+                    try {
+                        amount = Integer.parseInt(strings[4]);
+                    } catch (NumberFormatException e) {
                         player.sendMessage(
-                                Component.text(bundle.getString("level.inv.start.noRewardsLeft")).color(NamedTextColor.RED)
+                                Component.text(bundle.getString("commands.invalidArg"))
+                                        .color(NamedTextColor.RED)
                         );
                         return true;
                     }
 
-                    if(player.getInventory().firstEmpty() == -1){
+                    if(amount == 0 && !action.equalsIgnoreCase("set")){
                         player.sendMessage(
-                                Component.text(bundle.getString("level.inv.start.noSpace")).color(NamedTextColor.RED)
+                                Component.text(bundle.getString("commands.nothingChanged"))
+                                        .color(NamedTextColor.RED)
                         );
                         return true;
                     }
 
-                    new InventoryDrumroll(player, type);
-                }
-                case 3+99 ->{
-                    if(List.of("give", "set", "remove", "get").contains(strings[1].toLowerCase())) {
-                        if (!FileAdmins.isAdmin(player)) {
-                            player.sendMessage(Component.text(bundle.getString("commands.noAdmin")).color(NamedTextColor.RED));
-                            return true;
+                    if(action.equalsIgnoreCase("add"))
+                        action = "added";
+                    else if(action.equalsIgnoreCase("remove"))
+                        action = "removed";
+
+                    String bundleCategory = category;
+
+                    if(category.equalsIgnoreCase("levels"))
+                        bundleCategory = "Level";
+                    else if (category.equalsIgnoreCase("rewards"))
+                        bundleCategory = "Rewards";
+
+                    String fileCategory = category;
+                    if(category.equalsIgnoreCase("rewards"))
+                        fileCategory = "rewardsLeft";
+                    else if (category.equalsIgnoreCase("levels"))
+                        fileCategory = "level";
+
+                    switch (action){
+                        case "added" -> {
+                            FileLevels.getConfig().set(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase(),
+                                    FileLevels.getConfig().getInt(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase()) + amount);
                         }
-                        if (!strings[1].equalsIgnoreCase("get")) {
-                            player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
-                            return true;
+                        case "removed" -> {
+                            FileLevels.getConfig().set(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase(),
+                                    FileLevels.getConfig().getInt(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase()) - amount);
+                        }
+                        case "set" -> {
+                            FileLevels.getConfig().set(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase(), amount);
                         }
                     }
-                    String target = strings[2];
+                    FileLevels.saveConfig();
 
-                    Component text = Component.text(bundle.getString("commands.level.rewardsLeft.target")).color(NamedTextColor.DARK_GREEN)
+                    Component text = Component.text(bundle.getString("commands.level." + action + bundleCategory)).color(NamedTextColor.DARK_GREEN)
                             .replaceText(TextReplacementConfig.builder().match("%target%")
                                     .replacement(
-                                            Component.text(target)
-                                                    .color(NamedTextColor.GREEN)
+                                            Component.text(target.getName())
+                                                    .color(NamedTextColor.GOLD)
                                                     .decoration(TextDecoration.ITALIC, true)
+                                    ).build()
+                            ).replaceText(TextReplacementConfig.builder().match("%type%")
+                                    .replacement(
+                                            Component.text(bundle.getString("level." + levelType.toString().toLowerCase()))
+                                                    .color(levelType.getColor())
+                                                    .decoration(TextDecoration.BOLD, true)
+                                    ).build()
+                            ).replaceText(TextReplacementConfig.builder().match("%value%")
+                                    .replacement(
+                                            Component.text(String.valueOf(amount))
+                                                    .color(levelType.getColor())
+                                    ).build())
+                            .replaceText(TextReplacementConfig.builder().match("%" + category + "%")
+                                    .replacement(
+                                            Component.text(String.valueOf(FileLevels.getConfig().getInt(target.getName() + "." + fileCategory + "." + levelType.name().toLowerCase())))
+                                                    .color(levelType.getColor())
                                     ).build());
 
-                    boolean allZero = true;
-
-                    for (LevelType type : LevelType.values()) {
-                        if (!(FileLevels.getConfig().getInt(target + ".rewardsLeft." + type.name().toLowerCase()) == 0)) {
-                            allZero = false;
-                            Component minus = Component.text("\n - ").color(NamedTextColor.DARK_GRAY);
-                            Component reminderText = Component.text(bundle.getString("level." + type.toString().toLowerCase()) +
-                                            ": " + FileLevels.getConfig().getInt(target + ".rewardsLeft." + type.name().toLowerCase()))
-                                    .color(type.getColor());
-                            minus = minus.append(reminderText);
-                            text = text.append(minus);
-                        }
-                    }
-
-                    if (allZero) {
-                        text = Component.text(bundle.getString("commands.level.noRewardsLeft.target"))
-                                .color(NamedTextColor.RED).replaceText(TextReplacementConfig.builder().match("%target%")
-                                        .replacement(
-                                                Component.text(target)
-                                                        .color(NamedTextColor.GOLD)
-                                                        .decoration(TextDecoration.ITALIC, true)
-                                        ).build());;
-                    }
-
                     player.sendMessage(text);
-                }
-                case 4+99 -> {
-                    if(List.of("give", "set", "remove").contains(strings[1].toLowerCase())) {
-                        if (!FileAdmins.isAdmin(player)) {
-                            player.sendMessage(Component.text(bundle.getString("commands.noAdmin")).color(NamedTextColor.RED));
-                            return true;
-                        }
-                        if (!strings[1].equalsIgnoreCase("get")) {
-                            player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
-                            return true;
-                        }
-                    }
-                    String target = strings[2];
-                    String input = strings[3].toUpperCase();
-                    LevelType type;
-
-                    try {
-                        type = LevelType.valueOf(input);
-                    } catch (IllegalArgumentException e) {
-                        player.sendMessage(
-                                Component.text(bundle.getString("commands.invalidArg"))
-                                        .color(NamedTextColor.RED)
-                        );
-                        return true;
-                    }
-
-                    if(FileLevels.getConfig().getInt(target + ".rewardsLeft." + type.name().toLowerCase()) <= 0){
-                        Component targetComp = Component.text(target).color(NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, true);
-                        Component typeComp = Component.text(bundle.getString("level." + type.toString().toLowerCase()), type.getColor())
-                                .decoration(TextDecoration.BOLD, true);
-                        Component text = Component.text(bundle.getString("commands.level.noRewardsLeft.targetSolo")).color(NamedTextColor.RED)
-                                        .replaceText(TextReplacementConfig.builder().match("%target%").replacement(targetComp).build())
-                                        .replaceText(TextReplacementConfig.builder().match("%type%").replacement(typeComp).build());
-                        player.sendMessage(text);
-                        return true;
-                    }
-
-                    Component targetComp = Component.text(target).color(NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, true);
-                    Component typeComp = Component.text(bundle.getString("level." + type.toString().toLowerCase()), type.getColor())
-                            .decoration(TextDecoration.BOLD, true);
-                    Component text = Component.text(bundle.getString("commands.level.rewardsLeft.targetSolo")).color(NamedTextColor.DARK_GREEN)
-                            .replaceText(TextReplacementConfig.builder().match("%target%").replacement(targetComp).build())
-                            .replaceText(TextReplacementConfig.builder().match("%type%").replacement(typeComp).build())
-                            .append(Component.text(" " + FileLevels.getConfig().getInt(target + ".rewardsLeft." + type.name().toLowerCase()))
-                                    .color(NamedTextColor.GREEN));
-                    player.sendMessage(text);
-                }
-                case 5+99 -> {
-                    
                 }
             }
             return true;
         } else {
-
+            //TODO: Make Console tauglich digga
         }
         return true;
     }
