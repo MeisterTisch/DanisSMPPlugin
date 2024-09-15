@@ -418,28 +418,36 @@ public class CommandLeveling implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         switch (strings.length){
             case 1 -> {
-                return List.of("reward");
-            }
-            case 2 -> {
-                List<String> list = new ArrayList<>(List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building"));
+                ArrayList<String> list = new ArrayList<>(List.of("rewards", "levels", "farming", "mining", "combat", "adventure", "magic", "trading", "building"));
                 if(commandSender instanceof Player player && FileAdmins.isAdmin(player)){
-                    list.addAll(List.of("give", "set", "remove", "get"));
+                    list.addAll(List.of("add", "set", "remove", "get"));
                 }
                 return list;
             }
+            case 2 -> {
+                if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
+                    return List.of("rewards", "levels" );
+                }
+                else if(List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building").contains(strings[0].toLowerCase())){
+                    return List.of("open");
+                } else return new ArrayList<>();
+            }
             case 3 -> {
-                if(List.of("give", "set", "remove", "get").contains(strings[1].toLowerCase())){
+                if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())
+                        && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
                     return null;
                 }
-                return List.of();
             }
             case 4 -> {
-                if(List.of("give", "set", "remove", "get").contains(strings[1].toLowerCase())){
+                if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())
+                        && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
                     return List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building");
                 }
             }
             case 5 -> {
-                if(List.of("give", "set", "remove").contains(strings[1].toLowerCase())){
+                if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())
+                        && List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building").contains(strings[3].toLowerCase())
+                        && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
                     return List.of("0", "1", "2", "5", "10");
                 }
             }
