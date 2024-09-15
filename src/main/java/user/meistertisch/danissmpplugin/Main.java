@@ -15,6 +15,7 @@ import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdven
 import user.meistertisch.danissmpplugin.level.types.combat.EventLevelingCombat;
 import user.meistertisch.danissmpplugin.level.types.farming.EventLevelingFarming;
 import user.meistertisch.danissmpplugin.level.types.mining.EventLevelingMining;
+import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
@@ -36,6 +37,7 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingFarming(), this);
         pluginManager.registerEvents(new EventLevelingCombat(), this);
         pluginManager.registerEvents(new EventLevelingAdventure(), this);
+        pluginManager.registerEvents(new EventLevelingTrading(), this);
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
         pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);

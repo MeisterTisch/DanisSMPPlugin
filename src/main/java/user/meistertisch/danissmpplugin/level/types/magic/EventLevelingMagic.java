@@ -1,4 +1,8 @@
 package user.meistertisch.danissmpplugin.level.types.magic;
 
-public class EventLevelingMagic {
+import org.bukkit.event.Listener;
+
+public class EventLevelingMagic implements Listener {
+
+
 }
