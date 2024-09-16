@@ -12,15 +12,16 @@ import user.meistertisch.danissmpplugin.level.ListenerJoinRewardsReminder;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
 import user.meistertisch.danissmpplugin.level.invs.start.ListenerInvClickStartRewarding;
 import user.meistertisch.danissmpplugin.level.types.adventure.EventLevelingAdventure;
+import user.meistertisch.danissmpplugin.level.types.building.EventLevelingBuilding;
 import user.meistertisch.danissmpplugin.level.types.combat.EventLevelingCombat;
 import user.meistertisch.danissmpplugin.level.types.farming.EventLevelingFarming;
+import user.meistertisch.danissmpplugin.level.types.magic.EventLevelingMagic;
 import user.meistertisch.danissmpplugin.level.types.mining.EventLevelingMining;
 import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
     PluginManager pluginManager;
-    EventLevelingAdventure eventLevelingAdventure;
 
     @Override
     public void onEnable() {
@@ -38,6 +39,8 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingCombat(), this);
         pluginManager.registerEvents(new EventLevelingAdventure(), this);
         pluginManager.registerEvents(new EventLevelingTrading(), this);
+        pluginManager.registerEvents(new EventLevelingMagic(), this);
+        pluginManager.registerEvents(new EventLevelingBuilding(), this);
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
         pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);

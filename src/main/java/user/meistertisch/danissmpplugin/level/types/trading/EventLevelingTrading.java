@@ -49,11 +49,12 @@ public class EventLevelingTrading implements Listener {
 
     private void showXP(Player player, String text, double xp){
         FileConfiguration config = FileLevels.getConfig();
-        if(xp < 0) xp = 0;
         player.sendActionBar(Component.text(text + " | " + (xp * 100) + " XP"));
 
         int levelBefore = (int) config.getDouble(player.getName() + ".level.trading");
         double levelAfter = config.getDouble(player.getName() + ".level.trading") + xp;
+
+        if(levelAfter < 0) levelAfter = 0;
 
         config.set(player.getName() + ".level.trading", levelAfter);
         FileLevels.saveConfig();
