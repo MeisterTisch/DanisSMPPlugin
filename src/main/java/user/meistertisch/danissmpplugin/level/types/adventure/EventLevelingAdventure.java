@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
+import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -59,6 +60,9 @@ public class EventLevelingAdventure implements Listener {
     }
 
     private void showXP(Player player, Statistic stat, double xp){
+        LevelingLimiter.playerLeveled(player);
+        if(LevelingLimiter.isPlayerLimited(player)) return;
+
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(stat + " | " + (xp * 100) + " XP"));
 
@@ -83,6 +87,5 @@ public class EventLevelingAdventure implements Listener {
 
         new BossBarLevel(LevelType.ADVENTURE, player);
     }
-
 }
 

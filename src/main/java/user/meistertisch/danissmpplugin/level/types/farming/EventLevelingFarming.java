@@ -18,6 +18,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
+import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -29,7 +30,8 @@ public class EventLevelingFarming implements Listener {
     // FOR DESTROYING FARMING BLOCKS
     @EventHandler
     public void blockDestroyed(BlockBreakEvent event){
-        //TODO: Add CoreProtect API to check if block was placed by player
+        //~~Add CoreProtect API to check if block was placed by player~~
+        //Don't want, made timeout
 
         if(LevelType.FARMING.getValidBlocks().contains(event.getBlock().getType())) {
             Player player = event.getPlayer();
@@ -125,6 +127,9 @@ public class EventLevelingFarming implements Listener {
 
     // Showing the player the XP they got
     private void showXP(Player player, Material block, double xp){
+        LevelingLimiter.playerLeveled(player);
+        if(LevelingLimiter.isPlayerLimited(player)) return;
+
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(block + " | " + (xp * 100) + " XP"));
 
@@ -151,6 +156,9 @@ public class EventLevelingFarming implements Listener {
     }
 
     private void showXP(Player player, String text, double xp){
+        LevelingLimiter.playerLeveled(player);
+        if(LevelingLimiter.isPlayerLimited(player)) return;
+
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(text + " | " + (xp * 100) + " XP"));
 

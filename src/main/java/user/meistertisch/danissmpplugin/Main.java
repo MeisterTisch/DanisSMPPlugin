@@ -41,9 +41,12 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingTrading(), this);
         pluginManager.registerEvents(new EventLevelingMagic(), this);
         pluginManager.registerEvents(new EventLevelingBuilding(), this);
+
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
         pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
+
+        //Schedulers
 
         //Files
         this.saveDefaultConfig();

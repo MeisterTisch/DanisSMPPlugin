@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
+import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -40,6 +41,9 @@ public class EventLevelingCombat implements Listener {
 
     // Showing the player the XP they got
     private void showXP(Player player, EntityType monster, double xp){
+        LevelingLimiter.playerLeveled(player);
+        if(LevelingLimiter.isPlayerLimited(player)) return;
+
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(monster + " | " + (xp * 100) + " XP"));
 

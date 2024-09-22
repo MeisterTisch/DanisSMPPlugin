@@ -11,6 +11,7 @@ import org.bukkit.inventory.CreativeCategory;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
+import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -28,6 +29,9 @@ public class EventLevelingBuilding implements Listener {
     }
 
     private void showXP(Player player, String text, double xp){
+        LevelingLimiter.playerLeveled(player);
+        if(LevelingLimiter.isPlayerLimited(player)) return;
+
         FileConfiguration config = FileLevels.getConfig();
         player.sendActionBar(Component.text(text + " | " + (xp * 100) + " XP"));
 
