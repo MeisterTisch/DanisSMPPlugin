@@ -24,7 +24,7 @@ public class ListenerInvClickStartRewarding implements Listener {
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         String title = bundle.getString("level.inv.start.title");
 
-        if(!player.getOpenInventory().getOriginalTitle().equals(title))
+        if(!player.getOpenInventory().title().toString().equals(title))
             return;
 
         event.setCancelled(true);
