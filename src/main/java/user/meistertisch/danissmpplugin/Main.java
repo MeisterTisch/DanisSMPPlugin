@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
+import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
+import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
@@ -32,8 +34,10 @@ public final class  Main extends JavaPlugin {
         //Commands
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("admin").setExecutor(new CommandAdmin());
+        getCommand("functions").setExecutor(new CommandFunctions());
 
         //Listeners
+            //Leveling
         pluginManager.registerEvents(new EventLevelingMining(), this);
         pluginManager.registerEvents(new EventLevelingFarming(), this);
         pluginManager.registerEvents(new EventLevelingCombat(), this);
@@ -42,9 +46,13 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new EventLevelingMagic(), this);
         pluginManager.registerEvents(new EventLevelingBuilding(), this);
 
+            //Leveling: Rewards
         pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
         pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
         pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
+
+            //Functions
+        pluginManager.registerEvents(new ListenerInvClickFunctions(), this);
 
         //Schedulers
 
@@ -60,6 +68,11 @@ public final class  Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
+        this.saveConfig();
+        FilePlayer.saveConfig();
+        FileLevels.saveConfig();
+        FileAdmins.saveConfig();
     }
 
     //Some static Getters

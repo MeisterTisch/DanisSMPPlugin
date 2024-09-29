@@ -1,0 +1,11 @@
+levelingSystem:
+  use: true
+  rewards: true
+  categories:
+    adventure: true
+    building: true
+    combat: true
+    farming: true
+    magic: true
+    mining: true
+    trading: true
