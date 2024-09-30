@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.essentials.ListenerJoinAndLeave;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
@@ -37,19 +38,25 @@ public final class  Main extends JavaPlugin {
         getCommand("functions").setExecutor(new CommandFunctions());
 
         //Listeners
-            //Leveling
-        pluginManager.registerEvents(new EventLevelingMining(), this);
-        pluginManager.registerEvents(new EventLevelingFarming(), this);
-        pluginManager.registerEvents(new EventLevelingCombat(), this);
-        pluginManager.registerEvents(new EventLevelingAdventure(), this);
-        pluginManager.registerEvents(new EventLevelingTrading(), this);
-        pluginManager.registerEvents(new EventLevelingMagic(), this);
-        pluginManager.registerEvents(new EventLevelingBuilding(), this);
+            //Essentials
+        pluginManager.registerEvents(new ListenerJoinAndLeave(), this);
 
+        if(getConfig().getBoolean("levelingSystem.use")) {
+            //Leveling
+            pluginManager.registerEvents(new EventLevelingMining(), this);
+            pluginManager.registerEvents(new EventLevelingFarming(), this);
+            pluginManager.registerEvents(new EventLevelingCombat(), this);
+            pluginManager.registerEvents(new EventLevelingAdventure(), this);
+            pluginManager.registerEvents(new EventLevelingTrading(), this);
+            pluginManager.registerEvents(new EventLevelingMagic(), this);
+            pluginManager.registerEvents(new EventLevelingBuilding(), this);
             //Leveling: Rewards
-        pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
-        pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
-        pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
+            if(getConfig().getBoolean("levelingSystem.rewards")){
+                pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
+                pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
+                pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
+            }
+        }
 
             //Functions
         pluginManager.registerEvents(new ListenerInvClickFunctions(), this);

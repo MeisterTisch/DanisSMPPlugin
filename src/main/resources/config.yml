@@ -7,11 +7,3 @@ levelingSystem:
     rare: false
     uncommon: false
     common: false
-  categories:
-    adventure: true
-    building: true
-    combat: true
-    farming: true
-    magic: true
-    mining: true
-    trading: true
