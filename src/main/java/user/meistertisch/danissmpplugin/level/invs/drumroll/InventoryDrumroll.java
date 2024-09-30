@@ -429,8 +429,10 @@ public class InventoryDrumroll {
 
         Component rarity;
         Component itemName;
+        WinRarityTypes rarityType;
 
         if(obj instanceof RewardsLevelingAdventure reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -438,6 +440,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         } else if(obj instanceof RewardsLevelingTrading reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -445,6 +448,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         } else if(obj instanceof RewardsLevelingMining reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -452,6 +456,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         }  else if(obj instanceof RewardsLevelingCombat reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -459,6 +464,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         } else if(obj instanceof RewardsLevelingBuilding reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -466,6 +472,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         }  else if(obj instanceof RewardsLevelingFarming reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -473,6 +480,7 @@ public class InventoryDrumroll {
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
         } else if(obj instanceof RewardsLevelingMagic reward){
+            rarityType = reward.getRarity();
             rarity = Component.text(bundle.getString(reward.getRarity().getName()))
                     .color(reward.getRarity().getColor())
                     .decoration(TextDecoration.BOLD, true);
@@ -492,5 +500,20 @@ public class InventoryDrumroll {
                 .replaceText(TextReplacementConfig.builder().match("%item%").replacement(itemName).build());
 
         player.sendMessage(text);
+
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.announce." + rarityType.toString().toLowerCase()))
+            return;
+
+        for(Player onPlayer : Bukkit.getOnlinePlayers()){
+            ResourceBundle tempBundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(onPlayer.getName() + ".lang"));
+
+            Component announceText = Component.text(tempBundle.getString("level.rewarding.announce"))
+                    .color(TextColor.color(NamedTextColor.GOLD))
+                    .replaceText(TextReplacementConfig.builder().match("%rarity%").replacement(tempBundle.getString(rarityType.getName())).build())
+                    .replaceText(TextReplacementConfig.builder().match("%item%").replacement(itemName).build())
+                    .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build());
+
+            onPlayer.sendMessage(announceText);
+        }
     }
 }

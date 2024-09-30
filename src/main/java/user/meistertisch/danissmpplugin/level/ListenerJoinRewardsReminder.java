@@ -16,6 +16,12 @@ public class ListenerJoinRewardsReminder implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
+
+        if(FilePlayer.getConfig().getString(event.getPlayer().getName()) == null) {
+            FilePlayer.getConfig().set(event.getPlayer().getName() + ".lang", "de");
+            FilePlayer.saveConfig();
+        }
+
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(event.getPlayer().getName() + ".lang"));
         Component text = Component.text(bundle.getString("level.rewarding.reminder")).color(NamedTextColor.GOLD);
         boolean allZero = true;

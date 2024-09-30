@@ -1,6 +1,12 @@
 levelingSystem:
   use: true
   rewards: true
+  announce:
+    legendary: true
+    epic: true
+    rare: false
+    uncommon: false
+    common: false
   categories:
     adventure: true
     building: true
