@@ -4,12 +4,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
+import user.meistertisch.danissmpplugin.admin.CommandTest;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.essentials.chat.ListenerChatFormater;
 import user.meistertisch.danissmpplugin.essentials.ListenerJoinAndLeave;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.files.FileTeams;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
 import user.meistertisch.danissmpplugin.level.ListenerJoinRewardsReminder;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
@@ -36,11 +39,14 @@ public final class  Main extends JavaPlugin {
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("admin").setExecutor(new CommandAdmin());
         getCommand("functions").setExecutor(new CommandFunctions());
+        getCommand("test").setExecutor(new CommandTest());
 
         //Listeners
             //Essentials
         pluginManager.registerEvents(new ListenerJoinAndLeave(), this);
+        pluginManager.registerEvents(new ListenerChatFormater(), this);
 
+            //Leveling
         if(getConfig().getBoolean("levelingSystem.use")) {
             //Leveling
             pluginManager.registerEvents(new EventLevelingMining(), this);
@@ -70,6 +76,7 @@ public final class  Main extends JavaPlugin {
         FilePlayer.setup();
         FileLevels.setup();
         FileAdmins.setup();
+        FileTeams.setup();
     }
 
     @Override
@@ -80,6 +87,7 @@ public final class  Main extends JavaPlugin {
         FilePlayer.saveConfig();
         FileLevels.saveConfig();
         FileAdmins.saveConfig();
+        FileTeams.saveConfig();
     }
 
     //Some static Getters
