@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
@@ -30,13 +31,15 @@ public class InventoryLevelsStart {
                     )
                     .color(type.getColor()));
 
-            List<? extends Component> lore = List.of(
-                    Component.text(bundle.getString("level.inv.start.rewardsLeft")
-                            + (int) FileLevels.getConfig().getDouble(player.getName() + ".rewardsLeft." + type.name().toLowerCase())
-                    )
-            );
+            if(Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards")) {
+                List<? extends Component> lore = List.of(
+                        Component.text(bundle.getString("level.inv.start.rewardsLeft")
+                                + (int) FileLevels.getConfig().getDouble(player.getName() + ".rewardsLeft." + type.name().toLowerCase())
+                        )
+                );
 
-            meta.lore(lore);
+                meta.lore(lore);
+            }
 
             item.setItemMeta(meta);
             start.addItem(item);

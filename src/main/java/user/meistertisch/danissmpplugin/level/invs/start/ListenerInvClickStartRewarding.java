@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.InventoryDrumroll;
@@ -24,10 +25,14 @@ public class ListenerInvClickStartRewarding implements Listener {
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         String title = bundle.getString("level.inv.start.title");
 
-        if(!player.getOpenInventory().title().toString().equals(title))
+        if(!player.getOpenInventory().title().equals(Component.text(title)))
             return;
 
         event.setCancelled(true);
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards")){
+            return;
+        }
+
         ItemStack item = event.getCurrentItem();
 
         if(item == null || !item.hasItemMeta() || !item.getItemMeta().hasItemName())

@@ -19,10 +19,10 @@ public class ListenerJoinAndLeave implements Listener {
     TextColor color2 = TextColor.color(0xF01BC);
 
     @EventHandler
-    public void playerJoinEvent(PlayerJoinEvent event){
+    public void playerJoinEvent(PlayerJoinEvent event) {
         event.joinMessage(Component.text(""));
         Player player = event.getPlayer();
-        if(FilePlayer.getConfig().getString(player.getName()) == null) {
+        if (FilePlayer.getConfig().getString(player.getName()) == null) {
             FilePlayer.getConfig().set(player.getName() + ".lang", "de");
             FilePlayer.saveConfig();
         }
@@ -30,14 +30,14 @@ public class ListenerJoinAndLeave implements Listener {
         Component playerText = Component.text(player.getName()).color(color1).decorate(TextDecoration.BOLD);
         boolean firstJoin = !player.hasPlayedBefore();
 
-        for(Player onlinePlayer : Bukkit.getOnlinePlayers()){
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             String lang = FilePlayer.getConfig().getString(onlinePlayer.getName() + ".lang");
-            if(lang == null){
+            if (lang == null) {
                 lang = "de";
             }
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + lang);
 
-            if(firstJoin){
+            if (firstJoin) {
                 onlinePlayer.sendMessage(Component.text(bundle.getString("joinFirstTime")).color(color2).replaceText(
                         TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
                 ));
@@ -47,20 +47,18 @@ public class ListenerJoinAndLeave implements Listener {
                 ));
             }
         }
-
-
     }
 
     @EventHandler
-    public void playerLeaveEvent(PlayerQuitEvent event){
+    public void playerLeaveEvent(PlayerQuitEvent event) {
         event.quitMessage(Component.text(""));
         Player player = event.getPlayer();
 
         Component playerText = Component.text(player.getName()).color(color1).decorate(TextDecoration.BOLD);
 
-        for(Player onlinePlayer : Bukkit.getOnlinePlayers()){
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             String lang = FilePlayer.getConfig().getString(onlinePlayer.getName() + ".lang");
-            if(lang == null){
+            if (lang == null) {
                 lang = "de";
             }
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + lang);

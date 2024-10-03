@@ -36,10 +36,10 @@ public final class  Main extends JavaPlugin {
         pluginManager = Bukkit.getPluginManager();
 
         //Commands
-        getCommand("level").setExecutor(new CommandLeveling());
         getCommand("admin").setExecutor(new CommandAdmin());
         getCommand("functions").setExecutor(new CommandFunctions());
         getCommand("test").setExecutor(new CommandTest());
+        getCommand("level").setExecutor(new CommandLeveling());
 
         //Listeners
             //Essentials
@@ -48,7 +48,6 @@ public final class  Main extends JavaPlugin {
 
             //Leveling
         if(getConfig().getBoolean("levelingSystem.use")) {
-            //Leveling
             pluginManager.registerEvents(new EventLevelingMining(), this);
             pluginManager.registerEvents(new EventLevelingFarming(), this);
             pluginManager.registerEvents(new EventLevelingCombat(), this);
@@ -56,9 +55,9 @@ public final class  Main extends JavaPlugin {
             pluginManager.registerEvents(new EventLevelingTrading(), this);
             pluginManager.registerEvents(new EventLevelingMagic(), this);
             pluginManager.registerEvents(new EventLevelingBuilding(), this);
+            pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
             //Leveling: Rewards
             if(getConfig().getBoolean("levelingSystem.rewards")){
-                pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
                 pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
                 pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
             }

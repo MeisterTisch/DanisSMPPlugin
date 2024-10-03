@@ -12,6 +12,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
@@ -28,6 +29,14 @@ public class CommandLeveling implements TabExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(commandSender instanceof Player player){
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+
+            if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use")){
+                player.sendMessage(
+                        Component.text(bundle.getString("level.disabled"))
+                                .color(NamedTextColor.RED)
+                );
+                return true;
+            }
 
             switch (strings.length){
                 case 0 -> {
@@ -105,6 +114,14 @@ public class CommandLeveling implements TabExecutor {
                     }
                 }
                 case 2 -> {
+                    if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards")){
+                        player.sendMessage(
+                                Component.text(bundle.getString("level.rewarding.disabled"))
+                                        .color(NamedTextColor.RED)
+                        );
+                        return true;
+                    }
+
                     if(!strings[1].equalsIgnoreCase("open")){
                         player.sendMessage(
                                 Component.text(bundle.getString("commands.invalidArg"))
