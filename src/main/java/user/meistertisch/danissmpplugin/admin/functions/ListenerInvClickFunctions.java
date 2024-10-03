@@ -52,7 +52,16 @@ public class ListenerInvClickFunctions implements Listener {
                     break;
                 }
             }
+        } else if(material == Material.ARROW){
+            if(item.getItemMeta().displayName().equals(Component.text(bundle.getString("functionTypes.nextSite")))){
+                player.closeInventory();
+                new InventoryFunctions(player, 2);
+            } else if(item.getItemMeta().displayName().equals(Component.text(bundle.getString("functionTypes.previousSite")))){
+                player.closeInventory();
+                new InventoryFunctions(player, 1);
+            }
         }
+
 
         if(type == null)
             return;

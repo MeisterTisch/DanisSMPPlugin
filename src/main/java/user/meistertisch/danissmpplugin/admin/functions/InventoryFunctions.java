@@ -8,12 +8,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class InventoryFunctions {
     Player player;
@@ -22,6 +24,8 @@ public class InventoryFunctions {
     int page;
     ItemStack disabled;
     ItemStack enabled;
+    ItemStack nextSite;
+    ItemStack previousSite;
     FileConfiguration config = Main.getPlugin().getConfig();
 
     public InventoryFunctions(Player player, int page) {
@@ -30,6 +34,7 @@ public class InventoryFunctions {
         bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         inv = Bukkit.createInventory(player, 9*3, Component.text(bundle.getString("functionTypes.inv.title")));
         setModeItemStack(bundle);
+        setArrowItemStack(bundle);
 
         List<FunctionTypes> functionsList = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
@@ -57,6 +62,12 @@ public class InventoryFunctions {
             }
         }
 
+        if(page > 1)
+            inv.setItem(18, previousSite);
+
+        if(FunctionTypes.values().length > 9*page)
+            inv.setItem(26, nextSite);
+
         player.openInventory(inv);
     }
 
@@ -72,5 +83,18 @@ public class InventoryFunctions {
         meta.displayName(Component.text(bundle.getString("functionTypes.enabled")));
         meta.lore(List.of(Component.text(bundle.getString("functionTypes.enabled.desc"))));
         enabled.setItemMeta(meta);
+    }
+
+    private void setArrowItemStack(ResourceBundle bundle){
+        nextSite = new ItemStack(Material.ARROW);
+        ItemMeta nextSiteMeta = nextSite.getItemMeta();
+        nextSiteMeta.displayName(Component.text(bundle.getString("functionTypes.nextSite")));
+        nextSite.setItemMeta(nextSiteMeta);
+
+
+        previousSite = new ItemStack(Material.ARROW);
+        ItemMeta previousSiteMeta = nextSite.getItemMeta();
+        previousSiteMeta.displayName(Component.text(bundle.getString("functionTypes.previousSite")));
+        previousSite.setItemMeta(previousSiteMeta);
     }
 }
