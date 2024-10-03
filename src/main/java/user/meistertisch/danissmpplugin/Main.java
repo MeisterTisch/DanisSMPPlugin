@@ -24,6 +24,8 @@ import user.meistertisch.danissmpplugin.level.types.farming.EventLevelingFarming
 import user.meistertisch.danissmpplugin.level.types.magic.EventLevelingMagic;
 import user.meistertisch.danissmpplugin.level.types.mining.EventLevelingMining;
 import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading;
+import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.CommandThunderstormSummoner;
+import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.ListenerTridentThrow;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
@@ -40,8 +42,12 @@ public final class  Main extends JavaPlugin {
         getCommand("functions").setExecutor(new CommandFunctions());
         getCommand("test").setExecutor(new CommandTest());
         getCommand("level").setExecutor(new CommandLeveling());
+        getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
 
         //Listeners
+            //Functions
+        pluginManager.registerEvents(new ListenerInvClickFunctions(), this);
+
             //Essentials
         pluginManager.registerEvents(new ListenerJoinAndLeave(), this);
         pluginManager.registerEvents(new ListenerChatFormater(), this);
@@ -63,8 +69,9 @@ public final class  Main extends JavaPlugin {
             }
         }
 
-            //Functions
-        pluginManager.registerEvents(new ListenerInvClickFunctions(), this);
+            //ThunderstormSummoner
+        pluginManager.registerEvents(new ListenerTridentThrow(), this);
+
 
         //Schedulers
 

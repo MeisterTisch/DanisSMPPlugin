@@ -7,3 +7,5 @@ levelingSystem:
     rare: false
     uncommon: false
     common: false
+thunderSpawn:
+  use: true
