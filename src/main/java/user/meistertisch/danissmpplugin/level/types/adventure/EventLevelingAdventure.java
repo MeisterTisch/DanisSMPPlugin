@@ -17,10 +17,6 @@ import user.meistertisch.danissmpplugin.level.types.LevelType;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class EventLevelingAdventure implements Listener {
-    private static ScheduledExecutorService service;
-    //TODO: Check for if already gave xp for the statistic
-    //TODO: Rate Limit
-
     @EventHandler
     public void checkForStatistics(PlayerStatisticIncrementEvent event){
         Player player = event.getPlayer();
