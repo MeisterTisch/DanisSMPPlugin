@@ -8,6 +8,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
@@ -29,11 +30,13 @@ public class MessageLevelUp {
                 .replaceText(TextReplacementConfig.builder().match("%leveltype%").replacement(type).build());
 
 
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards"))
+            return;
         Component openText = Component.text(bundle.getString("level.levelUp.openReward"))
                 .color(TextColor.color(NamedTextColor.DARK_GREEN))
                 .decoration(TextDecoration.ITALIC, true)
                 .hoverEvent(Component.text(bundle.getString("level.levelUp.openReward.hover")))
-                .clickEvent(ClickEvent.runCommand("/level reward " + levelType.name().toLowerCase()));
+                .clickEvent(ClickEvent.runCommand("/level " + levelType.name().toLowerCase() + " open"));
 
         player.sendMessage(text);
         player.sendMessage(openText);
