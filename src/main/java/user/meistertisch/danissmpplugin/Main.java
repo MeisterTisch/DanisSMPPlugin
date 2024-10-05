@@ -70,7 +70,8 @@ public final class  Main extends JavaPlugin {
         }
 
             //ThunderstormSummoner
-        pluginManager.registerEvents(new ListenerTridentThrow(), this);
+        if(getConfig().getBoolean("thunderSpawn.use"))
+            pluginManager.registerEvents(new ListenerTridentThrow(), this);
 
 
         //Schedulers

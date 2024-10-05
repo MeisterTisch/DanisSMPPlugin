@@ -4,11 +4,11 @@ import com.destroystokyo.paper.event.player.PlayerLaunchProjectileEvent;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 
@@ -26,23 +26,19 @@ public class ListenerTridentThrow implements Listener {
 
         if(!meta.hasEnchant(Enchantment.CHANNELING))
             return;
-//        Damageable damageMeta = (Damageable) item.getItemMeta();
-//
-//        if(!damageMeta.hasMaxDamage())
-//            return;
-//
-//        if(damageMeta.getDamage() < damageMeta.getMaxDamage() * 0.6)
-//            return;
+        Damageable damageMeta = (Damageable) item.getItemMeta();
 
-        if(player.getLocation().getBlockY() < 320)
+        if(damageMeta.getDamage() >= 250 * 0.6)
+            return;
+
+        if(player.getLocation().getBlockY() < 320 && player.getPitch() > -85)
             return;
 
         if(player.getWorld().isThundering())
             return;
 
         player.getWorld().setThundering(true);
-        player.getWorld().createEntity(player.getLocation(), LightningStrike.class);
-//        damageMeta.setDamage((int) (damageMeta.getDamage() - damageMeta.getMaxDamage() * 0.6));
-//        item.setItemMeta(damageMeta);
+        damageMeta.setDamage((int) (250 * 0.6 + 1));
+        item.setItemMeta(damageMeta);
     }
 }
