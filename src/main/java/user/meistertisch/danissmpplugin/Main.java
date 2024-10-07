@@ -9,6 +9,7 @@ import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.essentials.chat.ListenerChatFormater;
 import user.meistertisch.danissmpplugin.essentials.ListenerJoinAndLeave;
+import user.meistertisch.danissmpplugin.essentials.lang.CommandLanguage;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
@@ -43,6 +44,7 @@ public final class  Main extends JavaPlugin {
         getCommand("test").setExecutor(new CommandTest());
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
+        getCommand("language").setExecutor(new CommandLanguage());
 
         //Listeners
             //Functions

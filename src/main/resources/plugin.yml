@@ -21,6 +21,13 @@ commands:
     aliases:
       - func
   test:
+    description: Command for testing.
+    usage: /test
   thunder:
     description: Command for turning on or off the function "Thunder Summoner".
     usage: /thunder [on/off]
+  language:
+    description: Command for changing the language.
+    usage: /language <language>
+    aliases:
+      - lang
