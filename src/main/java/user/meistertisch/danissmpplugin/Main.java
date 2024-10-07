@@ -25,6 +25,7 @@ import user.meistertisch.danissmpplugin.level.types.farming.EventLevelingFarming
 import user.meistertisch.danissmpplugin.level.types.magic.EventLevelingMagic;
 import user.meistertisch.danissmpplugin.level.types.mining.EventLevelingMining;
 import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading;
+import user.meistertisch.danissmpplugin.misc.fun.CommandSpit;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.CommandThunderstormSummoner;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.ListenerTridentThrow;
 
@@ -45,6 +46,7 @@ public final class  Main extends JavaPlugin {
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
         getCommand("language").setExecutor(new CommandLanguage());
+        getCommand("spit").setExecutor(new CommandSpit());
 
         //Listeners
             //Functions

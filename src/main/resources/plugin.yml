@@ -31,3 +31,6 @@ commands:
     usage: /language <language>
     aliases:
       - lang
+  spit:
+    description: Be a Llama!
+    usage: /spit

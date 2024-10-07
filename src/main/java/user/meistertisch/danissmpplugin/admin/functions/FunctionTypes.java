@@ -13,7 +13,8 @@ public enum FunctionTypes {
     DURABILITY_PING("functionTypes.durability_ping", "functionTypes.durability_ping.desc", "durabilityPing.use", Material.DAMAGED_ANVIL),
     MOB_HEALTHBAR("functionTypes.mob_healthbar", "functionTypes.mob_healthbar.desc", "mobHealthbar.use", Material.PIG_SPAWN_EGG),
     HEAD_DROP("functionTypes.head_drop", "functionTypes.head_drop.desc", "headDrop.use", Material.PLAYER_HEAD),
-    VILLAGER_DEATH_MESSAGE("functionTypes.villager_death_message", "functionTypes.villager_death_message.desc", "villagerDeathMessage.use", Material.VILLAGER_SPAWN_EGG),;
+    VILLAGER_DEATH_MESSAGE("functionTypes.villager_death_message", "functionTypes.villager_death_message.desc", "villagerDeathMessage.use", Material.VILLAGER_SPAWN_EGG),
+    SPIT("functionTypes.spit", "functionTypes.spit.desc", "spit.use", Material.WATER_BUCKET),;
 
     private String name;
     private String desc;

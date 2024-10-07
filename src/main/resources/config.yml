@@ -16,3 +16,5 @@ thunderSpawn:
 colors:
   accent1: 0x7704a8
   accent2: 0x0F01BC
+spit:
+  use: true
