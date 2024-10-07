@@ -31,12 +31,16 @@ public class ListenerTridentThrow implements Listener {
         if(damageMeta.getDamage() >= 250 * 0.6)
             return;
 
-        if(player.getLocation().getBlockY() < 320 && player.getPitch() > -85)
+        if(player.getLocation().getBlockY() < 320)
+            return;
+
+        if(player.getPitch() > -85)
             return;
 
         if(player.getWorld().isThundering())
             return;
 
+        player.getWorld().setClearWeatherDuration(0);
         player.getWorld().setThundering(true);
         damageMeta.setDamage((int) (250 * 0.6 + 1));
         item.setItemMeta(damageMeta);

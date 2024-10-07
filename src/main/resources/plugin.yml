@@ -7,8 +7,20 @@ authors: [MeisterTisch]
 description: This is a perfectly made plugin for SMPs
 website: https://github.com/meistertisch
 commands:
-  level:
   admin:
+    description: Command for setting or removing admins.
+    usage: /admin <add/remove> <player>
+  level:
+    description: Command for levels and rewards.
+    usage: /level <category> [open]
+    aliases:
+      - lvl
   functions:
+    description: Command for functions.
+    usage: /functions
+    aliases:
+      - func
   test:
   thunder:
+    description: Command for turning on or off the function "Thunder Summoner".
+    usage: /thunder [on/off]

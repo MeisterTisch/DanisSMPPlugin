@@ -1,3 +1,7 @@
+name: "Craft Mining 6"
+list:
+  header: "----- Craft Mining -----"
+  footer: "----- Season 6 -----"
 levelingSystem:
   use: true
   rewards: true
@@ -9,3 +13,6 @@ levelingSystem:
     common: false
 thunderSpawn:
   use: true
+colors:
+  accent1: 0x7704a8
+  accent2: 0x0F01BC
