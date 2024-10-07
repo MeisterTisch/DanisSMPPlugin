@@ -18,3 +18,11 @@ colors:
   accent2: 0x0F01BC
 spit:
   use: true
+discord:
+  use: false
+  link: ""
+teamspeak:
+  use: false
+  ip: ""
+  isPasswordProtected: false
+  password: ""

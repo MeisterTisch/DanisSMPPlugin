@@ -14,6 +14,8 @@ public enum FunctionTypes {
     MOB_HEALTHBAR("functionTypes.mob_healthbar", "functionTypes.mob_healthbar.desc", "mobHealthbar.use", Material.PIG_SPAWN_EGG),
     HEAD_DROP("functionTypes.head_drop", "functionTypes.head_drop.desc", "headDrop.use", Material.PLAYER_HEAD),
     VILLAGER_DEATH_MESSAGE("functionTypes.villager_death_message", "functionTypes.villager_death_message.desc", "villagerDeathMessage.use", Material.VILLAGER_SPAWN_EGG),
+    DISCORD("functionTypes.discord", "functionTypes.discord.desc", "discord.use", Material.SCULK_SENSOR),
+    TEAMSPEAK("functionTypes.teamspeak", "functionTypes.teamspeak.desc", "teamspeak.use", Material.CALIBRATED_SCULK_SENSOR),
     SPIT("functionTypes.spit", "functionTypes.spit.desc", "spit.use", Material.WATER_BUCKET),;
 
     private String name;
