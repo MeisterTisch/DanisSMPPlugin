@@ -30,10 +30,12 @@ import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading
 import user.meistertisch.danissmpplugin.misc.fun.CommandSpit;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.CommandThunderstormSummoner;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.ListenerTridentThrow;
+import user.meistertisch.danissmpplugin.tpa.ManagerTPA;
 
 public final class  Main extends JavaPlugin {
     private static Main plugin;
     PluginManager pluginManager;
+    private static ManagerTPA managerTPA;
 
     @Override
     public void onEnable() {
@@ -92,6 +94,9 @@ public final class  Main extends JavaPlugin {
         FileLevels.setup();
         FileAdmins.setup();
         FileTeams.setup();
+
+        //Managers
+        managerTPA = new ManagerTPA();
     }
 
     @Override
@@ -108,5 +113,9 @@ public final class  Main extends JavaPlugin {
     //Some static Getters
     public static Main getPlugin() {
         return plugin;
+    }
+
+    public static ManagerTPA getManagerTPA() {
+        return managerTPA;
     }
 }
