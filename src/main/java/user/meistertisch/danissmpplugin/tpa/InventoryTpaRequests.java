@@ -28,11 +28,11 @@ public class InventoryTpaRequests {
         bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         inv = Bukkit.createInventory(player, 9*3, Component.text(bundle.getString("tpa.inv.title")));
 
-        if(toTarget) {
-            requests = Main.getManagerTPA().getRequestedTo(player);
-        } else {
-            requests = Main.getManagerTPA().getRequestedHere(player);
-        }
+//        if(toTarget) {
+//            requests = Main.getManagerTPA().getRequestedTo(player);
+//        } else {
+//            requests = Main.getManagerTPA().getRequestedHere(player);
+//        }
 
         if(requests.isEmpty())
             return;
@@ -47,13 +47,15 @@ public class InventoryTpaRequests {
             //TODO: Make player heads to players
             ItemStack item = new ItemStack(Material.PLAYER_HEAD);
             ItemMeta meta = item.getItemMeta();
-            meta.displayName(Component.text(bundle.getString(target.getName())));
+            meta.displayName(Component.text(target.getName()));
             item.setItemMeta(meta);
             inv.addItem(item);
 
             inv.setItem(i+9, accept);
             inv.setItem(i+18, decline);
         }
+
+        player.openInventory(inv);
     }
 
     private void setModeItemStack(ResourceBundle bundle){

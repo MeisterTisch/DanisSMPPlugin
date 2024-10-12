@@ -44,3 +44,6 @@ commands:
     usage: /teamspeak
     aliases:
       - ts
+  tpa:
+    description: Teleport to a player.
+    usage: /tpa <here/to/allow/disallow/accept/decline/cancel> [player]

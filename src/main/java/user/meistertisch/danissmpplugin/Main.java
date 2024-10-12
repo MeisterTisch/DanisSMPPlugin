@@ -1,6 +1,7 @@
 package user.meistertisch.danissmpplugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
@@ -30,6 +31,7 @@ import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading
 import user.meistertisch.danissmpplugin.misc.fun.CommandSpit;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.CommandThunderstormSummoner;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.ListenerTridentThrow;
+import user.meistertisch.danissmpplugin.tpa.CommandTpa;
 import user.meistertisch.danissmpplugin.tpa.ManagerTPA;
 
 public final class  Main extends JavaPlugin {
@@ -53,6 +55,7 @@ public final class  Main extends JavaPlugin {
         getCommand("spit").setExecutor(new CommandSpit());
         getCommand("discord").setExecutor(new CommandDiscord());
         getCommand("teamspeak").setExecutor(new CommandTeamspeak());
+        getCommand("tpa").setExecutor(new CommandTpa());
 
         //Listeners
             //Functions
@@ -117,5 +120,13 @@ public final class  Main extends JavaPlugin {
 
     public static ManagerTPA getManagerTPA() {
         return managerTPA;
+    }
+
+    public static int getPrimaryColor(){
+        return plugin.getConfig().getInt("colors.accent1");
+    }
+
+    public static int getSecondaryColor(){
+        return plugin.getConfig().getInt("colors.accent2");
     }
 }
