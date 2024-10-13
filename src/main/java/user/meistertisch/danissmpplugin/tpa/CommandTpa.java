@@ -72,6 +72,6 @@ public class CommandTpa implements TabExecutor {
         if(strings.length == 1){
             return List.of("accept", "decline", "here", "to", "allow", "disallow", "cancel");
         }
-        return List.of();
+        return null;
     }
 }

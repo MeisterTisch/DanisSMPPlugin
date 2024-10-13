@@ -43,6 +43,13 @@ public class ManagerTPA {
             return;
         }
 
+        if(requester == target){
+            requester.sendMessage(
+                    Component.text(requesterBundle.getString("commands.tpa.samePlayer")).color(NamedTextColor.RED)
+            );
+            return;
+        }
+
         requests.put(requester, target);
         toRequesterMap.put(requester, toRequester);
 
@@ -52,11 +59,11 @@ public class ManagerTPA {
 
         Component toRequesterMessage = Component.text(targetBundle.getString("commands.tpa.toRequester.requestGot")).color(TextColor.color(Main.getPrimaryColor()))
                 .replaceText(TextReplacementConfig.builder().match("%requester%")
-                        .replacement(Component.text(target.getName()).color(TextColor.color(Main.getSecondaryColor()))).build());
+                        .replacement(Component.text(requester.getName()).color(TextColor.color(Main.getSecondaryColor()))).build());
 
         Component toTargetMessage = Component.text(targetBundle.getString("commands.tpa.toTarget.requestGot")).color(TextColor.color(Main.getPrimaryColor()))
                 .replaceText(TextReplacementConfig.builder().match("%requester%")
-                        .replacement(Component.text(target.getName()).color(TextColor.color(Main.getSecondaryColor()))).build());
+                        .replacement(Component.text(requester.getName()).color(TextColor.color(Main.getSecondaryColor()))).build());
 
         requester.sendMessage(requestSent);
         target.sendMessage(toRequester ? toRequesterMessage : toTargetMessage);
