@@ -1,13 +1,14 @@
 package user.meistertisch.danissmpplugin;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
 import user.meistertisch.danissmpplugin.admin.CommandTest;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.durability.CommandDurability;
+import user.meistertisch.danissmpplugin.durability.ListenerDurabilityPing;
 import user.meistertisch.danissmpplugin.essentials.CommandDiscord;
 import user.meistertisch.danissmpplugin.essentials.CommandTeamspeak;
 import user.meistertisch.danissmpplugin.essentials.chat.ListenerChatFormater;
@@ -56,6 +57,8 @@ public final class  Main extends JavaPlugin {
         getCommand("discord").setExecutor(new CommandDiscord());
         getCommand("teamspeak").setExecutor(new CommandTeamspeak());
         getCommand("tpa").setExecutor(new CommandTpa());
+        getCommand("durability").setExecutor(new CommandDurability());
+
 
         //Listeners
             //Functions
@@ -81,10 +84,12 @@ public final class  Main extends JavaPlugin {
                 pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
             }
         }
-
             //ThunderstormSummoner
         if(getConfig().getBoolean("thunderSpawn.use"))
             pluginManager.registerEvents(new ListenerTridentThrow(), this);
+
+            //Durability Ping
+        pluginManager.registerEvents(new ListenerDurabilityPing(), this);
 
 
         //Schedulers

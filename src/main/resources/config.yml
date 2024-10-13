@@ -26,3 +26,6 @@ teamspeak:
   ip: ""
   isPasswordProtected: false
   password: ""
+durabilityPing:
+  use: true
+  threshold: 0.1

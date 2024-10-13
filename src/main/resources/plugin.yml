@@ -47,3 +47,6 @@ commands:
   tpa:
     description: Teleport to a player.
     usage: /tpa <here/to/allow/disallow/accept/decline/cancel> [player]
+  durability:
+    description: Command for the durability ping.
+    usage: /durability [on/off]

@@ -21,7 +21,6 @@ public class EventLevelingAdventure implements Listener {
     public void checkForStatistics(PlayerStatisticIncrementEvent event){
         Player player = event.getPlayer();
         Statistic stat = event.getStatistic();
-        System.out.println("Statistic: " + event.getStatistic());
         int modulo;
 
         switch (stat) {
