@@ -10,11 +10,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import user.meistertisch.danissmpplugin.Main;
 
 
 public class ListenerTridentThrow implements Listener {
     @EventHandler
     public void playerThrewTrident(PlayerLaunchProjectileEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("thunderSpawn.use"))
+            return;
+
         Player player = event.getPlayer();
 
         if(event.getProjectile().getType() != EntityType.TRIDENT)
