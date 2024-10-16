@@ -29,3 +29,5 @@ teamspeak:
 durabilityPing:
   use: true
   threshold: 0.1
+mobHealthbar:
+  use: true

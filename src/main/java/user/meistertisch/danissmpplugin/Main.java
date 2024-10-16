@@ -32,6 +32,7 @@ import user.meistertisch.danissmpplugin.level.types.trading.EventLevelingTrading
 import user.meistertisch.danissmpplugin.misc.fun.CommandSpit;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.CommandThunderstormSummoner;
 import user.meistertisch.danissmpplugin.misc.thunderstormSummoner.ListenerTridentThrow;
+import user.meistertisch.danissmpplugin.mobHealthbar.ListenerMobAttack;
 import user.meistertisch.danissmpplugin.tpa.CommandTpa;
 import user.meistertisch.danissmpplugin.tpa.ManagerTPA;
 
@@ -58,7 +59,6 @@ public final class  Main extends JavaPlugin {
         getCommand("teamspeak").setExecutor(new CommandTeamspeak());
         getCommand("tpa").setExecutor(new CommandTpa());
         getCommand("durability").setExecutor(new CommandDurability());
-
 
         //Listeners
             //Functions
@@ -91,6 +91,8 @@ public final class  Main extends JavaPlugin {
             //Durability Ping
         pluginManager.registerEvents(new ListenerDurabilityPing(), this);
 
+            //MobHealthbar
+        pluginManager.registerEvents(new ListenerMobAttack(), this);
 
         //Schedulers
 
