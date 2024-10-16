@@ -33,6 +33,8 @@ public class ListenerMobAttack implements Listener {
 
     private static @NotNull Component getComponent(Damageable entity, int maxHealth, double damage) {
         int health = (int) (entity.getHealth() - damage);
+        if(health < 0)
+            health = 0;
 
         double procent = (double) health / maxHealth;
         TextColor color;
