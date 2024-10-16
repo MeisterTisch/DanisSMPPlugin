@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
@@ -19,6 +20,10 @@ import java.util.ResourceBundle;
 public class EventLevelingMagic implements Listener {
     @EventHandler
     public void enchantingTableEvent(EnchantItemEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         double xp = (double) event.getExpLevelCost() / 30;
 
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(event.getEnchanter().getName() + ".lang"));

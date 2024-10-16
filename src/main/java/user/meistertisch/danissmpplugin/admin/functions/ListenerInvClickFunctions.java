@@ -10,12 +10,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListenerInvClickFunctions implements Listener {
+    ItemStack disabled;
+    ItemStack enabled;
 
     @EventHandler
     public void invClick(InventoryClickEvent event){
@@ -24,6 +28,7 @@ public class ListenerInvClickFunctions implements Listener {
 
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         String title = bundle.getString("functionTypes.inv.title");
+        setModeItemStack(bundle);
 
         if(!player.getOpenInventory().title().equals(Component.text(title))){
             return;
@@ -52,6 +57,12 @@ public class ListenerInvClickFunctions implements Listener {
                     break;
                 }
             }
+
+            if(isEnabled){
+                event.getInventory().setItem(event.getSlot(), disabled);
+            } else {
+                event.getInventory().setItem(event.getSlot(), enabled);
+            }
         } else if(material == Material.ARROW){
             if(item.getItemMeta().displayName().equals(Component.text(bundle.getString("functionTypes.nextSite")))){
                 player.closeInventory();
@@ -70,7 +81,8 @@ public class ListenerInvClickFunctions implements Listener {
         Main.getPlugin().saveConfig();
         Main.getPlugin().reloadConfig();
 
-        player.closeInventory();
+//        player.closeInventory();
+
 
         if(!isEnabled){
             player.sendMessage(
@@ -85,8 +97,22 @@ public class ListenerInvClickFunctions implements Listener {
             );
         }
 
-        player.sendMessage(
-                Component.text(bundle.getString("functionTypes.changedRestart")).color(NamedTextColor.RED)
-        );
+//        player.sendMessage(
+//                Component.text(bundle.getString("functionTypes.changedRestart")).color(NamedTextColor.RED)
+//        );
+    }
+
+    private void setModeItemStack(ResourceBundle bundle){
+        disabled = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+        ItemMeta meta = disabled.getItemMeta();
+        meta.displayName(Component.text(bundle.getString("functionTypes.disabled")));
+        meta.lore(List.of(Component.text(bundle.getString("functionTypes.disabled.desc"))));
+        disabled.setItemMeta(meta);
+
+        enabled = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+        meta = enabled.getItemMeta();
+        meta.displayName(Component.text(bundle.getString("functionTypes.enabled")));
+        meta.lore(List.of(Component.text(bundle.getString("functionTypes.enabled.desc"))));
+        enabled.setItemMeta(meta);
     }
 }

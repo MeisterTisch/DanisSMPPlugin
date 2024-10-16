@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
 import java.util.ResourceBundle;
@@ -12,6 +13,10 @@ import java.util.ResourceBundle;
 public class ListenerInvInteractDrumroll implements Listener {
     @EventHandler
     public void inventoryInteract(InventoryClickEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards", true)){
+            return;
+        }
+
         if(!(event.getWhoClicked() instanceof Player player)){
             return;
         }

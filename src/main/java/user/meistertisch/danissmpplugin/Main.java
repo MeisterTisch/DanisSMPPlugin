@@ -69,21 +69,18 @@ public final class  Main extends JavaPlugin {
         pluginManager.registerEvents(new ListenerChatFormater(), this);
 
             //Leveling
-        if(getConfig().getBoolean("levelingSystem.use")) {
-            pluginManager.registerEvents(new EventLevelingMining(), this);
-            pluginManager.registerEvents(new EventLevelingFarming(), this);
-            pluginManager.registerEvents(new EventLevelingCombat(), this);
-            pluginManager.registerEvents(new EventLevelingAdventure(), this);
-            pluginManager.registerEvents(new EventLevelingTrading(), this);
-            pluginManager.registerEvents(new EventLevelingMagic(), this);
-            pluginManager.registerEvents(new EventLevelingBuilding(), this);
-            pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
+        pluginManager.registerEvents(new EventLevelingMining(), this);
+        pluginManager.registerEvents(new EventLevelingFarming(), this);
+        pluginManager.registerEvents(new EventLevelingCombat(), this);
+        pluginManager.registerEvents(new EventLevelingAdventure(), this);
+        pluginManager.registerEvents(new EventLevelingTrading(), this);
+        pluginManager.registerEvents(new EventLevelingMagic(), this);
+        pluginManager.registerEvents(new EventLevelingBuilding(), this);
+        pluginManager.registerEvents(new ListenerInvClickStartRewarding(), this);
             //Leveling: Rewards
-            if(getConfig().getBoolean("levelingSystem.rewards")){
-                pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
-                pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
-            }
-        }
+        pluginManager.registerEvents(new ListenerInvInteractDrumroll(), this);
+        pluginManager.registerEvents(new ListenerJoinRewardsReminder(), this);
+
             //ThunderstormSummoner
         if(getConfig().getBoolean("thunderSpawn.use"))
             pluginManager.registerEvents(new ListenerTridentThrow(), this);

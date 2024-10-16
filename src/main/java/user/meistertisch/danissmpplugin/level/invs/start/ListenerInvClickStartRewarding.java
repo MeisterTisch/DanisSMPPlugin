@@ -19,6 +19,10 @@ import java.util.ResourceBundle;
 public class ListenerInvClickStartRewarding implements Listener {
     @EventHandler
     public void invClick(InventoryClickEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         if(!(event.getWhoClicked() instanceof Player player))
             return;
 

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
@@ -16,6 +17,10 @@ public class EventLevelingMining implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         //TODO: Add CoreProtect API to check if block was placed by player
         if(LevelType.MINING.getValidBlocks().contains(event.getBlock().getType())){
             Player player = event.getPlayer();

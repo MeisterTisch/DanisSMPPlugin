@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.LevelingLimiter;
@@ -17,6 +18,10 @@ import user.meistertisch.danissmpplugin.level.types.LevelType;
 public class EventLevelingCombat implements Listener {
     @EventHandler
     public void monsterKilled(EntityDeathEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         if(LevelType.COMBAT.getValidMobs().contains(event.getEntityType()) && event.getEntity().getKiller() instanceof Player player){
             double xp;
 

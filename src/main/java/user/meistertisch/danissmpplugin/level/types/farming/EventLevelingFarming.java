@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.LevelingLimiter;
@@ -30,6 +31,10 @@ public class EventLevelingFarming implements Listener {
     // FOR DESTROYING FARMING BLOCKS
     @EventHandler
     public void blockDestroyed(BlockBreakEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         //~~Add CoreProtect API to check if block was placed by player~~
         //Don't want, made timeout
 
@@ -83,6 +88,10 @@ public class EventLevelingFarming implements Listener {
     // FOR PLACING SEEDS
     @EventHandler
     public void placingSeeds(BlockPlaceEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         Player player = event.getPlayer();
         double xp;
 
@@ -114,6 +123,10 @@ public class EventLevelingFarming implements Listener {
 
     @EventHandler
     public void berryBushInteract(PlayerInteractEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SWEET_BERRY_BUSH){
             Player player = event.getPlayer();
             double xp = 0.1;

@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
@@ -22,6 +23,10 @@ import java.util.ResourceBundle;
 public class EventLevelingTrading implements Listener {
     @EventHandler
     public void tradeEvent(PlayerTradeEvent event) {
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         Player player = event.getPlayer();
         double xp = 0.25;
         if(event.getVillager().getType() == EntityType.WANDERING_TRADER) xp = 0.5;
@@ -32,6 +37,10 @@ public class EventLevelingTrading implements Listener {
 
     @EventHandler
     public void villagerKillEvent(EntityDeathEvent event) {
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         if(event.getEntity().getType() == EntityType.VILLAGER && event.getEntity().getKiller() instanceof Player player){
             double xp = -0.5;
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
@@ -41,6 +50,10 @@ public class EventLevelingTrading implements Listener {
 
     @EventHandler
     public void babyEvent(EntityBreedEvent event) {
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         if(event.getBreeder() instanceof Player player){
             double xp = 0.3;
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));

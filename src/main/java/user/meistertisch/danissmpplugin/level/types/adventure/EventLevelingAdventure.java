@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.LevelingLimiter;
@@ -19,6 +20,10 @@ import java.util.concurrent.ScheduledExecutorService;
 public class EventLevelingAdventure implements Listener {
     @EventHandler
     public void checkForStatistics(PlayerStatisticIncrementEvent event){
+        if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
         Player player = event.getPlayer();
         Statistic stat = event.getStatistic();
         int modulo;
