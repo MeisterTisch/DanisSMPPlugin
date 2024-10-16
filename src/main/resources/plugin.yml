@@ -50,3 +50,10 @@ commands:
   durability:
     description: Command for the durability ping.
     usage: /durability [on/off]
+  inventory:
+    description: Look into a player's inventory or enderchest.
+    usage: /inventory <Player>
+    aliases:
+      - inv
+      - enderchest
+      - ec
