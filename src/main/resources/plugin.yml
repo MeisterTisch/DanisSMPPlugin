@@ -57,3 +57,8 @@ commands:
       - inv
       - enderchest
       - ec
+  freeze:
+    description: Freeze or unfreeze a player.
+    usage: /freeze <player>
+    aliases:
+      - unfreeze

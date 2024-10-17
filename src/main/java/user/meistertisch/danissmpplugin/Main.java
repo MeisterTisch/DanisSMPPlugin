@@ -6,6 +6,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
 import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
 import user.meistertisch.danissmpplugin.admin.CommandTest;
+import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
+import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
+import user.meistertisch.danissmpplugin.admin.freeze.ManagerFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.durability.CommandDurability;
@@ -61,6 +64,7 @@ public final class  Main extends JavaPlugin {
         getCommand("tpa").setExecutor(new CommandTpa());
         getCommand("durability").setExecutor(new CommandDurability());
         getCommand("inventory").setExecutor(new CommandInvLooker());
+        getCommand("freeze").setExecutor(new CommandFreeze());
 
         //Listeners
             //Functions
@@ -91,6 +95,9 @@ public final class  Main extends JavaPlugin {
 
             //MobHealthbar
         pluginManager.registerEvents(new ListenerMobAttack(), this);
+
+            //Freeze
+        pluginManager.registerEvents(new ListenerMoveFreeze(), this);
 
         //Schedulers
 

@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.CreativeCategory;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.admin.freeze.ManagerFreeze;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
@@ -24,6 +25,8 @@ public class EventLevelingBuilding implements Listener {
         if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
             return;
         }
+
+        if(ManagerFreeze.isFrozen(event.getPlayer())) return;
 
         if(event.getBlock().getType().getCreativeCategory() == CreativeCategory.BUILDING_BLOCKS){
             double xp = 0.01;
