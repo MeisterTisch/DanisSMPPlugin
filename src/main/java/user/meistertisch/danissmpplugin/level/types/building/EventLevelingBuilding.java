@@ -28,6 +28,7 @@ public class EventLevelingBuilding implements Listener {
 
         if(ManagerFreeze.isFrozen(event.getPlayer())) return;
 
+
         if(event.getBlock().getType().getCreativeCategory() == CreativeCategory.BUILDING_BLOCKS){
             double xp = 0.01;
 

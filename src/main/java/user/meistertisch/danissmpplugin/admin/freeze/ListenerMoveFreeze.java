@@ -25,7 +25,6 @@ public class ListenerMoveFreeze implements Listener {
     }
 
 
-
     @EventHandler
     public void targetBuilds(BlockPlaceEvent event){
         if(ManagerFreeze.isFrozen(event.getPlayer())){
