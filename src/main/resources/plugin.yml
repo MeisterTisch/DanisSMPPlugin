@@ -34,6 +34,8 @@ commands:
   spit:
     description: Be a Llama!
     usage: /spit
+    aliases:
+      - hawktuah
   discord:
     description: Get the link to the discord server.
     usage: /discord

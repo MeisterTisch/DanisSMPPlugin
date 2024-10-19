@@ -1,15 +1,12 @@
-package user.meistertisch.danissmpplugin.admin;
+package user.meistertisch.danissmpplugin.admin.misc;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import user.meistertisch.danissmpplugin.Main;
-import user.meistertisch.danissmpplugin.files.FileTeams;
-import user.meistertisch.danissmpplugin.tpa.InventoryTpaRequests;
 
 public class CommandTest implements CommandExecutor {
     @Override

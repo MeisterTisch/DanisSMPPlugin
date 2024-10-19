@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.admin;
+package user.meistertisch.danissmpplugin.admin.misc;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;

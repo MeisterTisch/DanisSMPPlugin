@@ -3,14 +3,14 @@ package user.meistertisch.danissmpplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import user.meistertisch.danissmpplugin.admin.CommandAdmin;
-import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
-import user.meistertisch.danissmpplugin.admin.CommandTest;
+import user.meistertisch.danissmpplugin.admin.misc.CommandAdmin;
+import user.meistertisch.danissmpplugin.admin.misc.CommandInvLooker;
+import user.meistertisch.danissmpplugin.admin.misc.CommandTest;
 import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
-import user.meistertisch.danissmpplugin.admin.freeze.ManagerFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.admin.spawn.FileSpawn;
 import user.meistertisch.danissmpplugin.durability.CommandDurability;
 import user.meistertisch.danissmpplugin.durability.ListenerDurabilityPing;
 import user.meistertisch.danissmpplugin.essentials.CommandDiscord;
@@ -50,6 +50,19 @@ public final class  Main extends JavaPlugin {
         //FIRST THINGS FIRST
         plugin = this;
         pluginManager = Bukkit.getPluginManager();
+
+        //Files
+        this.saveDefaultConfig();
+        this.saveResource("language_de.properties", true);
+        this.saveResource("language_en.properties", true);
+        FilePlayer.setup();
+        FileLevels.setup();
+        FileAdmins.setup();
+        FileTeams.setup();
+        FileSpawn.setup();
+
+        //Managers
+        managerTPA = new ManagerTPA();
 
         //Commands
         getCommand("admin").setExecutor(new CommandAdmin());
@@ -101,17 +114,6 @@ public final class  Main extends JavaPlugin {
 
         //Schedulers
 
-        //Files
-        this.saveDefaultConfig();
-        this.saveResource("language_de.properties", true);
-        this.saveResource("language_en.properties", true);
-        FilePlayer.setup();
-        FileLevels.setup();
-        FileAdmins.setup();
-        FileTeams.setup();
-
-        //Managers
-        managerTPA = new ManagerTPA();
     }
 
     @Override
