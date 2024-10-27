@@ -11,6 +11,7 @@ import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.misc.CommandSign;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
 import user.meistertisch.danissmpplugin.spawn.SchedulerPlayerPositions;
 import user.meistertisch.danissmpplugin.combatTimer.ListenerCombat;
@@ -87,6 +88,7 @@ public final class  Main extends JavaPlugin {
         getCommand("freeze").setExecutor(new CommandFreeze());
         getCommand("spawn").setExecutor(new CommandSpawn());
         getCommand("announce").setExecutor(new CommandAnnounce());
+        getCommand("sign").setExecutor(new CommandSign());
 
         //Listeners
             //Functions

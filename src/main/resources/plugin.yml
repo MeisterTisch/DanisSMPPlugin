@@ -70,3 +70,6 @@ commands:
   announce:
     description: Command for announcing.
     usage: /announce <message...>
+  sign:
+    description: Command for creating signs.
+    usage: /sign
