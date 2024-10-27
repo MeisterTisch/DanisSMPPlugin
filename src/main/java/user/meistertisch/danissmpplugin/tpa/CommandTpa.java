@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
 import java.util.List;
@@ -27,6 +28,11 @@ public class CommandTpa implements TabExecutor {
             }
             if(strings.length == 1) {
                 if (strings[0].equalsIgnoreCase("accept")) {
+                    if(ManagerCombatTimer.isInCombat(player)){
+                        player.sendMessage(Component.text(bundle.getString("combatTimer.added")).color(NamedTextColor.RED));
+                        return true;
+                    }
+
                     Main.getManagerTPA().accept(player);
                     return true;
                 } else if (strings[0].equalsIgnoreCase("decline")) {
@@ -52,6 +58,11 @@ public class CommandTpa implements TabExecutor {
             }
             if(strings.length == 2) {
                 if (List.of("here", "to").contains(strings[0].toLowerCase())) {
+                    if(ManagerCombatTimer.isInCombat(player)){
+                        player.sendMessage(Component.text(bundle.getString("combatTimer.added")).color(NamedTextColor.RED));
+                        return true;
+                    }
+
                     Player target = Bukkit.getPlayer(strings[1]);
                     if (target == null) {
                         player.sendMessage(Component.text(bundle.getString("commands.invalidTarget")).color(NamedTextColor.RED));
