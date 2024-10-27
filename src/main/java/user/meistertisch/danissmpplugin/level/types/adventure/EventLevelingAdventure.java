@@ -54,8 +54,6 @@ public class EventLevelingAdventure implements Listener {
         }
         if(event.getNewValue() != 0 && event.getNewValue() % modulo == 0){
             showXP(player, stat, 1);
-        } else {
-            System.out.println(player.getStatistic(stat) % modulo);
         }
     }
 
