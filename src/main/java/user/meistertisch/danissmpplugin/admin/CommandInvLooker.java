@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.admin.misc;
+package user.meistertisch.danissmpplugin.admin;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

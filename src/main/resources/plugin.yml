@@ -67,3 +67,6 @@ commands:
   spawn:
     description: Command for setting the spawn.
     usage: /spawn
+  announce:
+    description: Command for announcing.
+    usage: /announce <message...>

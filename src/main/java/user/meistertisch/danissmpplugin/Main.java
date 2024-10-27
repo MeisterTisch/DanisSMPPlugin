@@ -3,8 +3,9 @@ package user.meistertisch.danissmpplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import user.meistertisch.danissmpplugin.admin.misc.CommandAdmin;
-import user.meistertisch.danissmpplugin.admin.misc.CommandInvLooker;
+import user.meistertisch.danissmpplugin.admin.CommandAdmin;
+import user.meistertisch.danissmpplugin.admin.CommandAnnounce;
+import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
 import user.meistertisch.danissmpplugin.admin.misc.CommandTest;
 import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
@@ -85,6 +86,7 @@ public final class  Main extends JavaPlugin {
         getCommand("inventory").setExecutor(new CommandInvLooker());
         getCommand("freeze").setExecutor(new CommandFreeze());
         getCommand("spawn").setExecutor(new CommandSpawn());
+        getCommand("announce").setExecutor(new CommandAnnounce());
 
         //Listeners
             //Functions
