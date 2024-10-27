@@ -49,6 +49,16 @@ public class ListenerSpawnProt implements Listener {
     }
 
     @EventHandler
+    public void interact(EntityInteractEvent event){
+        if(bb.contains(event.getEntity().getBoundingBox())){
+            event.setCancelled(true);
+        }
+        if(bb.contains(event.getBlock().getBoundingBox())){
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void blockPlace(BlockPlaceEvent event){
         if(ManagerSpawn.isBypass(event.getPlayer(), true))
             return;
@@ -81,13 +91,29 @@ public class ListenerSpawnProt implements Listener {
     }
 
     @EventHandler
+    public void entityDamage(EntityDamageEvent event){
+        if(bb.contains(event.getEntity().getBoundingBox()) && event.getCause() == EntityDamageEvent.DamageCause.FALL){
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void mobSpawn(EntitySpawnEvent event){
         if(bb.contains(event.getEntity().getBoundingBox())){
 
             //Command /spit :)
             if(event.getEntityType() == EntityType.LLAMA_SPIT)
                 return;
+            if(event.getEntityType() == EntityType.ITEM)
+                return;
 
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void hunger(FoodLevelChangeEvent event){
+        if(bb.contains(event.getEntity().getBoundingBox())){
             event.setCancelled(true);
         }
     }
