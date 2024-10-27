@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import user.meistertisch.danissmpplugin.admin.spawn.ManagerSpawn;
+import user.meistertisch.danissmpplugin.spawn.ManagerSpawn;
 
 public class ListenerCombat implements Listener {
     @EventHandler

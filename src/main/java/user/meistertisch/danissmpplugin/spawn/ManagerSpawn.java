@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.admin.spawn;
+package user.meistertisch.danissmpplugin.spawn;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

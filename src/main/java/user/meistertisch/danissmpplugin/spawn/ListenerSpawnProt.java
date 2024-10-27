@@ -1,6 +1,7 @@
-package user.meistertisch.danissmpplugin.admin.spawn;
+package user.meistertisch.danissmpplugin.spawn;
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent;
+import com.destroystokyo.paper.event.entity.PhantomPreSpawnEvent;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -9,9 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.BoundingBox;
 import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
 import user.meistertisch.danissmpplugin.level.types.building.EventLevelingBuilding;
+
+import java.util.List;
 
 public class ListenerSpawnProt implements Listener {
     BoundingBox bb = ManagerSpawn.getBoundingBox();
@@ -49,11 +53,11 @@ public class ListenerSpawnProt implements Listener {
     }
 
     @EventHandler
-    public void interact(EntityInteractEvent event){
-        if(bb.contains(event.getEntity().getBoundingBox())){
+    public void interact(PlayerInteractEvent event){
+        if(bb.contains(event.getPlayer().getBoundingBox())){
             event.setCancelled(true);
         }
-        if(bb.contains(event.getBlock().getBoundingBox())){
+        if(bb.contains(event.getClickedBlock().getBoundingBox())){
             event.setCancelled(true);
         }
     }
@@ -92,13 +96,13 @@ public class ListenerSpawnProt implements Listener {
 
     @EventHandler
     public void entityDamage(EntityDamageEvent event){
-        if(bb.contains(event.getEntity().getBoundingBox()) && event.getCause() == EntityDamageEvent.DamageCause.FALL){
+        if(bb.contains(event.getEntity().getBoundingBox())){
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void mobSpawn(EntitySpawnEvent event){
+    public void mobSpawn(CreatureSpawnEvent event){
         if(bb.contains(event.getEntity().getBoundingBox())){
 
             //Command /spit :)
@@ -114,6 +118,13 @@ public class ListenerSpawnProt implements Listener {
     @EventHandler
     public void hunger(FoodLevelChangeEvent event){
         if(bb.contains(event.getEntity().getBoundingBox())){
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void phantomSpawning(PhantomPreSpawnEvent event){
+        if(bb.contains(event.getSpawningEntity().getBoundingBox())){
             event.setCancelled(true);
         }
     }
