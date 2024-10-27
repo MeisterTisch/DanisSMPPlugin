@@ -2,7 +2,7 @@ name: DanisSMPPlugin
 version: '${version}'
 main: user.meistertisch.danissmpplugin.Main
 api-version: '1.21.1'
-prefix: SMP
+prefix: Dani's SMP
 authors: [MeisterTisch]
 description: This is a perfectly made plugin for SMPs
 website: https://github.com/meistertisch
@@ -64,3 +64,6 @@ commands:
     usage: /freeze <player>
     aliases:
       - unfreeze
+  spawn:
+    description: Command for setting the spawn.
+    usage: /spawn

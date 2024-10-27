@@ -21,7 +21,12 @@ public class ListenerMobAttack implements Listener {
             return;
 
         Entity entity = event.getEntity();
-        int maxHealth = (int) ((Attributable) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
+        int maxHealth;
+        try{
+           maxHealth  = (int) ((Attributable) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
+        } catch (Exception e){
+            return;
+        }
         Component healthComp = getComponent((Damageable) entity, maxHealth, event.getDamage());
         Component maxHealthComp = Component.text(String.valueOf(maxHealth));
         Component name = Component.text("%health%/%maxHealth%")

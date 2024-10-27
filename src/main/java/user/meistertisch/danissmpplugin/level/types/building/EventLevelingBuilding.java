@@ -17,9 +17,13 @@ import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventLevelingBuilding implements Listener {
+    public static List<Player> placedBlocksAtSpawn = new ArrayList<>();
+
     @EventHandler
     public void blockPlacedEvent(BlockPlaceEvent event) {
         if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
@@ -27,6 +31,11 @@ public class EventLevelingBuilding implements Listener {
         }
 
         if(ManagerFreeze.isFrozen(event.getPlayer())) return;
+
+        if(placedBlocksAtSpawn.contains(event.getPlayer())){
+            placedBlocksAtSpawn.remove(event.getPlayer());
+            return;
+        }
 
 
         if(event.getBlock().getType().getCreativeCategory() == CreativeCategory.BUILDING_BLOCKS){

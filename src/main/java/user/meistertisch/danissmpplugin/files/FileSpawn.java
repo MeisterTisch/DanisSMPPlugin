@@ -1,4 +1,4 @@
-package user.meistertisch.danissmpplugin.admin.spawn;
+package user.meistertisch.danissmpplugin.files;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

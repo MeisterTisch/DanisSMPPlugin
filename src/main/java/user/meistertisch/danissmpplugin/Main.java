@@ -10,7 +10,12 @@ import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
-import user.meistertisch.danissmpplugin.admin.spawn.FileSpawn;
+import user.meistertisch.danissmpplugin.admin.spawn.CommandSpawn;
+import user.meistertisch.danissmpplugin.admin.spawn.SchedulerPlayerPositions;
+import user.meistertisch.danissmpplugin.combatTimer.ListenerCombat;
+import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
+import user.meistertisch.danissmpplugin.files.FileSpawn;
+import user.meistertisch.danissmpplugin.admin.spawn.ListenerSpawnProt;
 import user.meistertisch.danissmpplugin.durability.CommandDurability;
 import user.meistertisch.danissmpplugin.durability.ListenerDurabilityPing;
 import user.meistertisch.danissmpplugin.essentials.CommandDiscord;
@@ -63,6 +68,7 @@ public final class  Main extends JavaPlugin {
 
         //Managers
         managerTPA = new ManagerTPA();
+        ManagerCombatTimer.setup();
 
         //Commands
         getCommand("admin").setExecutor(new CommandAdmin());
@@ -78,6 +84,7 @@ public final class  Main extends JavaPlugin {
         getCommand("durability").setExecutor(new CommandDurability());
         getCommand("inventory").setExecutor(new CommandInvLooker());
         getCommand("freeze").setExecutor(new CommandFreeze());
+        getCommand("spawn").setExecutor(new CommandSpawn());
 
         //Listeners
             //Functions
@@ -112,7 +119,14 @@ public final class  Main extends JavaPlugin {
             //Freeze
         pluginManager.registerEvents(new ListenerMoveFreeze(), this);
 
+            //Spawn
+        pluginManager.registerEvents(new ListenerSpawnProt(), this);
+
+            //CombatTimer
+        pluginManager.registerEvents(new ListenerCombat(), this);
+
         //Schedulers
+//        SchedulerPlayerPositions.setup();
 
     }
 
@@ -120,11 +134,16 @@ public final class  Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
 
+        //Files
         this.saveConfig();
         FilePlayer.saveConfig();
         FileLevels.saveConfig();
         FileAdmins.saveConfig();
         FileTeams.saveConfig();
+
+        //Schedulers
+        SchedulerPlayerPositions.stop();
+        ManagerCombatTimer.shutDown();
     }
 
     //Some static Getters

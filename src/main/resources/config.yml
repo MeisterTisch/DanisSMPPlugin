@@ -1,33 +1,78 @@
+# The main configuration file for the plugin.
+
+# Important Stuff:
+
+# Your SMP-Server Name:
 name: "Craft Mining 6"
+
+# The Header and Footer at the tab menu:
 list:
   header: "----- Craft Mining -----"
   footer: "----- Season 6 -----"
+
+# What are your primary and secondary colors?
+# Use HEX-Colors for this.
+# Formatting: "0x" + HEX-Color WITHOUT "#"!
+colors:
+  accent1: 0x7704a8
+  accent2: 0x0F01BC
+
+# Spawn: The Spawn is regulated in a different file. Use command to set the spawn.
+spawn:
+  # Can Player always tp to spawn with the command?
+  commandTp: false
+
+
+# Functions: These are functions, that can be turned on or off, either here or in-game through the command /functions.
+
+# Leveling System
 levelingSystem:
   use: true
+  # Should rewards be given for leveling up?
   rewards: true
+  # What rarity should or should not be announced in chat?
   announce:
     legendary: true
     epic: true
     rare: false
     uncommon: false
     common: false
+
+# Thunder Summoner:
+# This function allows you to summon thunderstorms with throwing a trident at the highest block with the channeling enchantment.
+# Uses 60% of the trident's durability.
 thunderSpawn:
   use: true
-colors:
-  accent1: 0x7704a8
-  accent2: 0x0F01BC
-spit:
+
+# Durability Ping: Players get a ping, when their tool is about to break.
+durabilityPing:
   use: true
+  # The threshold is the percentage of durability, when the player gets a ping.
+  threshold: 0.1
+
+# Mob Healthbar: Players get a Healthbar at the actionbar, when they hit a mob.
+mobHealthbar:
+  use: true
+
+
+# Misc Commands:
+
+# Discord: This command gives you the link to the discord server.
 discord:
   use: false
   link: ""
+
+# Teamspeak: This command gives you the data to the teamspeak server.
 teamspeak:
   use: false
   ip: ""
   isPasswordProtected: false
   password: ""
-durabilityPing:
+
+# Spit: This command allows you to spit on other players.
+spit:
   use: true
-  threshold: 0.1
-mobHealthbar:
-  use: true
+
+
+
+
