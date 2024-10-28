@@ -12,6 +12,7 @@ import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.misc.CommandSign;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
 import user.meistertisch.danissmpplugin.spawn.SchedulerPlayerPositions;
@@ -133,6 +134,7 @@ public final class  Main extends JavaPlugin {
 
         //Schedulers
 //        SchedulerPlayerPositions.setup();
+        SchedulerChatCooldown.setup();
 
     }
 
@@ -150,6 +152,7 @@ public final class  Main extends JavaPlugin {
         //Schedulers
         SchedulerPlayerPositions.stop();
         ManagerCombatTimer.shutDown();
+        SchedulerChatCooldown.shutDown();
     }
 
     //Some static Getters
