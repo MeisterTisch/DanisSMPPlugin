@@ -16,12 +16,14 @@ import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.BoundingBox;
 import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileLevels;
 import user.meistertisch.danissmpplugin.level.BossBarLevel;
 import user.meistertisch.danissmpplugin.level.LevelingLimiter;
 import user.meistertisch.danissmpplugin.level.MessageLevelUp;
 import user.meistertisch.danissmpplugin.level.types.LevelType;
+import user.meistertisch.danissmpplugin.spawn.ManagerSpawn;
 
 import java.util.ResourceBundle;
 
@@ -32,6 +34,11 @@ public class EventLevelingFarming implements Listener {
     @EventHandler
     public void blockDestroyed(BlockBreakEvent event){
         if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
+        BoundingBox bb = ManagerSpawn.getBoundingBox();
+        if(bb.contains(event.getBlock().getBoundingBox()) || bb.contains(event.getPlayer().getBoundingBox())){
             return;
         }
 
@@ -92,6 +99,11 @@ public class EventLevelingFarming implements Listener {
             return;
         }
 
+        BoundingBox bb = ManagerSpawn.getBoundingBox();
+        if(bb.contains(event.getBlock().getBoundingBox()) || bb.contains(event.getPlayer().getBoundingBox())){
+            return;
+        }
+
         Player player = event.getPlayer();
         double xp;
 
@@ -124,6 +136,11 @@ public class EventLevelingFarming implements Listener {
     @EventHandler
     public void berryBushInteract(PlayerInteractEvent event){
         if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.use", true)){
+            return;
+        }
+
+        BoundingBox bb = ManagerSpawn.getBoundingBox();
+        if((event.getClickedBlock() != null && bb.contains(event.getClickedBlock().getBoundingBox())) || bb.contains(event.getPlayer().getBoundingBox())){
             return;
         }
 

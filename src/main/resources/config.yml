@@ -22,6 +22,14 @@ spawn:
   # Can Player always tp to spawn with the command?
   commandTp: false
 
+# Chat: Controlling the chat
+chat:
+  # Should the chat be disabled? Can also be toggled in-game (/chat <on/off>)
+  disabled: false
+  # Should there be a cooldown for the chat? (in seconds)
+  # Set to 0 to disable.
+  cooldown: 0
+
 
 # Functions: These are functions, that can be turned on or off, either here or in-game through the command /functions.
 

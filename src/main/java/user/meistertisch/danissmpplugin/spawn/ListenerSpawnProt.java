@@ -54,10 +54,13 @@ public class ListenerSpawnProt implements Listener {
 
     @EventHandler
     public void interact(PlayerInteractEvent event){
+        if(ManagerSpawn.isBypass(event.getPlayer(), true))
+            return;
+
         if(bb.contains(event.getPlayer().getBoundingBox())){
             event.setCancelled(true);
         }
-        if(bb.contains(event.getClickedBlock().getBoundingBox())){
+        if(event.getClickedBlock() != null && bb.contains(event.getClickedBlock().getBoundingBox())){
             event.setCancelled(true);
         }
     }

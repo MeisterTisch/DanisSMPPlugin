@@ -80,10 +80,20 @@ public class ListenerJoinAndLeave implements Listener {
         if(FilePlayer.getConfig().getBoolean(player.getName() + ".isTeam")) {
             String teamName = FilePlayer.getConfig().getString(player.getName() + ".team");
             Color teamColor = FileTeams.getConfig().getColor(teamName + ".color");
-            TextDecoration teamDecoration = TextDecoration.valueOf(FileTeams.getConfig().getString(teamName + ".decoration").toUpperCase(Locale.ROOT));
-            Component teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                    .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))
-                    .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
+
+            TextDecoration teamDecoration;
+            Component teamNameComp;
+            if(FileTeams.getConfig().getString(teamName + ".decoration") != null) {
+                teamDecoration = TextDecoration.valueOf(FileTeams.getConfig().getString(teamName + ".decoration").toUpperCase(Locale.ROOT));
+                teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
+                        .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))
+                        .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
+            } else {
+                teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
+                        .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())))
+                        .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
+            }
+
             teamNameComp = teamNameComp.decorate(TextDecoration.BOLD);
 
             Component name = Component.text("%team% %player%");

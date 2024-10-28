@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import user.meistertisch.danissmpplugin.admin.CommandAdmin;
 import user.meistertisch.danissmpplugin.admin.CommandAnnounce;
+import user.meistertisch.danissmpplugin.admin.CommandChat;
 import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
 import user.meistertisch.danissmpplugin.admin.misc.CommandTest;
 import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
@@ -89,6 +90,7 @@ public final class  Main extends JavaPlugin {
         getCommand("spawn").setExecutor(new CommandSpawn());
         getCommand("announce").setExecutor(new CommandAnnounce());
         getCommand("sign").setExecutor(new CommandSign());
+        getCommand("chat").setExecutor(new CommandChat());
 
         //Listeners
             //Functions

@@ -73,3 +73,6 @@ commands:
   sign:
     description: Command for creating signs.
     usage: /sign
+  chat:
+    description: Command for controlling the chat.
+    usage: /chat <on/off>

@@ -2,7 +2,6 @@ package user.meistertisch.danissmpplugin.admin;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,7 @@ import user.meistertisch.danissmpplugin.files.FilePlayer;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CommandAnnounce implements TabExecutor {
+public class CommandChat implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("language_en");
@@ -31,21 +30,34 @@ public class CommandAnnounce implements TabExecutor {
             }
         }
 
-        if (args.length == 0) {
+        if (args.length != 1 || !List.of("on", "off").contains(args[0].toLowerCase())){
             sender.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
             return true;
         }
 
-        Component text = Component.text("");
-        for (String arg : args) {
-            text = text.append(Component.text(arg + " "));
-        }
-        text = text.color(TextColor.color(Main.getSecondaryColor()));
+        boolean isTurningOff = args[0].equalsIgnoreCase("off");
+        boolean isOff = Main.getPlugin().getConfig().getBoolean("chat.disabled");
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            ResourceBundle bundleP = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(p.getName() + ".lang"));
-            p.sendMessage(Component.text(bundleP.getString("announce")).color(TextColor.color(Main.getPrimaryColor())));
-            p.sendMessage(text);
+        if (isTurningOff && isOff) {
+            sender.sendMessage(Component.text(bundle.getString("commands.chat.alreadyOff")).color(NamedTextColor.RED));
+            return true;
+        }
+        if (!isTurningOff && !isOff) {
+            sender.sendMessage(Component.text(bundle.getString("commands.chat.alreadyOn")).color(NamedTextColor.RED));
+            return true;
+        }
+
+        Main.getPlugin().getConfig().set("chat.disabled", isTurningOff);
+        Main.getPlugin().saveConfig();
+        Main.getPlugin().reloadConfig();
+
+        for(Player player : Bukkit.getOnlinePlayers()){
+            ResourceBundle bundleP = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+            if(isTurningOff){
+                player.sendMessage(Component.text(bundleP.getString("commands.chat.turnedOff")).color(NamedTextColor.RED));
+            } else {
+                player.sendMessage(Component.text(bundleP.getString("commands.chat.turnedOn")).color(NamedTextColor.GREEN));
+            }
         }
 
         return true;
