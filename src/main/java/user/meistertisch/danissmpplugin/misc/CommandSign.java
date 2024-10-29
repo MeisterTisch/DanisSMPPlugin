@@ -38,7 +38,7 @@ public class CommandSign implements TabExecutor {
             List<Component> lore =
                     List.of(
                             Component.text(bundle.getString("commands.sign.text")).color(TextColor.color(Main.getPrimaryColor())),
-                            player.displayName().color(TextColor.color(Main.getSecondaryColor()))
+                            Component.text(player.getName()).color(TextColor.color(Main.getSecondaryColor()))
                     );
 
             meta.lore(lore);

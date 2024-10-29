@@ -30,17 +30,22 @@ public class ListenerJoinAndLeave implements Listener {
     @EventHandler
     public void playerJoinEvent(PlayerJoinEvent event) {
         event.joinMessage(Component.text(""));
+
         Player player = event.getPlayer();
-        if (FilePlayer.getConfig().getString(player.getName()) == null) {
-            FilePlayer.getConfig().set(player.getName() + ".lang", "en");
-            FilePlayer.saveConfig();
+        boolean firstJoin = !player.hasPlayedBefore();
+
+        //Player joined first time, setting files
+        if (firstJoin) {
+            ManagerFileSetterAtFirstTimeJoin.set(player);
+
             player.sendMessage(Component.text("Your language has been set to English! To change the language, please execute this command:").color(NamedTextColor.RED));
             player.sendMessage(Component.text("/language <language>").color(NamedTextColor.GOLD));
         }
+
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
 
+        //Join Message
         Component playerText = Component.text(player.getName()).color(color1).decorate(TextDecoration.BOLD);
-        boolean firstJoin = !player.hasPlayedBefore();
 
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             String lang = FilePlayer.getConfig().getString(onlinePlayer.getName() + ".lang");
@@ -57,6 +62,7 @@ public class ListenerJoinAndLeave implements Listener {
             }
         }
 
+        //Title and Effect
         Title title = Title.title(
                 Component.text(bundle.getString("join.title")).color(color1),
                 Component.text(""),
@@ -72,66 +78,15 @@ public class ListenerJoinAndLeave implements Listener {
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 255, false, false, false));
         player.showTitle(title);
 
+        //Setting List Header and Footer
         player.sendPlayerListHeaderAndFooter(
                 Component.text(Main.getPlugin().getConfig().getString("list.header")).color(color1),
                 Component.text(Main.getPlugin().getConfig().getString("list.footer")).color(color2)
         );
 
-        if(FilePlayer.getConfig().getBoolean(player.getName() + ".isTeam")) {
-            String teamName = FilePlayer.getConfig().getString(player.getName() + ".team");
-            Color teamColor = FileTeams.getConfig().getColor(teamName + ".color");
-
-            TextDecoration teamDecoration;
-            Component teamNameComp;
-            Component prefix;
-            Component suffix;
-            Component name = Component.text("%prefix% %player% %suffix%");
-
-            if(FileTeams.getConfig().getBoolean(teamName + ".usesPrefixAndSuffix")){
-                if (FileTeams.getConfig().getString(teamName + ".decoration") != null) {
-                    teamDecoration = TextDecoration.valueOf(FileTeams.getConfig().getString(teamName + ".decoration").toUpperCase(Locale.ROOT));
-                    prefix = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(FileTeams.getConfig().getString(teamName + ".prefix", "null")).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                    suffix = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(FileTeams.getConfig().getString(teamName + ".suffix", "null")).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                } else {
-                    prefix = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(FileTeams.getConfig().getString(teamName + ".prefix", "null")).color(TextColor.color(teamColor.asRGB())))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                    suffix = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(FileTeams.getConfig().getString(teamName + ".suffix", "null")).color(TextColor.color(teamColor.asRGB())))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                }
-                prefix = prefix.decorate(TextDecoration.BOLD);
-                suffix = suffix.decorate(TextDecoration.BOLD);
-
-                name = name
-                        .replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(prefix).build())
-                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build())
-                        .replaceText(TextReplacementConfig.builder().match("%suffix%").replacement(suffix).build());
-            } else {
-                if (FileTeams.getConfig().getString(teamName + ".decoration") != null) {
-                    teamDecoration = TextDecoration.valueOf(FileTeams.getConfig().getString(teamName + ".decoration").toUpperCase(Locale.ROOT));
-                    teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                } else {
-                    teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
-                            .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())))
-                            .append(Component.text("]").color(TextColor.color(teamColor.asRGB())));
-                }
-                teamNameComp = teamNameComp.decorate(TextDecoration.BOLD);
-
-                name = name
-                        .replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(teamNameComp).build())
-                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build())
-                        .replaceText(TextReplacementConfig.builder().match(" %suffix%").replacement(Component.text("")).build());
-            }
-
-            player.playerListName(name);
-        }
+        //Setting Team
+        player.displayName(FileTeams.getTeamName(player));
+        player.playerListName(FileTeams.getTeamName(player));
     }
 
     @EventHandler
