@@ -7,6 +7,8 @@ import user.meistertisch.danissmpplugin.admin.CommandAdmin;
 import user.meistertisch.danissmpplugin.admin.CommandAnnounce;
 import user.meistertisch.danissmpplugin.admin.CommandChat;
 import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
+import user.meistertisch.danissmpplugin.admin.dimensions.CommandDimension;
+import user.meistertisch.danissmpplugin.admin.dimensions.ListenerDimension;
 import user.meistertisch.danissmpplugin.admin.misc.CommandTest;
 import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
@@ -92,6 +94,7 @@ public final class  Main extends JavaPlugin {
         getCommand("announce").setExecutor(new CommandAnnounce());
         getCommand("sign").setExecutor(new CommandSign());
         getCommand("chat").setExecutor(new CommandChat());
+        getCommand("dimension").setExecutor(new CommandDimension());
 
         //Listeners
             //Functions
@@ -131,6 +134,9 @@ public final class  Main extends JavaPlugin {
 
             //CombatTimer
         pluginManager.registerEvents(new ListenerCombat(), this);
+
+            //Dimension
+        pluginManager.registerEvents(new ListenerDimension(), this);
 
         //Schedulers
 //        SchedulerPlayerPositions.setup();

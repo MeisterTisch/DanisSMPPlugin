@@ -76,3 +76,6 @@ commands:
   chat:
     description: Command for controlling the chat.
     usage: /chat <on/off>
+  dimension:
+    description: Command for controlling the dimensions.
+    usage: /dimension <nether/end> <allow/disallow>

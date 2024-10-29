@@ -30,6 +30,12 @@ chat:
   # Set to 0 to disable.
   cooldown: 0
 
+# Dimension: Lock and unlock the nether and the end.
+# Either here or in-game through the command /dimension.
+dimension:
+  nether: false
+  end: false
+
 
 # Functions: These are functions, that can be turned on or off, either here or in-game through the command /functions.
 

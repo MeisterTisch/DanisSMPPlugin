@@ -92,13 +92,13 @@ public class ListenerSpawnProt implements Listener {
 
     @EventHandler
     public void entityDamage(EntityDamageByBlockEvent event){
-        if(bb.contains(event.getEntity().getBoundingBox())){
-            event.setCancelled(true);
+        if(event.getDamager() instanceof Player player){
+            if(ManagerSpawn.isBypass(player, false))
+                return;
+            if(ManagerCombatTimer.isInCombat(player))
+                return;
         }
-    }
 
-    @EventHandler
-    public void entityDamage(EntityDamageEvent event){
         if(bb.contains(event.getEntity().getBoundingBox())){
             event.setCancelled(true);
         }
