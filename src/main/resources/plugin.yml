@@ -82,3 +82,8 @@ commands:
   hide:
     description: Command for hiding players.
     usage: /hide
+  mute:
+    description: Command for muting players.
+    usage: /mute <player>
+    aliases:
+      - unmute

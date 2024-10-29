@@ -93,6 +93,7 @@ public final class  Main extends JavaPlugin {
         getCommand("chat").setExecutor(new CommandChat());
         getCommand("dimension").setExecutor(new CommandDimension());
         getCommand("hide").setExecutor(new CommandHide());
+        getCommand("mute").setExecutor(new CommandMute());
 
         //Listeners
             //Functions
