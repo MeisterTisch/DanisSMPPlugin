@@ -64,7 +64,7 @@ public class CommandTpa implements TabExecutor {
                     }
 
                     Player target = Bukkit.getPlayer(strings[1]);
-                    if (target == null) {
+                    if (target == null || FilePlayer.getConfig().getBoolean(target.getName() + ".hidden")) {
                         player.sendMessage(Component.text(bundle.getString("commands.invalidTarget")).color(NamedTextColor.RED));
                         return true;
                     }

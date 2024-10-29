@@ -79,3 +79,6 @@ commands:
   dimension:
     description: Command for controlling the dimensions.
     usage: /dimension <nether/end> <allow/disallow>
+  hide:
+    description: Command for hiding players.
+    usage: /hide

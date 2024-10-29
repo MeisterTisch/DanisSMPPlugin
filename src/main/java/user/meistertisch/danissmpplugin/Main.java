@@ -3,10 +3,7 @@ package user.meistertisch.danissmpplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import user.meistertisch.danissmpplugin.admin.CommandAdmin;
-import user.meistertisch.danissmpplugin.admin.CommandAnnounce;
-import user.meistertisch.danissmpplugin.admin.CommandChat;
-import user.meistertisch.danissmpplugin.admin.CommandInvLooker;
+import user.meistertisch.danissmpplugin.admin.*;
 import user.meistertisch.danissmpplugin.admin.dimensions.CommandDimension;
 import user.meistertisch.danissmpplugin.admin.dimensions.ListenerDimension;
 import user.meistertisch.danissmpplugin.admin.misc.CommandTest;
@@ -95,6 +92,7 @@ public final class  Main extends JavaPlugin {
         getCommand("sign").setExecutor(new CommandSign());
         getCommand("chat").setExecutor(new CommandChat());
         getCommand("dimension").setExecutor(new CommandDimension());
+        getCommand("hide").setExecutor(new CommandHide());
 
         //Listeners
             //Functions
