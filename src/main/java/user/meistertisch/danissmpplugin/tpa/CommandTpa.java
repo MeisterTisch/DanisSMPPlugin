@@ -22,6 +22,11 @@ public class CommandTpa implements TabExecutor {
         if(commandSender instanceof Player player){
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
 
+            if(!Main.getPlugin().getConfig().getBoolean("tpaSystem.use")){
+                player.sendMessage(Component.text(bundle.getString("commands.tpa.disabled")).color(NamedTextColor.RED));
+                return true;
+            }
+
             if(strings.length == 0){
                 player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
                 return true;

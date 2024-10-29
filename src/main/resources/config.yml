@@ -52,6 +52,10 @@ levelingSystem:
     uncommon: false
     common: false
 
+# TPA: Teleport to a player.
+tpaSystem:
+  use: true
+
 # Thunder Summoner:
 # This function allows you to summon thunderstorms with throwing a trident at the highest block with the channeling enchantment.
 # Uses 60% of the trident's durability.
