@@ -56,6 +56,16 @@ levelingSystem:
 tpaSystem:
   use: true
 
+# Slime Chunk Check System: This function allows you to check if you are in a slime chunk.
+# onlyCenter: Check only the chunk the player is standing in or also the nearby chunks (3x3)?
+# save: Should the found chunks be saved for the player to look up later?
+# checks: How many times can the player check for slime chunks?
+slimeChunkCheck:
+  use: true
+  onlyCenter: true
+  save: true
+  checks: 3
+
 # Thunder Summoner:
 # This function allows you to summon thunderstorms with throwing a trident at the highest block with the channeling enchantment.
 # Uses 60% of the trident's durability.
