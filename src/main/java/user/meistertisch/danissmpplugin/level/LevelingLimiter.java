@@ -13,7 +13,6 @@ public class LevelingLimiter implements Listener {
             limitBuildUp.put(player, 0);
 
         limitBuildUp.put(player, limitBuildUp.get(player) + 1);
-        System.out.println("Player " + player.getName() + " has now " + limitBuildUp.get(player) + " levels");
 
         if(limitBuildUp.get(player) >= 15){
             limitBuildUp.put(player, 0);
