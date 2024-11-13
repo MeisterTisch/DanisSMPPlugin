@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'user.meistertisch'
-version = '0.4'
+version = '0.5'
 
 repositories {
     mavenCentral()
@@ -46,4 +46,8 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+    //TODO: DAS AUSPROBIEREN:
+//    filesMatching('language_de.properties'){
+//        expand props
+//    }
 }

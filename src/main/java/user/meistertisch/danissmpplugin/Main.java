@@ -12,12 +12,13 @@ import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
+import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.misc.CommandSign;
+import user.meistertisch.danissmpplugin.sccs.CommandSCCS;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
 import user.meistertisch.danissmpplugin.spawn.SchedulerPlayerPositions;
 import user.meistertisch.danissmpplugin.combatTimer.ListenerCombat;
 import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
-import user.meistertisch.danissmpplugin.files.FileSpawn;
 import user.meistertisch.danissmpplugin.spawn.ListenerSpawnProt;
 import user.meistertisch.danissmpplugin.durability.CommandDurability;
 import user.meistertisch.danissmpplugin.durability.ListenerDurabilityPing;
@@ -26,10 +27,6 @@ import user.meistertisch.danissmpplugin.essentials.CommandTeamspeak;
 import user.meistertisch.danissmpplugin.essentials.chat.ListenerChatFormater;
 import user.meistertisch.danissmpplugin.essentials.ListenerJoinAndLeave;
 import user.meistertisch.danissmpplugin.essentials.lang.CommandLanguage;
-import user.meistertisch.danissmpplugin.files.FileAdmins;
-import user.meistertisch.danissmpplugin.files.FileLevels;
-import user.meistertisch.danissmpplugin.files.FilePlayer;
-import user.meistertisch.danissmpplugin.files.FileTeams;
 import user.meistertisch.danissmpplugin.level.CommandLeveling;
 import user.meistertisch.danissmpplugin.level.ListenerJoinRewardsReminder;
 import user.meistertisch.danissmpplugin.level.invs.drumroll.ListenerInvInteractDrumroll;
@@ -68,6 +65,7 @@ public final class  Main extends JavaPlugin {
         FileAdmins.setup();
         FileTeams.setup();
         FileSpawn.setup();
+        FileSlimeChunks.setup();
 
         //Managers
         managerTPA = new ManagerTPA();
@@ -94,6 +92,7 @@ public final class  Main extends JavaPlugin {
         getCommand("dimension").setExecutor(new CommandDimension());
         getCommand("hide").setExecutor(new CommandHide());
         getCommand("mute").setExecutor(new CommandMute());
+        getCommand("scc").setExecutor(new CommandSCCS());
 
         //Listeners
             //Functions
@@ -153,6 +152,7 @@ public final class  Main extends JavaPlugin {
         FileLevels.saveConfig();
         FileAdmins.saveConfig();
         FileTeams.saveConfig();
+        FileSlimeChunks.saveConfig();
 
         //Schedulers
         SchedulerPlayerPositions.stop();

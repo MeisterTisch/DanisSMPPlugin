@@ -87,3 +87,6 @@ commands:
     usage: /mute <player>
     aliases:
       - unmute
+  scc:
+    description: Command for the slime chunk check.
+    usage: /scc

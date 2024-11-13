@@ -16,12 +16,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import user.meistertisch.danissmpplugin.Main;
-import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.files.FileTeams;
 
 import java.time.Duration;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ListenerJoinAndLeave implements Listener {
@@ -86,8 +84,8 @@ public class ListenerJoinAndLeave implements Listener {
         );
 
         //Setting Team
-        player.displayName(FileTeams.getTeamName(player));
-        player.playerListName(FileTeams.getTeamName(player));
+        player.displayName(FileTeams.getTeamNamePrefixComponent(player));
+        player.playerListName(FileTeams.getTeamNamePrefixComponent(player));
 
         //Was hidden before player left and joined again?
         FilePlayer.getConfig().set(player.getName() + ".hidden", false);

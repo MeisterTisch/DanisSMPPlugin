@@ -4,7 +4,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -49,7 +48,7 @@ public class FileTeams {
         config = YamlConfiguration.loadConfiguration(file);
     }
 
-    public static Component getTeamName(Player player){
+    public static Component getTeamNamePrefixComponent(Player player){
         if(FilePlayer.getConfig().getBoolean(player.getName() + ".isTeam")) {
             String teamName = FilePlayer.getConfig().getString(player.getName() + ".team");
 
@@ -90,7 +89,7 @@ public class FileTeams {
                         .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build())
                         .replaceText(TextReplacementConfig.builder().match("%suffix%").replacement(suffix).build());
             } else {
-                if (FileTeams.getConfig().getString(teamName + ".decoration") != null) {
+                if (FileTeams.getConfig().isString(teamName + ".decoration")) {
                     teamDecoration = TextDecoration.valueOf(FileTeams.getConfig().getString(teamName + ".decoration").toUpperCase(Locale.ROOT));
                     teamNameComp = Component.text("[").color(TextColor.color(teamColor.asRGB()))
                             .append(Component.text(teamName).color(TextColor.color(teamColor.asRGB())).decorate(teamDecoration))

@@ -60,11 +60,13 @@ tpaSystem:
 # onlyCenter: Check only the chunk the player is standing in or also the nearby chunks (3x3)?
 # save: Should the found chunks be saved for the player to look up later?
 # checks: How many times can the player check for slime chunks?
+# noneFoundNoRemove: Should the player get one check removed, if no slime chunks are found?
 slimeChunkCheck:
   use: true
   onlyCenter: true
   save: true
   checks: 3
+  noneFoundNoRemove: true
 
 # Thunder Summoner:
 # This function allows you to summon thunderstorms with throwing a trident at the highest block with the channeling enchantment.
