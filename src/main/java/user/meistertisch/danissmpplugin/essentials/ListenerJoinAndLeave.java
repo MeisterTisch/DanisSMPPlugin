@@ -33,10 +33,10 @@ public class ListenerJoinAndLeave implements Listener {
         Player player = event.getPlayer();
         boolean firstJoin = !player.hasPlayedBefore();
 
+        ManagerFileSetterAtJoin.set(player);
+
         //Player joined first time, setting files
         if (firstJoin) {
-            ManagerFileSetterAtFirstTimeJoin.set(player);
-
             player.sendMessage(Component.text("Your language has been set to English! To change the language, please execute this command:").color(NamedTextColor.RED));
             player.sendMessage(Component.text("/language <language>").color(NamedTextColor.GOLD));
         }
