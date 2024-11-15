@@ -18,6 +18,8 @@ public class BossBarLevel {
     private static ScheduledExecutorService service;
 
     public BossBarLevel(LevelType levelType, Player player){
+        if(!FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpBar")) return;
+
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         player.activeBossBars().forEach(bossBar -> bossBar.removeViewer(player));
         service = Executors.newSingleThreadScheduledExecutor();

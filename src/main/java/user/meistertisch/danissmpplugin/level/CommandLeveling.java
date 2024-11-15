@@ -85,6 +85,27 @@ public class CommandLeveling implements TabExecutor {
                         player.sendMessage(text);
                         return true;
                     }
+                    else if(strings[0].equalsIgnoreCase("bossbar")){
+                        boolean isEnabled = FilePlayer.getConfig().getBoolean(player.getName() + ".level.xpBar");
+
+                        if(isEnabled){
+                            FilePlayer.getConfig().set(player.getName() + ".level.xpBar", false);
+                            FilePlayer.saveConfig();
+                            player.sendMessage(
+                                    Component.text(bundle.getString("commands.level.xpBar.off"))
+                                            .color(NamedTextColor.RED)
+                            );
+                        } else {
+                            FilePlayer.getConfig().set(player.getName() + ".level.xpBar", true);
+                            FilePlayer.saveConfig();
+                            player.sendMessage(
+                                    Component.text(bundle.getString("commands.level.xpBar.on"))
+                                            .color(NamedTextColor.GREEN)
+                            );
+                        }
+
+                        return true;
+                    }
                     else {
                         LevelType levelType;
 
@@ -113,6 +134,30 @@ public class CommandLeveling implements TabExecutor {
                     }
                 }
                 case 2 -> {
+                    if(strings[0].equalsIgnoreCase("bossbar")){
+                        if(strings[1].equalsIgnoreCase("on")){
+                            FilePlayer.getConfig().set(player.getName() + ".level.xpBar", true);
+                            FilePlayer.saveConfig();
+                            player.sendMessage(
+                                    Component.text(bundle.getString("commands.level.xpBar.on"))
+                                            .color(NamedTextColor.GREEN)
+                            );
+                        } else if(strings[1].equalsIgnoreCase("off")){
+                            FilePlayer.getConfig().set(player.getName() + ".level.xpBar", false);
+                            FilePlayer.saveConfig();
+                            player.sendMessage(
+                                    Component.text(bundle.getString("commands.level.xpBar.off"))
+                                            .color(NamedTextColor.RED)
+                            );
+                        } else {
+                            player.sendMessage(
+                                    Component.text(bundle.getString("commands.invalidArg"))
+                                            .color(NamedTextColor.RED)
+                            );
+                        }
+                        return true;
+                    }
+
                     if(!Main.getPlugin().getConfig().getBoolean("levelingSystem.rewards")){
                         player.sendMessage(
                                 Component.text(bundle.getString("level.rewarding.disabled"))
@@ -434,7 +479,7 @@ public class CommandLeveling implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         switch (strings.length){
             case 1 -> {
-                ArrayList<String> list = new ArrayList<>(List.of("rewards", "levels", "farming", "mining", "combat", "adventure", "magic", "trading", "building"));
+                ArrayList<String> list = new ArrayList<>(List.of("rewards", "levels", "farming", "mining", "combat", "adventure", "magic", "trading", "building", "bossbar"));
                 if(commandSender instanceof Player player && FileAdmins.isAdmin(player)){
                     list.addAll(List.of("add", "set", "remove", "get"));
                 }
@@ -446,7 +491,11 @@ public class CommandLeveling implements TabExecutor {
                 }
                 else if(List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building").contains(strings[0].toLowerCase())){
                     return List.of("open");
-                } else return new ArrayList<>();
+                }
+                else if(strings[0].equalsIgnoreCase("bossbar")){
+                    return List.of("on", "off");
+                }
+                else return new ArrayList<>();
             }
             case 3 -> {
                 if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())

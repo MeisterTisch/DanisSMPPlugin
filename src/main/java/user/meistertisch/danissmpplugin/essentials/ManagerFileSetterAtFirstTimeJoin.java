@@ -12,6 +12,7 @@ public class ManagerFileSetterAtFirstTimeJoin {
 
         config.set(name + ".lang", "en");
         config.set(name + ".level.xpSounds", true);
+        config.set(name + ".level.xpBar", true);
         config.set(name + ".isTeam", false);
         config.set(name + ".tpa", true);
         config.set(name + ".durabilityPing", true);
