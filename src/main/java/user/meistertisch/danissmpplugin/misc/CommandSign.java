@@ -35,16 +35,28 @@ public class CommandSign implements TabExecutor {
                 return true;
             }
             ItemMeta meta = item.getItemMeta();
-            List<Component> lore =
-                    List.of(
-                            Component.text(bundle.getString("commands.sign.text")).color(TextColor.color(Main.getPrimaryColor())),
-                            Component.text(player.getName()).color(TextColor.color(Main.getSecondaryColor()))
-                    );
+            List<Component> lore;
+
+            if(meta.hasLore() && meta.lore() != null){
+                lore = meta.lore();
+                Component name = Component.text(player.getName()).color(TextColor.color(Main.getSecondaryColor()));
+                if(lore.contains(name)){
+                    player.sendMessage(Component.text(bundle.getString("commands.sign.alreadySigned")).color(NamedTextColor.RED));
+                    return true;
+                }
+                lore.add(name);
+
+            } else {
+                lore = List.of(
+                                Component.text(bundle.getString("commands.sign.text")).color(TextColor.color(Main.getPrimaryColor())),
+                                Component.text(player.getName()).color(TextColor.color(Main.getSecondaryColor()))
+                        );
+            }
 
             meta.lore(lore);
             item.setItemMeta(meta);
             player.getInventory().setItemInMainHand(item);
-            player.sendMessage(Component.text(bundle.getString("commands.sign")).color(NamedTextColor.GREEN));
+            player.sendMessage(Component.text(bundle.getString("commands.sign")).color(NamedTextColor.GREEN)) ;
         } else {
             sender.sendMessage(Component.text(bundle.getString("commands.noPlayer")).color(NamedTextColor.RED));
             return true;
