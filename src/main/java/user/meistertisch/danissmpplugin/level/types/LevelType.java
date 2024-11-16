@@ -21,7 +21,7 @@ public enum LevelType {
     TRADING(NamedTextColor.BLUE, BossBar.Color.BLUE, Material.EMERALD),
     //MINING
     MINING(NamedTextColor.GRAY, BossBar.Color.WHITE, Material.DIAMOND_PICKAXE),
-    //TODO: RENAME COMBAT
+    //COMBAT
     COMBAT(NamedTextColor.RED, BossBar.Color.RED, Material.DIAMOND_SWORD),
     //HERE MAKE TOO: Eating
     FARMING(NamedTextColor.GOLD, BossBar.Color.YELLOW, Material.DIAMOND_HOE);
