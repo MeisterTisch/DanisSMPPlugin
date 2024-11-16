@@ -90,3 +90,6 @@ commands:
   scc:
     description: Command for the slime chunk check.
     usage: /scc
+  donate:
+    description: Command for donating the creator.
+    usage: /donate
