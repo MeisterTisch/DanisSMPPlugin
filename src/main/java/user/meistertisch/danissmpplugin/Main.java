@@ -59,8 +59,6 @@ public final class  Main extends JavaPlugin {
 
         //Files
         this.saveDefaultConfig();
-        this.saveResource("language_de.properties", true);
-        this.saveResource("language_en.properties", true);
         FilePlayer.setup();
         FileLevels.setup();
         FileAdmins.setup();

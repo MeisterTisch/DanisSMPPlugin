@@ -46,8 +46,10 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
-    //TODO: DAS AUSPROBIEREN:
-//    filesMatching('language_de.properties'){
-//        expand props
-//    }
+    filesMatching('language_de.properties'){
+        expand props
+    }
+    filesMatching('language_en.properties'){
+        expand props
+    }
 }
