@@ -24,19 +24,19 @@ public class CommandDurability implements TabExecutor {
                 FilePlayer.saveConfig();
 
                 if(isOn){
-                    player.sendMessage(Component.text(bundle.getString("commands.durabilityPing.off")).color(NamedTextColor.RED));
+                    player.sendMessage(Component.text(bundle.getString("commands.durability.off")).color(NamedTextColor.RED));
                 } else {
-                    player.sendMessage(Component.text(bundle.getString("commands.durabilityPing.on")).color(NamedTextColor.GREEN));
+                    player.sendMessage(Component.text(bundle.getString("commands.durability.on")).color(NamedTextColor.GREEN));
                 }
 
                 return true;
             }
             if(args[0].equalsIgnoreCase("on")){
-                player.sendMessage(Component.text(bundle.getString("commands.durabilityPing.on")).color(NamedTextColor.GREEN));
+                player.sendMessage(Component.text(bundle.getString("commands.durability.on")).color(NamedTextColor.GREEN));
                 return true;
             }
             if(args[0].equalsIgnoreCase("off")){
-                player.sendMessage(Component.text(bundle.getString("commands.durabilityPing.off")).color(NamedTextColor.RED));
+                player.sendMessage(Component.text(bundle.getString("commands.durability.off")).color(NamedTextColor.RED));
                 return true;
             }
 
