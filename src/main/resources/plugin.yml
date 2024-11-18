@@ -93,3 +93,6 @@ commands:
   donate:
     description: Command for donating the creator.
     usage: /donate
+  teams:
+    description: Command for teams.
+    usage: /teams

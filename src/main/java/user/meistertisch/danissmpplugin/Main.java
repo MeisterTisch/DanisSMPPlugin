@@ -11,6 +11,7 @@ import user.meistertisch.danissmpplugin.admin.freeze.CommandFreeze;
 import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
+import user.meistertisch.danissmpplugin.admin.teams.CommandTeams;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.misc.CommandDonate;
@@ -93,6 +94,7 @@ public final class  Main extends JavaPlugin {
         getCommand("mute").setExecutor(new CommandMute());
         getCommand("scc").setExecutor(new CommandSCCS());
         getCommand("donate").setExecutor(new CommandDonate());
+        getCommand("teams").setExecutor(new CommandTeams());
 
         //Listeners
             //Functions

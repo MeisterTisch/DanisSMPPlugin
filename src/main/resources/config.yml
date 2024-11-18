@@ -39,6 +39,13 @@ dimension:
 
 # Functions: These are functions, that can be turned on or off, either here or in-game through the command /functions.
 
+# Teams:
+teams:
+  # Should the teams only be in colors of Minecraft, or can they also be custom (hex) colors?
+  onlyMcColors: false
+  # Can multiple Teams have the same color?
+  sameColorMultipleTeams: false
+
 # Leveling System
 levelingSystem:
   use: true
