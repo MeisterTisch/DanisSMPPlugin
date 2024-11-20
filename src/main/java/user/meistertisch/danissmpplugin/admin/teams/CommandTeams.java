@@ -200,6 +200,14 @@ public class CommandTeams implements TabExecutor {
                         .replaceText(TextReplacementConfig.builder().match("%team%").replacement(team).build());
                 sender.sendMessage(text);
 
+                for(Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.delete.target")).color(NamedTextColor.RED);
+                        target.sendMessage(targetText);
+                    }
+                }
+
                 ManagerTeams.deleteTeam(args[1]);
                 return true;
             }
@@ -231,6 +239,15 @@ public class CommandTeams implements TabExecutor {
                         .replaceText(TextReplacementConfig.builder().match("%team%").replacement(team).build())
                         .replaceText(TextReplacementConfig.builder().match("%newTeam%").replacement(newTeam).build());
                 sender.sendMessage(text);
+
+                for(Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.rename.target")).color(NamedTextColor.GREEN)
+                                .replaceText(TextReplacementConfig.builder().match("%team%").replacement(newTeam).build());
+                        target.sendMessage(targetText);
+                    }
+                }
 
                 return true;
             }
@@ -287,6 +304,15 @@ public class CommandTeams implements TabExecutor {
                 Component text = Component.text(bundle.getString("commands.teams.color")).color(NamedTextColor.GREEN)
                         .replaceText(TextReplacementConfig.builder().match("%team%").replacement(team).build());
                 sender.sendMessage(text);
+
+                for(Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.color.target")).color(NamedTextColor.GREEN);
+                        target.sendMessage(targetText);
+                    }
+                }
+
                 return true;
             }
             case "decoration" -> {
@@ -318,6 +344,15 @@ public class CommandTeams implements TabExecutor {
                 Component text = Component.text(bundle.getString("commands.teams.decoration")).color(NamedTextColor.GREEN)
                         .replaceText(TextReplacementConfig.builder().match("%team%").replacement(team).build());
                 sender.sendMessage(text);
+
+                for (Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.decoration.target")).color(NamedTextColor.GREEN);
+                        target.sendMessage(targetText);
+                    }
+                }
+
                 return true;
             }
             case "setprefixsuffix" -> {
@@ -348,6 +383,18 @@ public class CommandTeams implements TabExecutor {
                         .replaceText(TextReplacementConfig.builder().match("%suffix%").replacement(suffix).build());
 
                 sender.sendMessage(text);
+
+                for (Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.setPrefixSuffix.target")).color(NamedTextColor.GREEN)
+                                .replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(prefix).build())
+                                .replaceText(TextReplacementConfig.builder().match("%suffix%").replacement(suffix).build());
+                        target.sendMessage(targetText);
+                    }
+                }
+
+                return true;
             }
             case "removeprefixsuffix" -> {
                 if (args.length != 2) {
@@ -368,6 +415,16 @@ public class CommandTeams implements TabExecutor {
                 Component text = Component.text(bundle.getString("commands.teams.removePrefixSuffix")).color(NamedTextColor.GREEN)
                         .replaceText(TextReplacementConfig.builder().match("%team%").replacement(team).build());
                 sender.sendMessage(text);
+
+                for(Player target : Bukkit.getOnlinePlayers()){
+                    if(FilePlayer.getConfig().getString(target.getName() + ".team", "").equals(args[1])){
+                        ResourceBundle bundleTarget = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(target.getName() + ".lang", "en"));
+                        Component targetText = Component.text(bundleTarget.getString("commands.teams.removePrefixSuffix.target")).color(NamedTextColor.RED);
+                        target.sendMessage(targetText);
+                    }
+                }
+
+                return true;
             }
             case "add" -> {
                 if (args.length != 3) {
@@ -527,7 +584,6 @@ public class CommandTeams implements TabExecutor {
                 }
             }
         }
-
 
         return true;
     }
