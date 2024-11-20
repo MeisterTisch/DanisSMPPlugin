@@ -23,8 +23,7 @@ public class CommandChat implements TabExecutor {
 
         if(sender instanceof Player player) {
             bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
-            List<String> list = FileAdmins.getConfig().getStringList("admins");
-            if (!list.contains(player.getUniqueId().toString())) {
+            if (!FileAdmins.isAdmin(player)) {
                 player.sendMessage(Component.text(bundle.getString("commands.noAdmin")).color(NamedTextColor.RED));
                 return true;
             }
@@ -65,6 +64,12 @@ public class CommandChat implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(sender instanceof Player player && !FileAdmins.isAdmin(player)){
+            return List.of();
+        }
+        if(args.length == 1){
+            return List.of("on", "off");
+        }
         return List.of();
     }
 }
