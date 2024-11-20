@@ -38,9 +38,35 @@ public class InventoryDrumroll {
         this.player = player;
         bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
         inv = Bukkit.createInventory(player, 9*3, Component.text(bundle.getString("level.inv.drumroll.title")));
+        ItemStack common = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemStack uncommon = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+        ItemStack rare = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
+        ItemStack epic = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE);
+        ItemStack legendary = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
+        ItemStack black = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        ItemStack white = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        ItemStack gray = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemStack light_gray = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+
         ItemStack greenGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         inv.setItem(4, greenGlass);
         inv.setItem(22, greenGlass);
+        inv.setItem(0, black);
+        inv.setItem(1, gray);
+        inv.setItem(2, light_gray);
+        inv.setItem(3, white);
+        inv.setItem(5, white);
+        inv.setItem(6, light_gray);
+        inv.setItem(7, gray);
+        inv.setItem(8, black);
+        inv.setItem(18, black);
+        inv.setItem(19, gray);
+        inv.setItem(20, light_gray);
+        inv.setItem(21, white);
+        inv.setItem(23, white);
+        inv.setItem(24, light_gray);
+        inv.setItem(25, gray);
+        inv.setItem(26, black);
 
         FileLevels.getConfig().set(player.getName() + ".rewardsLeft." + levelType.name().toLowerCase(),
                 FileLevels.getConfig().getInt(player.getName() + ".rewardsLeft." + levelType.name().toLowerCase())-1);
@@ -149,6 +175,29 @@ public class InventoryDrumroll {
                             item.setItemMeta(meta);
 
                             inv.setItem(17 - i, item);
+                        }
+
+                        switch (rewards[4].getRarity()){
+                            case COMMON -> {
+                                inv.setItem(4, common);
+                                inv.setItem(22, common);
+                            }
+                            case UNCOMMON -> {
+                                inv.setItem(4, uncommon);
+                                inv.setItem(22, uncommon);
+                            }
+                            case RARE -> {
+                                inv.setItem(4, rare);
+                                inv.setItem(22, rare);
+                            }
+                            case EPIC -> {
+                                inv.setItem(4, epic);
+                                inv.setItem(22, epic);
+                            }
+                            case LEGENDARY -> {
+                                inv.setItem(4, legendary);
+                                inv.setItem(22, legendary);
+                            }
                         }
                     }
                 }, 0, 1);
@@ -431,65 +480,73 @@ public class InventoryDrumroll {
         Component itemName;
         WinRarityTypes rarityType;
 
-        if(obj instanceof RewardsLevelingAdventure reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        } else if(obj instanceof RewardsLevelingTrading reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        } else if(obj instanceof RewardsLevelingMining reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        }  else if(obj instanceof RewardsLevelingCombat reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        } else if(obj instanceof RewardsLevelingBuilding reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        }  else if(obj instanceof RewardsLevelingFarming reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        } else if(obj instanceof RewardsLevelingMagic reward){
-            rarityType = reward.getRarity();
-            rarity = Component.text(bundle.getString(reward.getRarity().getName()))
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-            itemName = item.displayName()
-                    .color(reward.getRarity().getColor())
-                    .decoration(TextDecoration.BOLD, true);
-        }
-        else {
-            return;
+        switch (obj) {
+            case RewardsLevelingAdventure reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingTrading reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingMining reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingCombat reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingBuilding reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingFarming reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case RewardsLevelingMagic reward -> {
+                rarityType = reward.getRarity();
+                rarity = Component.text(bundle.getString(reward.getRarity().getName()))
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+                itemName = item.displayName()
+                        .color(reward.getRarity().getColor())
+                        .decoration(TextDecoration.BOLD, true);
+            }
+            case null, default -> {
+                return;
+            }
         }
 
         player.closeInventory();
