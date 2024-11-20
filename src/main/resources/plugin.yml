@@ -96,3 +96,6 @@ commands:
   teams:
     description: Command for teams.
     usage: /teams
+  clearChat:
+    description: Command for clearing the chat.
+    usage: /clearChat

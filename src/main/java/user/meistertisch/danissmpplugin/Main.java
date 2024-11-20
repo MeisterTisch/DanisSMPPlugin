@@ -73,28 +73,30 @@ public final class  Main extends JavaPlugin {
 
         //Commands
         getCommand("admin").setExecutor(new CommandAdmin());
-        getCommand("functions").setExecutor(new CommandFunctions());
-        getCommand("test").setExecutor(new CommandTest());
-        getCommand("level").setExecutor(new CommandLeveling());
-        getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
-        getCommand("language").setExecutor(new CommandLanguage());
-        getCommand("spit").setExecutor(new CommandSpit());
-        getCommand("discord").setExecutor(new CommandDiscord());
-        getCommand("teamspeak").setExecutor(new CommandTeamspeak());
-        getCommand("tpa").setExecutor(new CommandTpa());
-        getCommand("durability").setExecutor(new CommandDurability());
-        getCommand("inventory").setExecutor(new CommandInvLooker());
-        getCommand("freeze").setExecutor(new CommandFreeze());
-        getCommand("spawn").setExecutor(new CommandSpawn());
         getCommand("announce").setExecutor(new CommandAnnounce());
-        getCommand("sign").setExecutor(new CommandSign());
         getCommand("chat").setExecutor(new CommandChat());
+        getCommand("clearChat").setExecutor(new CommandClearChat());
         getCommand("dimension").setExecutor(new CommandDimension());
+        getCommand("discord").setExecutor(new CommandDiscord());
+        getCommand("donate").setExecutor(new CommandDonate());
+        getCommand("durability").setExecutor(new CommandDurability());
         getCommand("hide").setExecutor(new CommandHide());
+        getCommand("freeze").setExecutor(new CommandFreeze());
+        getCommand("functions").setExecutor(new CommandFunctions());
+        getCommand("inventory").setExecutor(new CommandInvLooker());
+        getCommand("language").setExecutor(new CommandLanguage());
+        getCommand("level").setExecutor(new CommandLeveling());
         getCommand("mute").setExecutor(new CommandMute());
         getCommand("scc").setExecutor(new CommandSCCS());
-        getCommand("donate").setExecutor(new CommandDonate());
+        getCommand("sign").setExecutor(new CommandSign());
+        getCommand("spawn").setExecutor(new CommandSpawn());
+        getCommand("spit").setExecutor(new CommandSpit());
         getCommand("teams").setExecutor(new CommandTeams());
+        getCommand("teamspeak").setExecutor(new CommandTeamspeak());
+        getCommand("test").setExecutor(new CommandTest());
+        getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
+        getCommand("tpa").setExecutor(new CommandTpa());
+
 
         //Listeners
             //Functions
