@@ -99,3 +99,6 @@ commands:
   clearChat:
     description: Command for clearing the chat.
     usage: /clearChat
+  shareItem:
+    description: Command for sharing items.
+    usage: /shareItem

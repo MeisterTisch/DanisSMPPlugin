@@ -15,6 +15,7 @@ import user.meistertisch.danissmpplugin.admin.teams.CommandTeams;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.misc.CommandDonate;
+import user.meistertisch.danissmpplugin.misc.CommandShareItem;
 import user.meistertisch.danissmpplugin.misc.CommandSign;
 import user.meistertisch.danissmpplugin.sccs.CommandSCCS;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
@@ -88,6 +89,7 @@ public final class  Main extends JavaPlugin {
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("mute").setExecutor(new CommandMute());
         getCommand("scc").setExecutor(new CommandSCCS());
+        getCommand("shareItem").setExecutor(new CommandShareItem());
         getCommand("sign").setExecutor(new CommandSign());
         getCommand("spawn").setExecutor(new CommandSpawn());
         getCommand("spit").setExecutor(new CommandSpit());
