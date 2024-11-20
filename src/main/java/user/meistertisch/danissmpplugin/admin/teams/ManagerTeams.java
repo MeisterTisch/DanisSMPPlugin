@@ -1,7 +1,5 @@
 package user.meistertisch.danissmpplugin.admin.teams;
 
-
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
