@@ -61,6 +61,14 @@ public class ManagerTeams {
         config.set(newTeamName, config.getConfigurationSection(teamName));
         config.set(teamName, null);
         FileTeams.saveConfig();
+
+        for (String player : FilePlayer.getConfig().getKeys(false)) {
+            if (FilePlayer.getConfig().getString(player + ".team", "").equals(teamName)) {
+                removeMember(player);
+                addMember(newTeamName, player);
+            }
+        }
+
         updateTeamShowcase();
     }
 
