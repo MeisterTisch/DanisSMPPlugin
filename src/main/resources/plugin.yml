@@ -102,3 +102,10 @@ commands:
   shareItem:
     description: Command for sharing items.
     usage: /shareItem
+  message:
+    description: Command for messaging players.
+    usage: /message
+    aliases:
+      - msg
+      - reply
+      - r

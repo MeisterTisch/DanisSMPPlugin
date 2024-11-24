@@ -12,6 +12,8 @@ import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.admin.teams.CommandTeams;
+import user.meistertisch.danissmpplugin.directMessage.CommandDirectMessage;
+import user.meistertisch.danissmpplugin.directMessage.ManagerDirectMessage;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.misc.CommandDonate;
@@ -71,6 +73,7 @@ public final class  Main extends JavaPlugin {
         //Managers
         managerTPA = new ManagerTPA();
         ManagerCombatTimer.setup();
+        ManagerDirectMessage.setup();
 
         //Commands
         getCommand("admin").setExecutor(new CommandAdmin());
@@ -87,6 +90,7 @@ public final class  Main extends JavaPlugin {
         getCommand("inventory").setExecutor(new CommandInvLooker());
         getCommand("language").setExecutor(new CommandLanguage());
         getCommand("level").setExecutor(new CommandLeveling());
+        getCommand("message").setExecutor(new CommandDirectMessage());
         getCommand("mute").setExecutor(new CommandMute());
         getCommand("scc").setExecutor(new CommandSCCS());
         getCommand("shareItem").setExecutor(new CommandShareItem());
@@ -164,6 +168,7 @@ public final class  Main extends JavaPlugin {
         SchedulerPlayerPositions.stop();
         ManagerCombatTimer.shutDown();
         SchedulerChatCooldown.shutDown();
+        ManagerDirectMessage.shutdown();
     }
 
     //Some static Getters
