@@ -24,10 +24,17 @@ public class CommandClearChat implements TabExecutor {
             return true;
         }
 
-        for (int i = 0; i < 100; i++) {
-            Bukkit.broadcast(Component.text("\n"));
-        }
         for(Player player : Bukkit.getOnlinePlayers()){
+            if(FileAdmins.isAdmin(player)){
+                continue;
+            }
+
+            for (int i = 0; i < 100; i++) {
+                player.sendMessage(Component.text("\n"));
+            }
+        }
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang", "en"));
             player.sendMessage(Component.text(bundle.getString("commands.chatCleared")).color(NamedTextColor.RED));
         }
