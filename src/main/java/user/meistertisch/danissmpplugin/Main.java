@@ -19,6 +19,7 @@ import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.misc.CommandDonate;
 import user.meistertisch.danissmpplugin.misc.CommandShareItem;
 import user.meistertisch.danissmpplugin.misc.CommandSign;
+import user.meistertisch.danissmpplugin.misc.ListenerPlayerDeathHeadDrop;
 import user.meistertisch.danissmpplugin.sccs.CommandSCCS;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
 import user.meistertisch.danissmpplugin.spawn.SchedulerPlayerPositions;
@@ -145,6 +146,9 @@ public final class  Main extends JavaPlugin {
 
             //Dimension
         pluginManager.registerEvents(new ListenerDimension(), this);
+
+            //Player Head Drop
+        pluginManager.registerEvents(new ListenerPlayerDeathHeadDrop(), this);
 
         //Schedulers
 //        SchedulerPlayerPositions.setup();
