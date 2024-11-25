@@ -75,6 +75,9 @@ public class CommandThunderstormSummoner implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(args.length == 1 && sender instanceof Player player && FileAdmins.isAdmin(player)){
+            return List.of("on", "off");
+        }
         return List.of();
     }
 }
