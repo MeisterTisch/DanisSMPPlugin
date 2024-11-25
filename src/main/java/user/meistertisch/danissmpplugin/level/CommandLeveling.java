@@ -487,7 +487,7 @@ public class CommandLeveling implements TabExecutor {
             }
             case 2 -> {
                 if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
-                    return List.of("rewards", "levels" );
+                    return List.of("rewards", "levels");
                 }
                 else if(List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building").contains(strings[0].toLowerCase())){
                     return List.of("open");
@@ -510,7 +510,7 @@ public class CommandLeveling implements TabExecutor {
                 }
             }
             case 5 -> {
-                if(List.of("add", "set", "remove", "get").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())
+                if(List.of("add", "set", "remove").contains(strings[0].toLowerCase()) && List.of("rewards", "levels").contains(strings[1].toLowerCase())
                         && List.of("farming", "mining", "combat", "adventure", "magic", "trading", "building").contains(strings[3].toLowerCase())
                         && commandSender instanceof Player player && FileAdmins.isAdmin(player)){
                     return List.of("0", "1", "2", "5", "10");
