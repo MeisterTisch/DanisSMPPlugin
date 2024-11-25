@@ -66,7 +66,7 @@ public class CommandLeveling implements TabExecutor {
                         player.sendMessage(text);
                     }
                     else if(strings[0].equalsIgnoreCase("levels")){
-                        Component text = Component.text(bundle.getString("commands.level.checkAll.other")).color(NamedTextColor.DARK_GREEN)
+                        Component text = Component.text(bundle.getString("commands.level.checkAll")).color(NamedTextColor.DARK_GREEN)
                                 .replaceText(TextReplacementConfig.builder().match("%target%")
                                         .replacement(
                                                 Component.text(player.getName())
