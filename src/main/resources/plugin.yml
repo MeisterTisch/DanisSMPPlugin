@@ -9,10 +9,10 @@ website: https://github.com/meistertisch
 commands:
   admin:
     description: Command for setting or removing admins.
-    usage: /admin <add/remove> <player>
+    usage: /admin
   level:
     description: Command for levels and rewards.
-    usage: /level <category> [open]
+    usage: /level
     aliases:
       - lvl
   functions:
@@ -25,10 +25,10 @@ commands:
     usage: /test
   thunder:
     description: Command for turning on or off the function "Thunder Summoner".
-    usage: /thunder [on/off]
+    usage: /thunder
   language:
     description: Command for changing the language.
-    usage: /language <language>
+    usage: /language
     aliases:
       - lang
   spit:
@@ -48,20 +48,20 @@ commands:
       - ts
   tpa:
     description: Teleport to a player.
-    usage: /tpa <here/to/allow/disallow/accept/decline/cancel> [player]
+    usage: /tpa
   durability:
     description: Command for the durability ping.
-    usage: /durability [on/off]
+    usage: /durability
   inventory:
     description: Look into a player's inventory or enderchest.
-    usage: /inventory <Player>
+    usage: /inventory
     aliases:
       - inv
       - enderchest
       - ec
   freeze:
     description: Freeze or unfreeze a player.
-    usage: /freeze <player>
+    usage: /freeze
     aliases:
       - unfreeze
   spawn:
@@ -69,22 +69,22 @@ commands:
     usage: /spawn
   announce:
     description: Command for announcing.
-    usage: /announce <message...>
+    usage: /announce
   sign:
     description: Command for creating signs.
     usage: /sign
   chat:
     description: Command for controlling the chat.
-    usage: /chat <on/off>
+    usage: /chat
   dimension:
     description: Command for controlling the dimensions.
-    usage: /dimension <nether/end> <allow/disallow>
+    usage: /dimension
   hide:
     description: Command for hiding players.
     usage: /hide
   mute:
     description: Command for muting players.
-    usage: /mute <player>
+    usage: /mute
     aliases:
       - unmute
   scc:
