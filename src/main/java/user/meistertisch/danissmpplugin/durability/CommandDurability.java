@@ -8,8 +8,11 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
+import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,8 +43,6 @@ public class CommandDurability implements TabExecutor {
                 return true;
             }
 
-            //TODO: TRESHOLD SELBER!
-
             player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
         }
         return true;
@@ -49,6 +50,8 @@ public class CommandDurability implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(args.length == 1)
+            return List.of("on", "off");
         return List.of();
     }
 }
