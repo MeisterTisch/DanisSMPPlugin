@@ -34,6 +34,10 @@ public class ManagerFileSetterAtJoin {
             config.set(name + ".durabilityPing", true);
         }
 
+        if (!config.contains(name + ".muted")) {
+            config.set(name + ".muted", false);
+        }
+
         if(!config.contains(name + ".sccsSearchesLeft")){
             config.set(name + ".sccsSearchesLeft", Main.getPlugin().getConfig().getInt("slimeChunkCheck.checks"));
         }
