@@ -39,6 +39,11 @@ dimension:
 
 # Functions: These are functions, that can be turned on or off, either here or in-game through the command /functions.
 
+# AFK: Use the AFK-System.
+afk:
+  # timeout: The time in minutes, after which a player is considered AFK.
+  timeout: 5
+
 # Teams:
 teams:
   # Should the teams only be in colors of Minecraft, or can they also be custom (hex) colors?

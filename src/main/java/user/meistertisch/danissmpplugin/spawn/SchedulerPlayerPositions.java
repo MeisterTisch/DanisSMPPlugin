@@ -23,7 +23,7 @@ public class SchedulerPlayerPositions {
 //        }, 0,1000, java.util.concurrent.TimeUnit.MILLISECONDS);
 //    }
 
-    public static void stop(){
+    public static void shutdown(){
         scheduledFuture.cancel(true);
         service.shutdown();
     }

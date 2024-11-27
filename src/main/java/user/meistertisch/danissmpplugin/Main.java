@@ -12,6 +12,9 @@ import user.meistertisch.danissmpplugin.admin.freeze.ListenerMoveFreeze;
 import user.meistertisch.danissmpplugin.admin.functions.CommandFunctions;
 import user.meistertisch.danissmpplugin.admin.functions.ListenerInvClickFunctions;
 import user.meistertisch.danissmpplugin.admin.teams.CommandTeams;
+import user.meistertisch.danissmpplugin.afk.CommandAFK;
+import user.meistertisch.danissmpplugin.afk.ListenerMoveAFK;
+import user.meistertisch.danissmpplugin.afk.ManagerAFK;
 import user.meistertisch.danissmpplugin.directMessage.CommandDirectMessage;
 import user.meistertisch.danissmpplugin.directMessage.ManagerDirectMessage;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
@@ -75,9 +78,11 @@ public final class  Main extends JavaPlugin {
         managerTPA = new ManagerTPA();
         ManagerCombatTimer.setup();
         ManagerDirectMessage.setup();
+        ManagerAFK.setup();
 
         //Commands
         getCommand("admin").setExecutor(new CommandAdmin());
+        getCommand("afk").setExecutor(new CommandAFK());
         getCommand("announce").setExecutor(new CommandAnnounce());
         getCommand("chat").setExecutor(new CommandChat());
         getCommand("clearChat").setExecutor(new CommandClearChat());
@@ -108,6 +113,9 @@ public final class  Main extends JavaPlugin {
         //Listeners
             //Functions
         pluginManager.registerEvents(new ListenerInvClickFunctions(), this);
+
+            //AFK
+        pluginManager.registerEvents(new ListenerMoveAFK(), this);
 
             //Essentials
         pluginManager.registerEvents(new ListenerJoinAndLeave(), this);
@@ -169,10 +177,11 @@ public final class  Main extends JavaPlugin {
         FileSlimeChunks.saveConfig();
 
         //Schedulers
-        SchedulerPlayerPositions.stop();
-        ManagerCombatTimer.shutDown();
-        SchedulerChatCooldown.shutDown();
+        SchedulerPlayerPositions.shutdown();
+        ManagerCombatTimer.shutdown();
+        SchedulerChatCooldown.shutdown();
         ManagerDirectMessage.shutdown();
+        ManagerAFK.shutdown();
     }
 
     //Some static Getters

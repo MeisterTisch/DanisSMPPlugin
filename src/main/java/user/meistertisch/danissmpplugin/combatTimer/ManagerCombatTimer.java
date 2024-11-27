@@ -36,7 +36,7 @@ public class ManagerCombatTimer {
         return combatTimer.containsKey(player);
     }
 
-    public static void shutDown(){
+    public static void shutdown(){
         scheduledFuture.cancel(true);
         service.shutdown();
     }

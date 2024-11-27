@@ -109,3 +109,6 @@ commands:
       - msg
       - reply
       - r
+  afk:
+    description: Command for the AFK-System.
+    usage: /afk

@@ -2,6 +2,7 @@ package user.meistertisch.danissmpplugin.files;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
@@ -9,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.afk.ManagerAFK;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class FileTeams {
             Component teamNameComp;
             Component prefix;
             Component suffix;
+            Component playername = Component.text(player.getName());
             Component name = Component.text("%prefix% %player% %suffix%");
 
             if(FileTeams.getConfig().getBoolean(teamName + ".usesPrefixAndSuffix")){
@@ -84,9 +87,13 @@ public class FileTeams {
                 prefix = prefix.decorate(TextDecoration.BOLD);
                 suffix = suffix.decorate(TextDecoration.BOLD);
 
+                if(ManagerAFK.isAFK(player)){
+                    playername = Component.text(player.getName()).decorate(TextDecoration.ITALIC).color(NamedTextColor.GRAY);
+                }
+
                 name = name
                         .replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(prefix).build())
-                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build())
+                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(playername).build())
                         .replaceText(TextReplacementConfig.builder().match("%suffix%").replacement(suffix).build());
             } else {
                 if (FileTeams.getConfig().isString(teamName + ".decoration")) {
@@ -101,9 +108,13 @@ public class FileTeams {
                 }
                 teamNameComp = teamNameComp.decorate(TextDecoration.BOLD);
 
+                if(ManagerAFK.isAFK(player)){
+                    playername = Component.text(player.getName()).decorate(TextDecoration.ITALIC).color(NamedTextColor.GRAY);
+                }
+
                 name = name
                         .replaceText(TextReplacementConfig.builder().match("%prefix%").replacement(teamNameComp).build())
-                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(player.getName()).build())
+                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(playername).build())
                         .replaceText(TextReplacementConfig.builder().match(" %suffix%").replacement(Component.text("")).build());
             }
 

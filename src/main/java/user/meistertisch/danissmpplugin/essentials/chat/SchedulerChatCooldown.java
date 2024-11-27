@@ -34,7 +34,7 @@ public class SchedulerChatCooldown {
         return SchedulerChatCooldown.cooldown.containsKey(player);
     }
 
-    public static void shutDown(){
+    public static void shutdown(){
         scheduledFuture.cancel(true);
         service.shutdown();
     }
