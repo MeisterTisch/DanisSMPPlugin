@@ -19,6 +19,7 @@ import user.meistertisch.danissmpplugin.directMessage.CommandDirectMessage;
 import user.meistertisch.danissmpplugin.directMessage.ManagerDirectMessage;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.files.*;
+import user.meistertisch.danissmpplugin.home.CommandHome;
 import user.meistertisch.danissmpplugin.misc.CommandDonate;
 import user.meistertisch.danissmpplugin.misc.CommandShareItem;
 import user.meistertisch.danissmpplugin.misc.CommandSign;
@@ -73,6 +74,7 @@ public final class  Main extends JavaPlugin {
         FileTeams.setup();
         FileSpawn.setup();
         FileSlimeChunks.setup();
+        FileHomes.setup();
 
         //Managers
         managerTPA = new ManagerTPA();
@@ -91,6 +93,7 @@ public final class  Main extends JavaPlugin {
         getCommand("donate").setExecutor(new CommandDonate());
         getCommand("durability").setExecutor(new CommandDurability());
         getCommand("hide").setExecutor(new CommandHide());
+        getCommand("home").setExecutor(new CommandHome());
         getCommand("freeze").setExecutor(new CommandFreeze());
         getCommand("functions").setExecutor(new CommandFunctions());
         getCommand("inventory").setExecutor(new CommandInvLooker());

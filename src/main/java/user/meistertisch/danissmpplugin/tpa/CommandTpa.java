@@ -34,7 +34,7 @@ public class CommandTpa implements TabExecutor {
             if(strings.length == 1) {
                 if (strings[0].equalsIgnoreCase("accept")) {
                     if(ManagerCombatTimer.isInCombat(player)){
-                        player.sendMessage(Component.text(bundle.getString("combatTimer.added")).color(NamedTextColor.RED));
+                        player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
                         return true;
                     }
 
@@ -64,7 +64,7 @@ public class CommandTpa implements TabExecutor {
             if(strings.length == 2) {
                 if (List.of("here", "to").contains(strings[0].toLowerCase())) {
                     if(ManagerCombatTimer.isInCombat(player)){
-                        player.sendMessage(Component.text(bundle.getString("combatTimer.added")).color(NamedTextColor.RED));
+                        player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
                         return true;
                     }
 

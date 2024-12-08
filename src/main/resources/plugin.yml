@@ -112,3 +112,6 @@ commands:
   afk:
     description: Command for the AFK-System.
     usage: /afk
+  home:
+    description: Command for setting or teleporting to a home.
+    usage: /home

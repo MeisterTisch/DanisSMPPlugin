@@ -68,6 +68,14 @@ levelingSystem:
 tpaSystem:
   use: true
 
+# Home: Set and teleport to a home.
+homeSystem:
+  use: true
+  # How many homes can a player have?
+  maxHomes: 5
+  # Can the players in the team share one of their homes with the team?
+  teamHomes: true
+
 # Slime Chunk Check System: This function allows you to check if you are in a slime chunk.
 # onlyCenter: Check only the chunk the player is standing in or also the nearby chunks (3x3)?
 # save: Should the found chunks be saved for the player to look up later?
