@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.afk.ManagerAFK;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.files.FileTeams;
 
@@ -109,5 +110,7 @@ public class ListenerJoinAndLeave implements Listener {
                     TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
             ));
         }
+
+        ManagerAFK.removeAFK(player);
     }
 }
