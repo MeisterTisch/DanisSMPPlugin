@@ -9,6 +9,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
@@ -20,18 +21,23 @@ public class CommandHome implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(sender instanceof Player player){
+            ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
+
             if(args.length == 0 || args.length > 3){
-                ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
                 player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
                 return true;
             }
 
             switch (args[0].toLowerCase()){
                 case "create" -> {
-                    ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
-
                     if(args.length != 2){
                         player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
+                        return true;
+                    }
+
+                    if(ManagerHome.getHomeCount(player) >= Main.getPlugin().getConfig().getInt("homeSystem.maxHomes")){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.maxHomes"), NamedTextColor.RED)
+                                .replaceText(TextReplacementConfig.builder().match("%maxHomes%").replacement(Component.text(Main.getPlugin().getConfig().getInt("homeSystem.maxHomes"), NamedTextColor.GOLD)).build()));
                         return true;
                     }
 
@@ -46,8 +52,6 @@ public class CommandHome implements TabExecutor {
                             .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
                 }
                 case "remove", "delete" -> {
-                    ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
-
                     if(args.length != 2){
                         player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
                         return true;
@@ -64,8 +68,6 @@ public class CommandHome implements TabExecutor {
                             .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
                 }
                 case "rename" -> {
-                    ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
-
                     if(args.length != 3){
                         player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
                         return true;
@@ -89,8 +91,6 @@ public class CommandHome implements TabExecutor {
                             .replaceText(TextReplacementConfig.builder().match("%newHome%").replacement(Component.text(args[2], NamedTextColor.GOLD)).build()));
                 }
                 case "teleport", "tp" -> {
-                    ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
-
                     if(args.length != 2){
                         player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
                         return true;
@@ -111,6 +111,10 @@ public class CommandHome implements TabExecutor {
                     player.sendMessage(Component.text(bundle.getString("commands.home.teleport"), NamedTextColor.GREEN)
                             .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
                 }
+                default -> {
+                    player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
+                    return true;
+                }
             }
 
         } else {
@@ -128,7 +132,8 @@ public class CommandHome implements TabExecutor {
             return List.of();
         }
         if(args.length == 1){
-            return List.of("create", "remove", "delete", "rename", "teleport", "tp", "share", "unshare");
+            //TODO: Share and Unshare
+            return List.of("create", "remove", "delete", "rename", "teleport", "tp");
         }
         if(args.length == 2){
             if(List.of("remove", "delete", "teleport", "tp", "share", "rename").contains(args[0].toLowerCase(Locale.ROOT))){
