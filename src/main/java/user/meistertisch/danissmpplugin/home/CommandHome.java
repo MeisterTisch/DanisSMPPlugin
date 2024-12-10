@@ -10,8 +10,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import user.meistertisch.danissmpplugin.Main;
+import user.meistertisch.danissmpplugin.admin.teams.ManagerTeams;
 import user.meistertisch.danissmpplugin.combatTimer.ManagerCombatTimer;
+import user.meistertisch.danissmpplugin.files.FileHomes;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
+import user.meistertisch.danissmpplugin.files.FileTeams;
 
 import java.util.List;
 import java.util.Locale;
@@ -111,6 +114,22 @@ public class CommandHome implements TabExecutor {
                     player.sendMessage(Component.text(bundle.getString("commands.home.teleport"), NamedTextColor.GREEN)
                             .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
                 }
+                case "share" -> {
+                    if(args.length != 2){
+                        player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
+                        return true;
+                    }
+
+                    if(!ManagerHome.homeExists(player, args[1])){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.notExists"), NamedTextColor.RED)
+                                .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
+                        return true;
+                    }
+
+                    ManagerHome.shareHome(player, args[1]);
+                    player.sendMessage(Component.text(bundle.getString("commands.home.share"), NamedTextColor.GREEN)
+                            .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
+                }
                 default -> {
                     player.sendMessage(Component.text(bundle.getString("commands.invalidArg"), NamedTextColor.RED));
                     return true;
@@ -137,7 +156,25 @@ public class CommandHome implements TabExecutor {
         }
         if(args.length == 2){
             if(List.of("remove", "delete", "teleport", "tp", "share", "rename").contains(args[0].toLowerCase(Locale.ROOT))){
-                return ManagerHome.getHomes(player);
+                List<String> list = ManagerHome.getHomes(player);
+                if(args[0].equalsIgnoreCase("teleport") || args[0].equalsIgnoreCase("tp")){
+                    if(!FileTeams.getConfig().getBoolean(player.getName() + ".isTeam")){
+                        return list;
+                    }
+
+                    //TODO: other things say not your home
+
+                    String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+                    for(String p : ManagerTeams.getTeam(team)){
+                        for(String home : ManagerHome.getHomes(player)) {
+                            if (FileHomes.getConfig().getBoolean(p + "." + home + ".shared")) {
+                                list.add(home);
+                            }
+                        }
+                    }
+                }
+
+                return list;
             }
         }
         return List.of();

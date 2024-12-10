@@ -1,15 +1,20 @@
 package user.meistertisch.danissmpplugin.home;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.admin.teams.ManagerTeams;
 import user.meistertisch.danissmpplugin.files.FileHomes;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ManagerHome {
     public static void addHome(Player player, String name, Location location) {
@@ -90,8 +95,12 @@ public class ManagerHome {
 
         String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
         for(Player p : Bukkit.getOnlinePlayers()){
-            if(FilePlayer.getConfig().getString(p.getName() + ".team", "").equals(team)){
-                //TODO
+            if(ManagerTeams.getTeam(team).contains(p.getName())){
+                ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(p.getName() + ".lang"));
+                p.sendMessage(Component.text(bundle.getString("commands.home.shareMessage"), TextColor.color(Main.getSecondaryColor()))
+                        .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(home, TextColor.color(Main.getPrimaryColor()))).build())
+                        .replaceText(TextReplacementConfig.builder().match("%player%").replacement(Component.text(player.getName(), TextColor.color(Main.getPrimaryColor()))).build())
+                );
             }
         }
 

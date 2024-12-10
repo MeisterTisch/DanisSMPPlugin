@@ -9,6 +9,8 @@ import user.meistertisch.danissmpplugin.files.FilePlayer;
 import user.meistertisch.danissmpplugin.files.FileTeams;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class ManagerTeams {
@@ -123,5 +125,17 @@ public class ManagerTeams {
             player.displayName(FileTeams.getTeamNamePrefixComponent(player));
             player.playerListName(FileTeams.getTeamNamePrefixComponent(player));
         }
+    }
+
+    public static List<String> getTeam(String team){
+        List<String> list = new ArrayList<>();
+
+        for(String player : FilePlayer.getConfig().getKeys(false)){
+            if(FilePlayer.getConfig().getString(player + ".team", "").equals(team)){
+                list.add(player);
+            }
+        }
+
+        return list;
     }
 }
