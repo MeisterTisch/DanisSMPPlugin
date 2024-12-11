@@ -30,7 +30,7 @@ public class CommandTeams implements TabExecutor {
         if (sender instanceof Player player) {
             bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(player.getName() + ".lang"));
             if (!FileAdmins.isAdmin(player)) {
-                player.sendMessage(bundle.getString("commands.noAdmin"));
+                player.sendMessage(Component.text(bundle.getString("commands.noAdmin"), NamedTextColor.RED));
                 return true;
             }
         }
@@ -592,6 +592,12 @@ public class CommandTeams implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         List<String> decorationList = List.of("italic", "underlined", "strikethrough");
         List<String> decorationListAndRemove = List.of("italic", "underlined", "strikethrough", "remove");
+
+        if(sender instanceof Player player){
+            if(!FileAdmins.isAdmin(player)){
+                return List.of();
+            }
+        }
 
         if (args.length == 1) {
             return List.of("create", "delete", "color", "rename", "decoration", "add", "remove", "setPrefixSuffix", "removePrefixSuffix", "list");

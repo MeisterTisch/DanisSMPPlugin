@@ -20,10 +20,7 @@ import user.meistertisch.danissmpplugin.directMessage.ManagerDirectMessage;
 import user.meistertisch.danissmpplugin.essentials.chat.SchedulerChatCooldown;
 import user.meistertisch.danissmpplugin.files.*;
 import user.meistertisch.danissmpplugin.home.CommandHome;
-import user.meistertisch.danissmpplugin.misc.CommandDonate;
-import user.meistertisch.danissmpplugin.misc.CommandShareItem;
-import user.meistertisch.danissmpplugin.misc.CommandSign;
-import user.meistertisch.danissmpplugin.misc.ListenerPlayerDeathHeadDrop;
+import user.meistertisch.danissmpplugin.misc.*;
 import user.meistertisch.danissmpplugin.sccs.CommandSCCS;
 import user.meistertisch.danissmpplugin.spawn.CommandSpawn;
 import user.meistertisch.danissmpplugin.spawn.SchedulerPlayerPositions;
@@ -160,6 +157,9 @@ public final class  Main extends JavaPlugin {
 
             //Player Head Drop
         pluginManager.registerEvents(new ListenerPlayerDeathHeadDrop(), this);
+
+            //Respawn to Spawn, if no RespawnLocation is set
+        pluginManager.registerEvents(new ListenerPlayerDeathSpawnTp(), this);
 
         //Schedulers
 //        SchedulerPlayerPositions.setup();

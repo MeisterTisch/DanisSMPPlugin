@@ -94,7 +94,11 @@ public class ManagerHome {
         config.set(player.getName() + "." + home + ".shared", true);
 
         String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+        String owner = getHomeOwner(home);
         for(Player p : Bukkit.getOnlinePlayers()){
+            if(p.getName().equals(owner)){
+                continue;
+            }
             if(ManagerTeams.getTeam(team).contains(p.getName())){
                 ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(p.getName() + ".lang"));
                 p.sendMessage(Component.text(bundle.getString("commands.home.shareMessage"), TextColor.color(Main.getSecondaryColor()))

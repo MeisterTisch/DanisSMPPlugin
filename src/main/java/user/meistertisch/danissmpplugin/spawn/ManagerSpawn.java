@@ -94,4 +94,8 @@ public class ManagerSpawn {
         initialize();
         return spawnLocations.get((int) (Math.random() * spawnLocations.size()));
     }
+
+    public static Location getRandomSpawn(){
+        return spawnLocations.get((int) (Math.random() * spawnLocations.size()));
+    }
 }
