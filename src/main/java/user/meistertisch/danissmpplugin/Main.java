@@ -91,6 +91,7 @@ public final class  Main extends JavaPlugin {
         getCommand("durability").setExecutor(new CommandDurability());
         getCommand("hide").setExecutor(new CommandHide());
         getCommand("home").setExecutor(new CommandHome());
+        getCommand("fakeadmin").setExecutor(new CommandFakeAdmin());
         getCommand("freeze").setExecutor(new CommandFreeze());
         getCommand("functions").setExecutor(new CommandFunctions());
         getCommand("inventory").setExecutor(new CommandInvLooker());
@@ -160,6 +161,8 @@ public final class  Main extends JavaPlugin {
 
             //Respawn to Spawn, if no RespawnLocation is set
         pluginManager.registerEvents(new ListenerPlayerDeathSpawnTp(), this);
+
+
 
         //Schedulers
 //        SchedulerPlayerPositions.setup();

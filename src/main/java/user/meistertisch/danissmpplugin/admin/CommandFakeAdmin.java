@@ -32,7 +32,7 @@ public class CommandFakeAdmin implements TabExecutor {
         }
 
         Player target = Bukkit.getPlayer(args[0]);
-        if(target == null){
+        if(target == null || target == sender){
             sender.sendMessage(Component.text(bundle.getString("commands.playerNotFound"), NamedTextColor.RED).replaceText(TextReplacementConfig.builder().match("%target%").replacement(args[0]).build()));
             return true;
         }
@@ -45,7 +45,8 @@ public class CommandFakeAdmin implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
+        if(args.length == 1)
+            return null;
         return List.of();
     }
 }
