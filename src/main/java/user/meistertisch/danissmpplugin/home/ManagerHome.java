@@ -62,16 +62,16 @@ public class ManagerHome {
         return config.get(player.getName() + "." + name) != null;
     }
 
-    public static List<String> getHomes(Player player) {
+    public static List<String> getHomes(String player) {
         FileConfiguration config = FileHomes.getConfig();
         List<String> homes = new ArrayList<>();
-        if (config.getConfigurationSection(player.getName()) != null) {
-            homes.addAll(config.getConfigurationSection(player.getName()).getKeys(false));
+        if (config.getConfigurationSection(player) != null) {
+            homes.addAll(config.getConfigurationSection(player).getKeys(false));
         }
         return homes;
     }
 
-    public static int getHomeCount(Player player) {
+    public static int getHomeCount(String player) {
         return getHomes(player).size();
     }
 
@@ -85,7 +85,7 @@ public class ManagerHome {
             return;
         }
 
-        for(String string : getHomes(player)){
+        for(String string : getHomes(player.getName())){
             if(config.getBoolean(player.getName() + "." + string + ".shared")){
                 return;
             }
@@ -105,5 +105,14 @@ public class ManagerHome {
         }
 
         FileHomes.saveConfig();
+    }
+
+    public static String getHomeOwner(String home){
+        for(String player : FileHomes.getConfig().getKeys(false)){
+            if(getHomes(player).contains(home)){
+                return player;
+            }
+        }
+        return null;
     }
 }

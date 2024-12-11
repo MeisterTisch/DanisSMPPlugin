@@ -38,7 +38,7 @@ public class CommandHome implements TabExecutor {
                         return true;
                     }
 
-                    if(ManagerHome.getHomeCount(player) >= Main.getPlugin().getConfig().getInt("homeSystem.maxHomes")){
+                    if(ManagerHome.getHomeCount(player.getName()) >= Main.getPlugin().getConfig().getInt("homeSystem.maxHomes")){
                         player.sendMessage(Component.text(bundle.getString("commands.home.maxHomes"), NamedTextColor.RED)
                                 .replaceText(TextReplacementConfig.builder().match("%maxHomes%").replacement(Component.text(Main.getPlugin().getConfig().getInt("homeSystem.maxHomes"), NamedTextColor.GOLD)).build()));
                         return true;
@@ -47,6 +47,14 @@ public class CommandHome implements TabExecutor {
                     if(ManagerHome.homeExists(player, args[1])){
                         player.sendMessage(Component.text(bundle.getString("commands.home.exists"), NamedTextColor.RED)
                                 .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
+                        return true;
+                    }
+
+                    String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+                    String owner = ManagerHome.getHomeOwner(args[1]);
+
+                    if(!player.getName().equals(owner) && ManagerTeams.getTeam(team).contains(owner) && FileHomes.getConfig().getBoolean(owner + "." + args[1] + ".shared")){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.notYourHome"), NamedTextColor.RED));
                         return true;
                     }
 
@@ -63,6 +71,14 @@ public class CommandHome implements TabExecutor {
                     if(!ManagerHome.homeExists(player, args[1])){
                         player.sendMessage(Component.text(bundle.getString("commands.home.notExists"), NamedTextColor.RED)
                                 .replaceText(TextReplacementConfig.builder().match("%home%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build()));
+                        return true;
+                    }
+
+                    String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+                    String owner = ManagerHome.getHomeOwner(args[1]);
+
+                    if(!player.getName().equals(owner) && ManagerTeams.getTeam(team).contains(owner) && FileHomes.getConfig().getBoolean(owner + "." + args[1] + ".shared")){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.notYourHome"), NamedTextColor.RED));
                         return true;
                     }
 
@@ -88,6 +104,14 @@ public class CommandHome implements TabExecutor {
                         return true;
                     }
 
+                    String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+                    String owner = ManagerHome.getHomeOwner(args[1]);
+
+                    if(!player.getName().equals(owner) && ManagerTeams.getTeam(team).contains(owner) && FileHomes.getConfig().getBoolean(owner + "." + args[1] + ".shared")){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.notYourHome"), NamedTextColor.RED));
+                        return true;
+                    }
+
                     ManagerHome.renameHome(player, args[1], args[2]);
                     player.sendMessage(Component.text(bundle.getString("commands.home.rename"), NamedTextColor.GREEN)
                             .replaceText(TextReplacementConfig.builder().match("%oldHome%").replacement(Component.text(args[1], NamedTextColor.GOLD)).build())
@@ -107,6 +131,14 @@ public class CommandHome implements TabExecutor {
 
                     if(ManagerCombatTimer.isInCombat(player)){
                         player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
+                        return true;
+                    }
+
+                    String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
+                    String owner = ManagerHome.getHomeOwner(args[1]);
+
+                    if(!player.getName().equals(owner) && ManagerTeams.getTeam(team).contains(owner) && FileHomes.getConfig().getBoolean(owner + "." + args[1] + ".shared")){
+                        player.sendMessage(Component.text(bundle.getString("commands.home.notYourHome"), NamedTextColor.RED));
                         return true;
                     }
 
@@ -146,7 +178,7 @@ public class CommandHome implements TabExecutor {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!(sender instanceof Player player)){
             return List.of();
         }
@@ -156,17 +188,15 @@ public class CommandHome implements TabExecutor {
         }
         if(args.length == 2){
             if(List.of("remove", "delete", "teleport", "tp", "share", "rename").contains(args[0].toLowerCase(Locale.ROOT))){
-                List<String> list = ManagerHome.getHomes(player);
+                List<String> list = ManagerHome.getHomes(player.getName());
                 if(args[0].equalsIgnoreCase("teleport") || args[0].equalsIgnoreCase("tp")){
                     if(!FileTeams.getConfig().getBoolean(player.getName() + ".isTeam")){
                         return list;
                     }
 
-                    //TODO: other things say not your home
-
                     String team = FilePlayer.getConfig().getString(player.getName() + ".team", "");
                     for(String p : ManagerTeams.getTeam(team)){
-                        for(String home : ManagerHome.getHomes(player)) {
+                        for(String home : ManagerHome.getHomes(player.getName())) {
                             if (FileHomes.getConfig().getBoolean(p + "." + home + ".shared")) {
                                 list.add(home);
                             }
