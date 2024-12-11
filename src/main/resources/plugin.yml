@@ -115,3 +115,6 @@ commands:
   home:
     description: Command for setting or teleporting to a home.
     usage: /home
+  fakeadmin:
+    description: Send troll message to a player.
+    usage: /fakeadmin
