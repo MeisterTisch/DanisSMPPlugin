@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerSpawn {
-    private static FileConfiguration config = FileSpawn.getConfig();
+    private static FileConfiguration config;
     private static int spawns;
     private static World world;
     private static List<Location> spawnLocations = new ArrayList<>();
@@ -22,6 +22,9 @@ public class ManagerSpawn {
     private static List<Player> bypassCombat = new ArrayList<>();
 
     private static void initialize() {
+        FileSpawn.saveConfig();
+        FileSpawn.reload();
+        config = FileSpawn.getConfig();
         spawns = config.getInt("spawns");
         world = Bukkit.getWorld(config.getString("world", "world"));
         border1 = new Location(world, config.getDouble("border1.x"), config.getDouble("border1.y"), config.getDouble("border1.z"));

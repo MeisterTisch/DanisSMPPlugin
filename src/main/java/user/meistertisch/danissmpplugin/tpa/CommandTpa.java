@@ -27,17 +27,17 @@ public class CommandTpa implements TabExecutor {
                 return true;
             }
 
+            if(ManagerCombatTimer.isInCombat(player)){
+                player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
+                return true;
+            }
+
             if(strings.length == 0){
                 player.sendMessage(Component.text(bundle.getString("commands.invalidArg")).color(NamedTextColor.RED));
                 return true;
             }
             if(strings.length == 1) {
                 if (strings[0].equalsIgnoreCase("accept")) {
-                    if(ManagerCombatTimer.isInCombat(player)){
-                        player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
-                        return true;
-                    }
-
                     Main.getManagerTPA().accept(player);
                     return true;
                 } else if (strings[0].equalsIgnoreCase("decline")) {
@@ -63,11 +63,6 @@ public class CommandTpa implements TabExecutor {
             }
             if(strings.length == 2) {
                 if (List.of("here", "to").contains(strings[0].toLowerCase())) {
-                    if(ManagerCombatTimer.isInCombat(player)){
-                        player.sendMessage(Component.text(bundle.getString("combatTimer")).color(NamedTextColor.RED));
-                        return true;
-                    }
-
                     Player target = Bukkit.getPlayer(strings[1]);
                     if (target == null || FilePlayer.getConfig().getBoolean(target.getName() + ".hidden")) {
                         player.sendMessage(Component.text(bundle.getString("commands.invalidTarget")).color(NamedTextColor.RED));
