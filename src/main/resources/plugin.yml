@@ -118,3 +118,11 @@ commands:
   fakeadmin:
     description: Send troll message to a player.
     usage: /fakeadmin
+  plugins:
+    description: Command for listing all plugins.
+    usage: /plugins
+    aliases:
+      - pl
+  seed:
+    description: Command for getting the seed of the world.
+    usage: /seed

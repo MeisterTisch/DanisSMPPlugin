@@ -99,7 +99,9 @@ public final class  Main extends JavaPlugin {
         getCommand("level").setExecutor(new CommandLeveling());
         getCommand("message").setExecutor(new CommandDirectMessage());
         getCommand("mute").setExecutor(new CommandMute());
+        getCommand("plugins").setExecutor(new CommandPlugins());
         getCommand("scc").setExecutor(new CommandSCCS());
+        getCommand("seed").setExecutor(new CommandSeed());
         getCommand("shareItem").setExecutor(new CommandShareItem());
         getCommand("sign").setExecutor(new CommandSign());
         getCommand("spawn").setExecutor(new CommandSpawn());

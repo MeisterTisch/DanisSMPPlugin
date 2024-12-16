@@ -77,6 +77,22 @@ public class ListenerSpawnProt implements Listener {
     }
 
     @EventHandler
+    public void fallDamage(EntityDamageEvent event){
+        if(event.getEntity() instanceof Player player){
+            if(ManagerSpawn.isBypass(player, false))
+                return;
+            if(ManagerCombatTimer.isInCombat(player))
+                return;
+        }
+
+        if(bb.contains(event.getEntity().getBoundingBox())){
+            if(event.getCause() == EntityDamageEvent.DamageCause.FALL){
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
     public void entityDamage(EntityDamageByEntityEvent event){
         if(event.getDamager() instanceof Player player){
             if(ManagerSpawn.isBypass(player, false))
@@ -113,6 +129,25 @@ public class ListenerSpawnProt implements Listener {
                 return;
             if(event.getEntityType() == EntityType.ITEM)
                 return;
+            if(event.getEntityType() == EntityType.EXPERIENCE_ORB)
+                return;
+            if(event.getEntityType() == EntityType.FIREWORK_ROCKET)
+                return;
+            if(event.getEntityType() == EntityType.ARROW)
+                return;
+            if(event.getEntityType() == EntityType.SPECTRAL_ARROW)
+                return;
+            if(event.getEntityType() == EntityType.TRIDENT)
+                return;
+            if(event.getEntityType() == EntityType.SNOWBALL)
+                return;
+            if(event.getEntityType() == EntityType.EGG)
+                return;
+            if(event.getEntityType() == EntityType.ENDER_PEARL)
+                return;
+            if(event.getEntityType() == EntityType.EYE_OF_ENDER)
+                return;
+
 
             event.setCancelled(true);
         }
