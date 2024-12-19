@@ -1,3 +1,5 @@
+# Direct Message Command
+
 Player command for sending private messages to others.
 
 _Admins can disable this function with the [[Functions Command]]._
