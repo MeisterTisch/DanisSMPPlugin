@@ -7,7 +7,10 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.eclipse.sisu.Priority;
 import user.meistertisch.danissmpplugin.Main;
 import user.meistertisch.danissmpplugin.files.FileAdmins;
 import user.meistertisch.danissmpplugin.files.FilePlayer;
@@ -16,7 +19,6 @@ import java.util.ResourceBundle;
 
 
 public class ListenerChatFormater implements Listener {
-    @EventHandler
     public void onChatMessage(AsyncChatEvent event){
         if(Main.getPlugin().getConfig().getBoolean("chat.disabled") && !FileAdmins.isAdmin(event.getPlayer())){
             ResourceBundle bundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(event.getPlayer().getName() + ".lang"));
