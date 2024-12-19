@@ -1,6 +1,8 @@
+# Spit Command
+
 Player command for spitting like a llama.
 
-_Admins can disable the command with the [[Functions Command]]._
+_Admins can disable the command with the Functions Command._
 
 ---
 ## Command Usage

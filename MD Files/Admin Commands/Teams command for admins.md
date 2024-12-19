@@ -1,13 +1,15 @@
+# Teams command for admins
+
 Admin command for the teams related stuff.
 
-_Teamsdata will be saved in [[teams.yml]]._
-_Member of a team will be saved in [[players.yml]]._
+_Teamsdata will be saved in teams.yml._
+_Member of a team will be saved in players.yml._
 
-_For more infos to the teams function, check here: [[Teams Function]]._
-_For the player part of the command, check here: [[Teams Command for players]]_
-_To give some the admin role, check here: [[Admin Command]]_
+_For more infos to the teams function, check here: Teams Function._
+_For the player part of the command, check here: Teams Command for players_
+_To give some the admin role, check here: Admin Command_
 
-_Admin can disable the function with the [[Functions Command]].
+_Admin can disable the function with the Functions Command.
 
 ---
 ## Command Usage

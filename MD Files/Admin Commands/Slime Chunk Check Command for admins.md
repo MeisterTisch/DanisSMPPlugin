@@ -1,8 +1,10 @@
-Admin command for the [[Slime Chunk Check System]].
+# Slime Chunk Check Command for admins
 
-_For the player part of the command, check here: [[Slime Chunk Check Command for players]]_
-_To give some the admin role, check here: [[Admin Command]]_
-_Number of checks and found list will be saved in [[slimeChunks.yml]]._
+Admin command for the Slime Chunk Check System.
+
+_For the player part of the command, check here: Slime Chunk Check Command for players_
+_To give some the admin role, check here: Admin Command_
+_Number of checks and found list will be saved in slimeChunks.yml._
 
 ---
 ## Command Usage

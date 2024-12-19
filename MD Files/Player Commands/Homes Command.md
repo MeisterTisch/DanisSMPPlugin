@@ -1,8 +1,10 @@
+# Homes Command
+
 Player command for setting and teleporting to individual homes.
 
-_Data will be saved in the [[homes.yml]]._
+_Data will be saved in the homes.yml._
 
-_Admin can disable the command with the [[Functions Command]]._
+_Admin can disable the command with the Functions Command._
 
 ---
 ## Command Usage

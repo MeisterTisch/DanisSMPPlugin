@@ -1,6 +1,8 @@
+# Discord Command
+
 Player command for getting the invitation link to the corresponding discord server, if set.
 
-_Admins can set the link in the [[config.yml]]._
+_Admins can set the link in the config.yml._
 
 --- 
 ## Command Usage

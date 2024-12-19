@@ -1,8 +1,10 @@
+# Freeze Command
+
 Admin command for freezing or unfreezing a player. 
 The target will always be frozen, even after rejoining. Target needs to be manually unfrozen!
 
-_To give some the admin role, check here: [[Admin Command]]_
-_State for each player will be saved in [[config.yml]]._
+_To give some the admin role, check here: Admin Command_
+_State for each player will be saved in config.yml._
 
 ---
 ## Command Usage

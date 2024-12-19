@@ -2,7 +2,7 @@
 
 Player command for sending private messages to others.
 
-_Admins can disable this function with the [[Functions Command]]._
+_Admins can disable this function with the Functions Command._
 
 ---
 ## Command Usage

@@ -1,11 +1,12 @@
+# Level Command for admins
 
 Admin command for
 - giving, removing or setting levels in a category for a player
 - giving, removing or setting rewards in a category for a player
 
-_To see the player part of the command, check here: [[Level Command for players]]_
-_To give some the admin role, check here: [[Admin Command]]_
-_Levels and rewards will be saved in [[levels.yml]]._
+_To see the player part of the command, check here: Level Command for players_
+_To give some the admin role, check here: Admin Command_
+_Levels and rewards will be saved in levels.yml._
 
 ---
 ## Command Usage

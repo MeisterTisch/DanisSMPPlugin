@@ -1,3 +1,5 @@
+# Spawn Command for admins
+
 Admin command for
 - adding or removing the spawns
 - setting the borders
@@ -5,10 +7,10 @@ Admin command for
 - teleporting to a certain spawn
 
 
-_Spawns will be saved in [[spawn.yml]]._
+_Spawns will be saved in spawn.yml._
 
-_For the player part of the command, check here: [[Spawn Command for players]]_
-_To give some the admin role, check here: [[Admin Command]]_
+_For the player part of the command, check here: Spawn Command for players_
+_To give some the admin role, check here: Admin Command_
 
 --- 
 ## Command Usage

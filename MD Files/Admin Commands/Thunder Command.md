@@ -1,7 +1,9 @@
-Admin command for enabling and disabling the [[Thunderstorm Function]].
+# Thunder Command
 
-_Admins can disable the function with the [[Functions Command]]._
-_To give some the admin role, check here: [[Admin Command]]_
+Admin command for enabling and disabling the Thunderstorm Function.
+
+_Admins can disable the function with the Functions Command._
+_To give some the admin role, check here: Admin Command_
 
 ---
 ## Command Usage

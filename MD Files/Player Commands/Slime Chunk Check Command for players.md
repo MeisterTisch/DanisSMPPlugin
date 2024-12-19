@@ -1,9 +1,11 @@
-Player command for the [[Slime Chunk Check System]].
+# Slime Chunk Check Command for players
 
-_Number of checks and found list will be saved in [[slimeChunks.yml]]._
+Player command for the Slime Chunk Check System.
 
-_For the admin part of the command, check here: [[Slime Chunk Check Command for admins]]_
-_Admins can disable teleportation to spawn with the [[Functions Command]]._
+_Number of checks and found list will be saved in slimeChunks.yml._
+
+_For the admin part of the command, check here: Slime Chunk Check Command for admins_
+_Admins can disable teleportation to spawn with the Functions Command._
 
 ---
 ## Command Usage

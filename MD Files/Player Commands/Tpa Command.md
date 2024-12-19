@@ -1,8 +1,10 @@
+# Tpa Command
+
 Player command for sending teleportation requests to other players.
 
-_TPA allowance state will be saved in [[players.yml]]._
+_TPA allowance state will be saved in players.yml._
 
-_Admins can disable the function with the [[Functions Command]]._
+_Admins can disable the function with the Functions Command._
 
 ---
 ## Command Usage
@@ -16,7 +18,7 @@ _Admins can disable the function with the [[Functions Command]]._
 ### Cancelling a sent out request
 `/tpa cancel`
 
-### Accepting or declinening the request
+### Accepting or declining the request
 `/tpa <accept/decline>`
 
 - `<accept/decline>` - Accept or decline the request.
