@@ -2,6 +2,7 @@ package user.meistertisch.danissmpplugin.misc;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,7 +22,7 @@ public class CommandSeed implements TabExecutor {
             seed *= -1;
         }
 
-        Component seedMsg = Component.text(seed, NamedTextColor.GREEN);
+        Component seedMsg = Component.text(seed, NamedTextColor.GREEN).clickEvent(ClickEvent.copyToClipboard(String.valueOf(seed)));
         Component message = Component.text("Seed: [%seed%]").replaceText(TextReplacementConfig.builder().match("%seed%").replacement(seedMsg).build());
 
         sender.sendMessage(message);
