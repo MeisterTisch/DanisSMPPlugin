@@ -6,7 +6,7 @@ Dani's SMP Plugin is a Plugin for Minecraft SMP Servers.
 ## Command Overview
 
 ### Player Commands
-- [Direct Message Command](.\MD%20Files\Player%20Commands\Direct%20Message%20Command.md)
+- [Direct Message Command](MD%20Files\Player%20Commands\Direct%20Message%20Command.md)
 - Discord Command
 - Durability Command
 - Homes Command
