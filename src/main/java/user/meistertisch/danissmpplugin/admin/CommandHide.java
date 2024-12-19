@@ -1,8 +1,12 @@
 package user.meistertisch.danissmpplugin.admin;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -43,13 +47,38 @@ public class CommandHide implements TabExecutor {
             );
 
             for(Player all : Bukkit.getOnlinePlayers()){
-                if(!FileAdmins.isAdmin(all)){
+                if(all == player) continue;
+
+                TextColor color1 = TextColor.color(Main.getPlugin().getConfig().getColor("colors.accent1", Color.fromRGB(0x7704a8)).asRGB());
+                TextColor color2 = TextColor.color(Main.getPlugin().getConfig().getColor("colors.accent2", Color.fromRGB(0xF01BC)).asRGB());
+                ResourceBundle tempBundle = ResourceBundle.getBundle("language_" + FilePlayer.getConfig().getString(all.getName() + ".lang"));
+                Component playerText = Component.text(player.getName()).color(color1).decorate(TextDecoration.BOLD);
+
                     if(isHidden){
-                        all.showPlayer(Main.getPlugin(), player);
+                        if(!FileAdmins.isAdmin(all)) {
+                            all.showPlayer(Main.getPlugin(), player);
+                            all.sendMessage(Component.text(tempBundle.getString("join.joinMessage")).color(color2).replaceText(
+                                    TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
+                            ));
+                        } else {
+                            playerText = playerText.color(NamedTextColor.GOLD);
+                            all.sendMessage(Component.text(tempBundle.getString("commands.hide.notHidden.toOtherAdmins")).color(NamedTextColor.GREEN).replaceText(
+                                    TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
+                            ));
+                        }
                     } else {
-                        all.hidePlayer(Main.getPlugin(), player);
+                        if(!FileAdmins.isAdmin(all)) {
+                            all.hidePlayer(Main.getPlugin(), player);
+                            all.sendMessage(Component.text(tempBundle.getString("leaveMessage")).color(color2).replaceText(
+                                    TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
+                            ));
+                        } else {
+                            playerText = playerText.color(NamedTextColor.GOLD);
+                            all.sendMessage(Component.text(tempBundle.getString("commands.hide.hidden.toOtherAdmins")).color(NamedTextColor.RED).replaceText(
+                                    TextReplacementConfig.builder().match("%player%").replacement(playerText).build()
+                            ));
+                        }
                     }
-                }
             }
 
         } else {
