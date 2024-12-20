@@ -72,6 +72,7 @@ public final class  Main extends JavaPlugin {
         FileSpawn.setup();
         FileSlimeChunks.setup();
         FileHomes.setup();
+        FileWhitelist.setup();
 
         //Managers
         managerTPA = new ManagerTPA();
@@ -111,6 +112,7 @@ public final class  Main extends JavaPlugin {
         getCommand("test").setExecutor(new CommandTest());
         getCommand("thunder").setExecutor(new CommandThunderstormSummoner());
         getCommand("tpa").setExecutor(new CommandTpa());
+        getCommand("whitelist").setExecutor(new CommandWhitelist());
 
 
         //Listeners
@@ -183,6 +185,9 @@ public final class  Main extends JavaPlugin {
         FileAdmins.saveConfig();
         FileTeams.saveConfig();
         FileSlimeChunks.saveConfig();
+        FileWhitelist.saveConfig();
+        FileHomes.saveConfig();
+        FileSpawn.saveConfig();
 
         //Schedulers
         SchedulerPlayerPositions.shutdown();

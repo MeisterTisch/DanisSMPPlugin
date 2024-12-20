@@ -3,6 +3,7 @@ package user.meistertisch.danissmpplugin.files;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import user.meistertisch.danissmpplugin.Main;
 
 import java.io.File;
@@ -49,5 +50,21 @@ public class FileWhitelist {
 
     public static List<String> getList(){
         return getConfig().getStringList("whitelist");
+    }
+
+    public static void removePlayer(@NotNull String arg) {
+        List<String> list = getList();
+        list.remove(arg);
+        getConfig().set("whitelist", list);
+        saveConfig();
+        reload();
+    }
+
+    public static void addPlayer(@NotNull String arg) {
+        List<String> list = getList();
+        list.add(arg);
+        getConfig().set("whitelist", list);
+        saveConfig();
+        reload();
     }
 }
