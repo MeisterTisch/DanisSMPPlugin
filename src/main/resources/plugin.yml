@@ -99,6 +99,8 @@ commands:
   clearChat:
     description: Command for clearing the chat.
     usage: /clearChat
+    aliases:
+      - cc
   shareItem:
     description: Command for sharing items.
     usage: /shareItem
@@ -126,3 +128,6 @@ commands:
   seed:
     description: Command for getting the seed of the world.
     usage: /seed
+  whitelist:
+    description: Command for the whitelist.
+    usage: /whitelist
